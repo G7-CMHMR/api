@@ -39,8 +39,8 @@ Product.hasMany(Image);
 
 Product.hasOne(Promotions);
 
-Product.hasMany(Category);
-Category.hasMany(Product);
+Product.belongsToMany(Category , { through: 'Product_Category' });
+Category.belongsToMany(Product , { through: 'Product_Category' });
 
 
 module.exports = {
