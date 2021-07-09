@@ -4,6 +4,7 @@ const { api } = require('./config')
 // Import middlewares
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
+const routes = require('./network/routes')
 
 const server = express()
 
@@ -31,6 +32,8 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     console.error(err);
     res.status(status).send(message);
   })
+
+routes(server)
 
 server.listen(port, host, () => {
     console.log(`Server is running at ${host}:${port}`)
