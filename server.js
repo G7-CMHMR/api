@@ -5,6 +5,8 @@ const { api } = require('./config')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
 
+require('./db')
+
 const server = express()
 
 const host = api.host
@@ -32,7 +34,4 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     res.status(status).send(message);
   })
 
-server.listen(port, host, () => {
-    console.log(`Server is running at ${host}:${port}`)
-})
-  
+module.exports = server;
