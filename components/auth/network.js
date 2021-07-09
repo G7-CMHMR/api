@@ -1,9 +1,10 @@
 const { Router } =  require('express');
 const router = Router();
 
-// const auth = require('./middlewares/auth');
-const { userValidator } = require('./middlewares/validations');
-const validateFields = require('./middlewares/validate-fields');
+const auth = require('./resources/middlewares/auth');
+const { userValidator } = require('./resources/middlewares/validations');
+const validateFields = require('./resources/middlewares/validate-fields');
+const response = require('../../network/response');
 
 const { create, login, update, updatePassword, googleSignIn } = require('./controller');
 
@@ -16,13 +17,40 @@ const { create, login, update, updatePassword, googleSignIn } = require('./contr
 // si hubo algun error en las validaciones que se hicieron
 
 
-router.post('/login', [userValidator.login, validateFields], login);
+// router.post('/login', [userValidator.login, validateFields], login);
+router.post('/login', [userValidator.login, validateFields], (req, res) => {
+	// controller.
+	console.log('ENTRE A LOGIN');
+		login(req.body)
+		.then( e => {
+			console.log('ESTA ES LA RESPUESTA :',e);
+			response.sucess(req, res, 200, e);
+		})
+		.catch( e => {
+			console.log('ENTRO AL ERROR DE LOGIN', e);
+			response.error(req, res, 404, e, 'No se pudo iniciar sesion');
+		})
+});
 
-router.post('/create', [userValidator.create, validateFields], create);
 
-// router.post('/update', [auth, userValidator.update, validateFields], update);
 
-// router.post('/update-password', [auth, userValidator.updatePassword, validateFields], updatePassword)
+// router.post('/create', [userValidator.create, validateFields], create);
+router.post('/create', [userValidator.create, validateFields], (req, res) => {
+	console.log('ENTRE A CREATE');
+		create(req.body)
+		.then( e => {
+			console.log('ESTA ES LA RESPUESTA : ',e)
+			response.sucess(req, res, 200, e)
+		})
+		.catch( e => {
+			console.log('ENTRO AL ERROR DE CREATE: ',e);
+			response.error(req, res, 404, e, 'No se pudo crear el usuario');
+		})
+});
+
+router.post('/update', [auth, userValidator.update, validateFields], update);
+
+router.post('/update-password', [auth, userValidator.updatePassword, validateFields], updatePassword)
 
 router.post('/google', googleSignIn);
 

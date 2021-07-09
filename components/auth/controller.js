@@ -1,28 +1,23 @@
-
-// const { User } = require("../models/User");
 const bcrypt = require('bcryptjs');
 
-const { User } = require('../../models/user');
+const { User } = require('../../db');
 
-const hashPassword = require('./utils/hashPassword');
-const { generateJWT } = require('./utils/jwt');
-const { googleVerify } = require('./utils/googleVerify')
+const hashPassword = require('./resources/utils/hashPassword');
+const { generateJWT } = require('./resources/utils/jwt');
+const { googleVerify } = require('./resources/utils/googleVerify')
 
 
-const login = async (req, res) => {
-    
-    // Se pasa por el req.body los datos del usuario
-    const user = req.body;
-    
+const login = async (user) => {
+
     // Con el email pasado por parametro, busca el usuario en la bd
     const searchedUser = await User.findOne({ where: { email: user.email } });
     
     // En caso que el usuario no se encuentre registrado
     if (!searchedUser) {
-        return res.status(400).json({
+        return {
             ok: false,
-            msg: 'Datos incorrectos'
-        })
+            msg: 'El usuario no se encuentra registrado'
+        }
     }
 
     // Verifica si el password ingresado corresponde con el que se guardo en la bd
@@ -30,10 +25,10 @@ const login = async (req, res) => {
 
     // En caso que el password no coincida
     if (!validPassword) {
-        return res.status(400).json({
+        return {
             ok: false,
-            msg: 'Datos incorrectos'
-        })
+            msg: 'El password es incorrecto'
+        }
     }
 
     // En este punto, el usuario existe e ingreso correctamente el password
@@ -43,27 +38,27 @@ const login = async (req, res) => {
     const token = await generateJWT(id, name);
 
     // Envía como respuesta el usuario junto al token
-    return res.json({
+    return {
         id,
         name,
         lastName,
         email,
         token
-    })
+    };
 
 }
 
 
-const create = async (req, res) => {
+const create = async (user) => {
 
     // Se pasa por el body los datos que el usuario ingreso
-    const user = req.body;
+    // const user = req.body;
 
     try {
         // Verifica si ya existe un usuario registrado con el email ingresado
         const emailTaken = await User.findOne({ where: { email: user.email } })
         // En el caso que el email ya se encuentre en uso
-        if (emailTaken) return res.status(400).json({ ok: false, msg: 'Este email ya está en uso' });
+        if (emailTaken) return { ok: false, msg: 'Este email ya está en uso' };
 
         // En este punto, el pass ingresado por el usuario se aplica
         // funcion hash para guardar en la db
@@ -73,17 +68,15 @@ const create = async (req, res) => {
         const userCreated = await User.create(user);
 
         // Se envía como respuesta el usuario creado
-        return res.json({
-            userCreated
-        });
+        return userCreated;
 
     // Atrapa en caso de haber algun error
     } catch (error) {
-        return res.status(500).json({
+        return {
             ok: false,
             msg: 'Ocurrió un error',
             error
-        });
+        };
 
     }
 }

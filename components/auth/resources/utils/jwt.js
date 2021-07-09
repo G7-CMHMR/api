@@ -5,7 +5,7 @@ dotenv.config();
 
 
 generateJWT = (id, name) => {
-
+    console.log('ENTRE A JWT: ', id, name)
     return new Promise((resolve, reject) => {
         
         const payload = { id, name };

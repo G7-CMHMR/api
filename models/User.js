@@ -1,5 +1,6 @@
 // const { nanoid } = require('nanoid');
 const { DataTypes, UUIDV4 } = require('sequelize');
+const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => {
 
