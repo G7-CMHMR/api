@@ -6,7 +6,10 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const routes = require('./network/routes');
 
-const server = express();
+
+require('./db')
+
+const server = express()
 
 const host = api.host;
 const port = api.port;
@@ -35,7 +38,6 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 
 routes(server);
 
-server.listen(port, host, () => {
-    console.log(`Server is running at ${host}:${port}`)
-});
-  
+
+module.exports = server;
+
