@@ -7,7 +7,7 @@ const routes = (server) => {
     server.use('/products', networkProducts);
     server.use('/auth', networkAuth);
     server.use('/category', networkCategory);
-    server.use('/product/:product_id', networkProduct);
+    server.use('/product', networkProduct);
 }
 
 module.exports = routes;
