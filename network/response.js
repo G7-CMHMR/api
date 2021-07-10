@@ -1,4 +1,4 @@
-// const Color = require('color');
+// require('colors');
 
 exports.sucess = (req, res, status, message) => {
     console.log('ESTOY EN RESPONSE :', message)
