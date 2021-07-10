@@ -30,4 +30,4 @@ let json_products = [{ "name":"Samsung LS27F354FHNXZA - Monitor plano FHD de 27 
 ,{"name":"Rucial - Memoria de 16GB SODIMM de 260 pines DDR4 3200 MT/s (PC4-25600)","status":"Nuevo","price":"68", "valuation":3, "stock":2220, "brand":"crucial", "description":"Aumenta las velocidades hasta 3200 MT/s y se espera que estén disponibles tasas de datos más rápidas a medida que la tecnología DDR4 madure.", "visible":true, "category":["ram"], "seller":"Lucemon","image":["https://images-na.ssl-images-amazon.com/images/I/71Oys7qdffL._AC_SX450_PIbundle-2,TopRight,0,0_SH20_.jpg"] }
 ,{"name":"Samsung M471A4G43MB1 - Módulo de memoria RAM (32 GB, DDR4, 2666 MHz, 260 pines, SODIMM, 1,2 V)","status":"Nuevo","price":"170", "valuation":5, "stock":34, "brand":"samsung", "description":"Velocidad: 2666 Mbps | Tipo de atenuación: SODIMM", "visible":true, "category":["ram"], "seller":"Lucemon","image":["https://images-na.ssl-images-amazon.com/images/I/71JOuGEq0xL._AC_SY450_.jpg"] }]
 
-export default json_products;
+module.exports = json_products;

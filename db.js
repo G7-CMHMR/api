@@ -3,6 +3,10 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const { api,db } = require('./config')
+const json_users = require('./jsons_files/json_users')
+const json_categories = require('./jsons_files/json_categories')
+const json_products = require('./jsons_files/json_products');
+const console = require('console');
 
 const sequelize = new Sequelize(`postgres://${db.user}:${db.pass}@${api.host}/compumundo`, {
   logging: false, // set to console.log to see the raw SQL queries
@@ -49,6 +53,12 @@ Promotions.belongsTo(Product)
 Product.belongsToMany(Category , { through: 'Product_Category' });
 Category.belongsToMany(Product , { through: 'Product_Category' });
 
+//-----------------------------------------------//
+
+json_categories.forEach(async function(add_title){
+  await Category.create({title: add_title});
+  console.log(add_title);
+})
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
