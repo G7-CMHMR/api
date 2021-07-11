@@ -1,5 +1,5 @@
 // const { nanoid } = require('nanoid');
-const { DataTypes, UUIDV4 } = require('sequelize');
+const { DataTypes, UUIDV4, INTEGER } = require('sequelize');
 const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => {
@@ -46,7 +46,19 @@ module.exports = (sequelize) => {
 		},
 		active: {
 			type: DataTypes.BOOLEAN,
-
+			defaultValue: true
+		},
+		dni: {
+			type: DataTypes.INTEGER,
+			allowNull: false
+		},
+		address: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		phone: {
+			type: DataTypes.STRING,
+			allowNull: false
 		}
 
 		// role: {

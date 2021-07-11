@@ -10,21 +10,21 @@ const store = {
           })
         json_users.forEach(async function (add_user) {
             let new_user = {
-                name: add_user.name,
-                lastName: add_user.lastName,
-                email: add_user.mail,
-                password: '456'
-                // ,dni:add_user.dni
-                // ,phone:add_user.phone
-                // ,adress:add_user.adress
+                name: add_user.name
+                ,lastName: add_user.lastName
+                ,email: add_user.mail
+                ,password: '456'
+                ,dni:add_user.dni
+                ,phone:add_user.phone
+                ,address:add_user.address
             };
             let user_db = await User.create(new_user);
             let new_seller = {
-                accountBank: add_user.seller.accountBank,
-                address: add_user.seller.adress,
-                reputation: add_user.seller.reputation,
-                commission: add_user.seller.comission,
-                userId: user_db.dataValues.id
+                accountBank: add_user.seller.accountBank
+                ,address: add_user.seller.address
+                ,reputation: add_user.seller.reputation
+                ,commission: add_user.seller.comission
+                ,userId: user_db.dataValues.id
             };
             let seller_db = await Seller.create(new_seller);
         })

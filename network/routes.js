@@ -9,7 +9,7 @@ const routes = (server) => {
     server.use('/auth', networkAuth);
     server.use('/category', networkCategory);
     server.use('/product', networkProduct);
-    server.use('/asdf', networkPreLoad);
+    server.use('/pre_load', networkPreLoad);
 }
 
 module.exports = routes;
