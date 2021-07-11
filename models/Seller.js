@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 module.exports = (sequelize) => {
 
   sequelize.define('seller', {
-    account_bank: {
+    accountBank: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
     reputation: {
         type: DataTypes.FLOAT,
     },
-    commision: {
+    commission: {
         type: DataTypes.FLOAT,
         allowNull: false,
     }

@@ -8,6 +8,7 @@ let json_categories = [
 'unidades opticas',
 'mouse',
 'gabinete',
-'monitor'];
+'monitor',
+'keyboard'];
 
 module.exports = json_categories;
