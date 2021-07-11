@@ -1,4 +1,5 @@
 const {Product, Category, User ,Image, Seller, Promotion} = require('../../db');
+const { Op } = require("sequelize");
 
 const simplificarProduct = function(product){
     const res = {
@@ -84,6 +85,40 @@ const store = {
         })
 
         return response.map((el) => simplificarProduct(el))
+    },
+    getAll_offer: async function(){
+        let response = await Promotion.findAll({
+            where:{ value: {[Op.ne]: 0} },
+            include: [{
+                model: Product,
+                attributes: [ 'name','id','status','price','valuation','stock','brand','description'],
+                include: [
+                    {
+                        model: Seller,
+                        attributes: ["id"],
+                        include: [{
+                            model: User,
+                             attributes: ["name"],
+                        }]
+                    },
+                    {
+                        model:Image,
+                        attributes: ["image"],
+                    },
+                    {
+                        model:Category,
+                        attributes: ["title"],
+                    },
+                    {
+                        model:Promotion,
+                        attributes: ["value","delivery"],
+                    }
+                ],
+                
+            }]
+
+        })
+        return response.map(el => simplificarProduct(el.product))
     }
 };
 
