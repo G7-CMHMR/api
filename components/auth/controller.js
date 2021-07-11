@@ -147,6 +147,22 @@ const updatePassword = async (req, res) => {
 };
 
 
+const renewToken = async (req, res) => {
+
+    const {id, name} = req;
+
+    const token = await generateJWT(id, name);
+
+    return res.json({
+        ok: true,
+        id,
+        name,
+        token
+    })
+    
+};
+
+
 const googleSignIn = async (req, res) => {
 
     const { id_token } = req.body;
@@ -163,10 +179,10 @@ const googleSignIn = async (req, res) => {
         ///////////////////////////////////////////////////////////
         if (!user) {
             const data = {
-                name,
+                name: name.split(" ")[0],
                 lastName: name.split(" ")[1],
                 email,
-                password: 'passEjemploCambiarDespues',
+                password: '',
             }
 
             await User.create(data);
@@ -176,14 +192,15 @@ const googleSignIn = async (req, res) => {
 
         return res.json({
             ok: true,
-            user,
+            name: user.name,
             token
         });
 
     } catch (error) {
         return res.status(400).json({
             ok: false,
-            msg: 'El token de Google no es válido'
+            msg: 'El token de Google no es válido',
+            error
         })
     }
 
@@ -196,6 +213,7 @@ module.exports = {
     login,
     update,
     updatePassword,
+    renewToken,
     googleSignIn
 }
 
