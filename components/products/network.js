@@ -4,6 +4,12 @@ const response = require('../../network/response');
 
 const router = express.Router();
 
+router.get('/category/:category_name', (req, res) => {
+    controller
+    .getAllProductsByCategory(req.params.category_name)
+    .then(e => response.sucess(req, res, 200, e))
+    .catch(e => response.error(req, res, 404, e,'fallo en conseguir los productos por categoria'))
+})
 router.get('/', (req, res) => {
     controller
     .getAllProducts()

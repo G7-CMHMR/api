@@ -1,7 +1,7 @@
-// const Color = require('color');
+// require('colors');
 
 exports.sucess = (req, res, status, message) => {
-    console.log('ESTOY EN RESPONSE :', message)
+    // console.log('ESTOY EN RESPONSE :', message)
     res.status(status).json(message)
 }
 exports.error = (req, res, status, message, error) => {
