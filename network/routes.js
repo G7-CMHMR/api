@@ -1,8 +1,8 @@
 const networkProducts = require('../components/products/network');
 const networkProduct = require('../components/product/network');
 const networkAuth = require('../components/auth/network');
-const networkCategory = require('../components/Category/network');
-const networkPreLoad = require('../components/PreLoad/network');
+const networkCategory = require('../components/category/network');
+const networkPreLoad = require('../components/preload/network');
 
 const routes = (server) => {
     server.use('/products', networkProducts);
