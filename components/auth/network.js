@@ -20,14 +20,11 @@ const { create, login, update, updatePassword, googleSignIn, renewToken } = requ
 // router.post('/login', [userValidator.login, validateFields], login);
 router.post('/login', [userValidator.login, validateFields], (req, res) => {
 	// controller.
-	console.log('ENTRE A LOGIN');
 		login(req.body)
 		.then( e => {
-			console.log('ESTA ES LA RESPUESTA :',e);
 			response.sucess(req, res, 200, e);
 		})
 		.catch( e => {
-			console.log('ENTRO AL ERROR DE LOGIN', e);
 			response.error(req, res, 404, e, 'No se pudo iniciar sesion');
 		})
 });
@@ -36,14 +33,11 @@ router.post('/login', [userValidator.login, validateFields], (req, res) => {
 
 // router.post('/create', [userValidator.create, validateFields], create);
 router.post('/create', [userValidator.create, validateFields], (req, res) => {
-	console.log('ENTRE A CREATE');
 		create(req.body)
 		.then( e => {
-			console.log('ESTA ES LA RESPUESTA : ',e)
 			response.sucess(req, res, 200, e)
 		})
 		.catch( e => {
-			console.log('ENTRO AL ERROR DE CREATE: ',e);
 			response.error(req, res, 404, e, 'No se pudo crear el usuario');
 		})
 });

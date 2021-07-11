@@ -8,13 +8,12 @@ const { googleVerify } = require('./resources/utils/googleVerify')
 
 
 const login = async (user) => {
-
     // Con el email pasado por parametro, busca el usuario en la bd
     const searchedUser = await User.findOne({ where: { email: user.email } });
     
     // En caso que el usuario no se encuentre registrado
     if (!searchedUser) {
-        return {
+        throw {
             ok: false,
             msg: 'El usuario no se encuentra registrado'
         }
@@ -25,7 +24,7 @@ const login = async (user) => {
 
     // En caso que el password no coincida
     if (!validPassword) {
-        return {
+        throw {
             ok: false,
             msg: 'El password es incorrecto'
         }
@@ -41,8 +40,6 @@ const login = async (user) => {
     return {
         id,
         name,
-        lastName,
-        email,
         token
     };
 
@@ -50,23 +47,24 @@ const login = async (user) => {
 
 
 const create = async (user) => {
-
     // Se pasa por el body los datos que el usuario ingreso
     // const user = req.body;
 
     try {
         // Verifica si ya existe un usuario registrado con el email ingresado
         const emailTaken = await User.findOne({ where: { email: user.email } })
+
         // En el caso que el email ya se encuentre en uso
-        if (emailTaken) return { ok: false, msg: 'Este email ya está en uso' };
+        if (emailTaken) {
+            console.log('ENTRO A EMAIL EN USO')
+            throw { ok: false, msg: 'Este email ya está en uso' };
+        }
 
         // En este punto, el pass ingresado por el usuario se aplica
         // funcion hash para guardar en la db
         user.password = await hashPassword(user.password);
-
         // Se crea el usuario
         const userCreated = await User.create(user);
-
         // Se envía como respuesta el usuario creado
         return userCreated;
 
@@ -164,12 +162,11 @@ const renewToken = async (req, res) => {
 
 
 const googleSignIn = async (req, res) => {
-
     const { id_token } = req.body;
 
     try {
-
         const googleUser = await googleVerify(id_token);
+        console.log('GOOGLEUSER: ', googleUser)
 
         const { name, email } = googleUser;
 
@@ -177,15 +174,14 @@ const googleSignIn = async (req, res) => {
 
         // TODO: ver como manejar el password cuando es de google
         ///////////////////////////////////////////////////////////
-        if (!user) {
+        if (!user) {  
             const data = {
                 name: name.split(" ")[0],
-                lastName: name.split(" ")[1],
+                lastName: name.split(" ")[1] || ' ',
                 email,
                 password: '',
             }
-
-            await User.create(data);
+            user = await User.create(data);
         }
 
         const token = await generateJWT(user.id, user.name);
