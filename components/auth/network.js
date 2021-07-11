@@ -6,7 +6,7 @@ const { userValidator } = require('./resources/middlewares/validations');
 const validateFields = require('./resources/middlewares/validate-fields');
 const response = require('../../network/response');
 
-const { create, login, update, updatePassword, googleSignIn } = require('./controller');
+const { create, login, update, updatePassword, googleSignIn, renewToken } = require('./controller');
 
 
 // "userValidator" es un middleware de express-validator que hace validaciones
@@ -50,7 +50,9 @@ router.post('/create', [userValidator.create, validateFields], (req, res) => {
 
 router.post('/update', [auth, userValidator.update, validateFields], update);
 
-router.post('/update-password', [auth, userValidator.updatePassword, validateFields], updatePassword)
+router.post('/update-password', [auth, userValidator.updatePassword, validateFields], updatePassword);
+
+router.get('/renew-token', auth, renewToken);
 
 router.post('/google', googleSignIn);
 
