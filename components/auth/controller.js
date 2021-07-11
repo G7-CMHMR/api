@@ -56,7 +56,7 @@ const create = async (user) => {
 
         // En el caso que el email ya se encuentre en uso
         if (emailTaken) {
-            console.log('ENTRO A EMAIL EN USO')
+
             throw { ok: false, msg: 'Este email ya está en uso' };
         }
 
@@ -166,7 +166,6 @@ const googleSignIn = async (req, res) => {
 
     try {
         const googleUser = await googleVerify(id_token);
-        console.log('GOOGLEUSER: ', googleUser)
 
         const { name, email } = googleUser;
 
