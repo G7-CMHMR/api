@@ -17,4 +17,11 @@ router.get('/', (req, res) => {
     .catch(e => response.error(req, res, 404, e,'fallo en conseguir los productos'))
 })
 
+router.get('/offer', (req, res) => {
+    controller
+    .getAllProductsOffer()
+    .then(e => response.sucess(req, res, 200, e))
+    .catch(e => response.error(req, res, 404, e,'fallo en conseguir los productos en oferta'))
+})
+
 module.exports = router;
