@@ -10,7 +10,8 @@ const store = {
         return response.map((el) => el.title)
     },
     postOne: async function(category_name){
-        let response = await Category.create({title: category_name});
+        console.log(category_name)
+        let response = await Category.create({title: category_name.title});
         return response
     }
 };
