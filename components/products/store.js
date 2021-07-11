@@ -1,20 +1,41 @@
-const {Product, Category, Image, Promotion} = require('../../db');
+const {Product, Category, User ,Image, Seller, Promotion} = require('../../db');
 
 const store = {
     getAll_category: async function(category_name){
         let response = await Category.findOne(
             {
             where: {title: category_name},
-            includes: [{model: Product, includes: [{model:Image},{model:Category},{model:Promotion}]}]
+            include: [{model: Product, includes: [{model:Image},{model:Category},{model:Promotion}]}]
             })
         return response
     },
     getAll: async function(){
         let response = await Product.findAll({
-        includes: [{model:Image},{model:Category},{model:Promotion}],
-            atributes: [
-                'name','status','price','valuation','stock','brand','description','visible'
-            ]});
+            where: {visible: true},
+            attributes: [ 'name','status','price','valuation','stock','brand','description'],
+            include: [
+                {
+                    model: Seller,
+                    attributes: ["id"],
+                    include: [{
+                        model: User,
+                         attributes: ["name"],
+                    }]
+                },
+                {
+                    model:Image,
+                    attributes: ["image"],
+                },
+                {
+                    model:Category,
+                    attributes: ["title"],
+                },
+                {
+                    model:Promotion,
+                    attributes: ["value","delivery"],
+                }
+            ],
+        })
         return response
     }
 };
