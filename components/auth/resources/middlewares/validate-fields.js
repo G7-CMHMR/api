@@ -2,15 +2,20 @@
 const { validationResult } = require("express-validator");
 
 
+  const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
+    // return `${param}: ${msg}`;
+    return `${msg}`;
+  };
+
+
 const validateFields = (req, res, next) => {
 
-    const errors = validationResult(req);
-    let resp;
+    const error = validationResult(req).formatWith(errorFormatter);;
 
-    if (!errors.isEmpty()) {
+    if (!error.isEmpty()) {
         return res.status(400).json({
-            ok: false,
-            errors: errors.mapped()
+            // ok: false,
+            error: error.mapped()
         })
     }
 

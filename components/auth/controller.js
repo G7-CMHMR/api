@@ -13,10 +13,7 @@ const login = async (user) => {
     
     // En caso que el usuario no se encuentre registrado
     if (!searchedUser) {
-        throw {
-            ok: false,
-            msg: 'El usuario no se encuentra registrado'
-        }
+        throw { error:'El usuario no se encuentra registrado' }
     }
 
     // Verifica si el password ingresado corresponde con el que se guardo en la bd
@@ -24,10 +21,7 @@ const login = async (user) => {
 
     // En caso que el password no coincida
     if (!validPassword) {
-        throw {
-            ok: false,
-            msg: 'El password es incorrecto'
-        }
+        throw { error: 'El password es incorrecto' }
     }
 
     // En este punto, el usuario existe e ingreso correctamente el password
@@ -56,10 +50,8 @@ const create = async (user) => {
 
         // En el caso que el email ya se encuentre en uso
         if (emailTaken) {
-
-            throw { ok: false, msg: 'Este email ya está en uso' };
+            throw { error: 'Este email ya está en uso' };
         }
-
         // En este punto, el pass ingresado por el usuario se aplica
         // funcion hash para guardar en la db
         user.password = await hashPassword(user.password);
@@ -70,12 +62,7 @@ const create = async (user) => {
 
     // Atrapa en caso de haber algun error
     } catch (error) {
-        return {
-            ok: false,
-            msg: 'Ocurrió un error',
-            error
-        };
-
+        throw error;
     }
 }
 
