@@ -6,7 +6,7 @@ const host = api.host
 const port = api.port
 
 // Syncing all the models at once.
-conn.sync({ force: false }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(port, host, () => {
     console.log(`Server is running at ${host}:${port}`)
 })
