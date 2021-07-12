@@ -35,9 +35,11 @@ router.post('/login', [userValidator.login, validateFields], (req, res) => {
 router.post('/create', [userValidator.create, validateFields], (req, res) => {
 		create(req.body)
 		.then( e => {
+			console.log('NO DEBERIA ENTRAR AL THEN')
 			response.sucess(req, res, 200, e)
 		})
 		.catch( e => {
+			console.log('ERROR EN CREATE: ', e);
 			response.error(req, res, 404, e, 'No se pudo crear el usuario');
 		})
 });
