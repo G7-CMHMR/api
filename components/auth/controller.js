@@ -8,24 +8,15 @@ const { googleVerify } = require('./resources/utils/googleVerify')
 
 
 const login = async (user) => {
-    // Con el email pasado por parametro, busca el usuario en la bd
-    const searchedUser = await User.findOne({ where: { email: user.email } });
-    
-    // En caso que el usuario no se encuentre registrado
-    if (!searchedUser) {
-        throw { error:'El usuario no se encuentra registrado' }
-    }
 
-    // Verifica si el password ingresado corresponde con el que se guardo en la bd
-    const validPassword = bcrypt.compareSync(user.password, searchedUser.password);
+    const userRegistered = await User.findOne({ where: { email: user.email } });
+    if (!userRegistered)  throw { error:'El usuario no se encuentra registrado' };
 
-    // En caso que el password no coincida
-    if (!validPassword) {
-        throw { error: 'El password es incorrecto' }
-    }
+    const isValidPassword = bcrypt.compareSync(user.password, userRegistered.password);
+    if (!isValidPassword) throw { error: 'El password es incorrecto' };
 
     // En este punto, el usuario existe e ingreso correctamente el password
-    const { id, name, lastName, email } = searchedUser;
+    const { id, name, lastName, email } = userRegistered;
 
     // Genera un token 
     const token = await generateJWT(id, name);
@@ -41,24 +32,17 @@ const login = async (user) => {
 
 
 const create = async (user) => {
-    // Se pasa por el body los datos que el usuario ingreso
-    // const user = req.body;
 
     try {
-        // Verifica si ya existe un usuario registrado con el email ingresado
-        const emailTaken = await User.findOne({ where: { email: user.email } })
+        const userRegisteredWithMail = await User.findOne({ where: { email: user.email } });
+        if (userRegisteredWithMail !== null)   throw { error: 'Este email ya está en uso' };
 
-        // En el caso que el email ya se encuentre en uso
-        if (emailTaken) {
-            throw { error: 'Este email ya está en uso' };
-        }
-        // En este punto, el pass ingresado por el usuario se aplica
-        // funcion hash para guardar en la db
         user.password = await hashPassword(user.password);
-        // Se crea el usuario
-        const userCreated = await User.create(user);
-        // Se envía como respuesta el usuario creado
-        return userCreated;
+
+        const newUser = await User.create(user);
+
+        const isNewUserCreated = Object.keys(newUser).length > 0;
+        if (isNewUserCreated)   return { succesfull: 'El usuario se ha creado con exito' };
 
     // Atrapa en caso de haber algun error
     } catch (error) {
