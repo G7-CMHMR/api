@@ -5,6 +5,7 @@ const response = require('../../network/response');
 const router = express.Router();
 
 router.post('/', (req, res) => {
+    console.log('ENTRO A ROUTER PRE_LOAD')
     controller
     .addPreLoad()
     .then(e => response.sucess(req, res, 200, e))
