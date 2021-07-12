@@ -1,14 +1,9 @@
 let json_categories = [
-'mother',
-'procesador',
-'CPU',
-'ram',
-'placa de video',
-'disco solido',
-'unidades opticas',
-'mouse',
-'gabinete',
-'monitor',
-'keyboard'];
+'Monitor',
+'Procesador',
+'Ram',
+'Almacenamiento',
+'Placa de Video',
+];
 
 module.exports = json_categories;
