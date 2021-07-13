@@ -3,19 +3,19 @@ const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => {
 
-  sequelize.define('seller', {
-    accountBank: {
+  sequelize.define('seller_review', {
+    title: {
+      type: DataTypes.STRING,
+    },
+    type: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    address: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    creation_date: {
+    date: {
         type: DataTypes.DATE,
+        allowNull: false,
     },
-    commission: {
+    message: {
         type: DataTypes.FLOAT,
         allowNull: false,
     }
