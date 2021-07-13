@@ -1,10 +1,10 @@
-const {Product, Category, Image, Promotion, Seller, User} = require('../../db');
-const json_users = require('../../jsons_files/json_users')
-const json_categories = require('../../jsons_files/json_categories')
-const json_products = require('../../jsons_files/json_products')
+const {Product, Category, Image, Promotion, Seller, User} = require('./db');
+const json_users = require('./jsons_files/json_users')
+const json_categories = require('./jsons_files/json_categories')
+const json_products = require('./jsons_files/json_products')
 
-const store = {
-    addAll: async function(){
+
+    const addProducts= async function(){
         json_categories.forEach(async function(add_title){
             await Category.create({title: add_title});
           })
@@ -66,9 +66,31 @@ const store = {
         })
 
         await new Promise(r => setTimeout(r, 5));
-        let response = await User.findAll();
-        return response
-    }
-};
+        return "Se cargaron los productos";
+    };
 
-module.exports = store;
+    const simplificarProduct = function(product){
+        const res = {
+            name: product.name,
+            status: product.status,
+            price: product.price,
+            valuation: product.valuation,
+            stock: product.stock,
+            brand: product.brand,
+            description: product.description,
+            seller: product.seller.user.name,
+            images: product.images.map((image) => image.image),
+            categories: product.categories.map((category) => category.title),
+            discount: product.promotion.value,
+            delivery: product.promotion.delivery,
+            id: product.id,
+    
+        }
+        return res;
+    }
+
+
+module.exports = {
+    addProducts,
+    simplificarProduct,
+}
