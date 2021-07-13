@@ -11,6 +11,6 @@ conn.sync({ force: true }).then(() => {
   server.listen(port, host, () => {
     console.log(`Server is running at ${host}:${port}`);
     addProducts();
-    console.log("Se cargaron los productos.");
+
 })
 });
