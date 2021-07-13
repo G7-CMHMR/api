@@ -4,8 +4,8 @@ const fs = require('fs');
 const path = require('path');
 const { api,db } = require('./config')
 const json_users = require('./jsons_files/json_users')
-const json_categories = require('./jsons_files/json_categories')
-const json_products = require('./jsons_files/json_products');
+const json_categories = require('./jsons_files/json_categories_O')
+const json_products = require('./jsons_files/json_products_O');
 const console = require('console');
 
 const sequelize = new Sequelize(`postgres://${db.user}:${db.pass}@${api.host}/compumundo`, {
