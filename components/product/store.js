@@ -1,24 +1,5 @@
 const {Product, Category, Image, Promotion, Seller, User} = require('../../db');
-
-const simplificarProduct = function(product){
-    const res = {
-        name: product.name,
-        status: product.status,
-        price: product.price,
-        valuation: product.valuation,
-        stock: product.stock,
-        brand: product.brand,
-        description: product.description,
-        seller: product.seller.user.name,
-        images: product.images.map((image) => image.image),
-        categories: product.categories.map((category) => category.title),
-        discount: product.promotion.value,
-        delivery: product.promotion.delivery,
-        id: product.id,
-
-    }
-    return res;
-}
+const {simplificarProduct} = require('../../aux_functions');
 
 const store = {
     getOne: async function(product_id){
