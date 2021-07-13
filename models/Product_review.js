@@ -9,17 +9,17 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     valoration: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     message: {
       type: DataTypes.STRING,
     },
     likes: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
     },
     dislikes: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.INTEGER,
     },
     date: {
         type: DataTypes.DATE,
