@@ -8,9 +8,8 @@ const port = api.port
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(port, host, () => {
+  server.listen(port, host,async () => {
     console.log(`Server is running at ${host}:${port}`);
-    addProducts();
-    console.log("Se cargaron los productos.");
+    await addProducts();
 })
 });
