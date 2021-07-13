@@ -5,7 +5,7 @@ const store = {
     getOne: async function(product_id){
         let response = await Product.findOne({
             where: { id: product_id},
-            attributes: [ 'name','status','id','price','valuation','stock','brand','description'],
+            attributes: [ 'name','status','id','price','valuation','stock','brand','description','type'],
             include: [
                 {
                     model: Seller,

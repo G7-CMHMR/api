@@ -4,7 +4,7 @@ const {simplificarProduct} = require('../../aux_functions');
 const store = {
     getOne: async function(product_name){
         let response = await Product.findAll({
-            attributes: [ 'name','status','id','price','valuation','stock','brand','description'],
+            attributes: [ 'name','status','id','price','type','valuation','stock','brand','description'],
             include: [
                 {
                     model: Seller,

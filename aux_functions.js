@@ -1,4 +1,4 @@
-const {Product, Category, Image, Promotion, Seller, User} = require('./db');
+const {Product, Category, Image, Promotion, Seller, Type , User} = require('./db');
 const json_users = require('./jsons_files/json_users')
 const json_categories = require('./jsons_files/json_categories')
 const json_products = require('./jsons_files/json_products')
@@ -8,8 +8,12 @@ const json_products = require('./jsons_files/json_products')
 
         const cargarCategorias = async function(){
 
-            await Promise.all(json_categories.map(async function(add_title){
-                await Category.create({title: add_title});
+            await Promise.all(json_categories.map(async function(add_category){
+                let cat = await Category.create({title: add_category.title});
+                await Promise.all(add_category.types.map(async(type) => {
+                    let current_type = await Type.create({title: type});
+                    await cat.addType(current_type);
+                }))
             })).then(()=> cargarUsers())
         }
 
@@ -32,7 +36,6 @@ const json_products = require('./jsons_files/json_products')
                     let new_seller = {
                         accountBank: add_user.seller.accountBank
                         ,address: add_user.seller.address
-                        ,reputation: add_user.seller.reputation
                         ,commission: add_user.seller.comission
                         ,userId: user_db.dataValues.id
                     };
@@ -45,7 +48,7 @@ const json_products = require('./jsons_files/json_products')
 
             await Promise.all(json_products.map(async function (add_product) {
                 let b = await User.findOne({where: {name : add_product.seller}})
-                let c = await Seller.findOne({where: {userId : b.dataValues.id}}) ///
+                let c = await Seller.findOne({where: {userId : b.dataValues.id}})
                 
                 let new_product = {
                     name : add_product.name
@@ -56,6 +59,7 @@ const json_products = require('./jsons_files/json_products')
                     ,brand: add_product.brand
                     ,description: add_product.description
                     ,visible: add_product.visible
+                    ,type: add_product.type
                     ,sellerId: c.dataValues.id
                 };
                 let product_db = await Product.create(new_product);

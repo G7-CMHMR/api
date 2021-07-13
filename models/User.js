@@ -49,15 +49,14 @@ module.exports = (sequelize) => {
 		},
 		phone: {
 			type: DataTypes.STRING,
-		}
+		},
 		// active: {
 		// 	type: DataTypes.BOOLEAN,
 		// 	defaultValue: true,
 		// },
-		// address: {
-		// 	type: DataTypes.STRING,
-		// 	allowNull: false
-		// },
+		address: {
+			type: DataTypes.STRING,
+		},
 
 		// role: {
 		// 	type: DataTypes.ENUM(["ROLE_USER", "ROLE_ADMIN", "ROLE_SELLER"]),

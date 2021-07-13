@@ -1,9 +1,15 @@
-const {Category} = require('../../db');
+const {Category, Type} = require('../../db');
 
 
 const store = {
     getAll: async function(){
         let response = await Category.findAll({
+            include: [{
+                model: Type,
+                attributes: [
+                    'title'
+                ]
+            }],
             attributes: [
                 'title'
             ]});
