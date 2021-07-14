@@ -13,7 +13,7 @@ const store = {
             attributes: [
                 'title'
             ]});
-        return response.map((el) => el.title)
+        return response.map((el) => ({ title: el.title, types: el.types.map(el => el.title)}))
     },
     postOne: async function(category_name){
         console.log(category_name)
