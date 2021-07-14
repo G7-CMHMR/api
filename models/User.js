@@ -44,10 +44,15 @@ module.exports = (sequelize) => {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		// active: {
-		// 	type: DataTypes.BOOLEAN,
-		// 	defaultValue: true,
-		// },
+		active: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+		},
+		emailToken: {
+			type: DataTypes.STRING,
+			defaultValue: UUIDV4,
+		},
+		// emailTokenExpiration: DataTypes.DATE,
 		// dni: {
 		// 	type: DataTypes.INTEGER,
 		// 	allowNull: false
