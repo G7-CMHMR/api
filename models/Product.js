@@ -37,6 +37,14 @@ module.exports = (sequelize) => {
     },
     type: {
       type: DataTypes.STRING,
-    }
+    },
+    warranty: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    sold: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
   });
 };

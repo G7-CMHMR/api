@@ -61,6 +61,8 @@ const json_products = require('./jsons_files/json_products')
                     ,visible: add_product.visible
                     ,type: add_product.type
                     ,sellerId: c.dataValues.id
+                    ,warranty: add_product.warranty
+                    ,sold: add_product.sold
                 };
                 let product_db = await Product.create(new_product);
                 add_product.category.forEach(async (category) => {
@@ -93,6 +95,7 @@ const json_products = require('./jsons_files/json_products')
             status: product.status,
             price: product.price,
             valuation: product.valuation,
+            type: product.type,
             stock: product.stock,
             brand: product.brand,
             description: product.description,
@@ -102,6 +105,8 @@ const json_products = require('./jsons_files/json_products')
             discount: product.promotion.value,
             delivery: product.promotion.delivery,
             id: product.id,
+            sold: product.sold,
+            warranty: product.warranty,
 
         }
         return res;
