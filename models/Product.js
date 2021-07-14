@@ -9,10 +9,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    description: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
     status: {
       type: DataTypes.STRING,
     },
@@ -31,9 +27,24 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     visible: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+    },
+    type: {
+      type: DataTypes.STRING,
+    },
+    warranty: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+    },
+    sold: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
   });
 };

@@ -6,7 +6,7 @@ let json_products = [
       valuation: 4,
       stock: 201,
       brand: "Samsung",
-      //type: "LCD",
+      type: "LCD",
       description: "Un monitor a tu medida Gracias a su pantalla LCD, disfrutá de gráficas con colores vivos y atractivos..",
       visible: true,
       category: [
@@ -33,12 +33,14 @@ let json_products = [
       valuation: 4,
       stock: 3,
       brand: "ViewSonic",
-      //type: "LCD",
+      type: "LCD",
       description: "Este monitor de 24' te va a resultar cómodo para estudiar, trabajar o ver una película en tus tiempos de ocio.",
       visible: true,
       category: [
         "Monitor"
       ],
+      warranty: 30,
+      sold: 10,
       promotion: {
         title: null,
         value: 10,
@@ -60,7 +62,7 @@ let json_products = [
       valuation: 5,
       stock: 58,
       brand: "Samsung",
-      //type: "LED",
+      type: "LED",
       description: "Este monitor de 24' te va a resultar cómodo para estudiar, trabajar o ver una película en tus tiempos de ocio.",
       visible: true,
       category: [
@@ -88,7 +90,7 @@ let json_products = [
       valuation: 5,
       stock: 52,
       brand: "Samsung",
-      //type: "LED",
+      type: "LED",
       description: "Un monitor a tu medida Con tu pantalla LED no solo ahorrás energía, ya que su consumo es bajo, sino que vas a ver colores nítidos y definidos en tus películas o series favoritas.",
       visible: true,
       category: [
@@ -115,7 +117,7 @@ let json_products = [
       valuation: 5,
       stock: 4,
       brand: "Intel",
-      //type: "FCLGA1200",
+      type: "Atom",
       description: "Productividad y entretenimiento, todo disponible en tu computadora de escritorio. ",
       visible: true,
       category: [
@@ -141,7 +143,7 @@ let json_products = [
       valuation: 5,
       stock: 12,
       brand: "Amd",
-      //type: "AM4",
+      type: "Core",
       description: "Clave en el rendimiento de tu computadora de escritorio, ya no tenés que pensar en cómo distribuir el tiempo y acciones porque ahora las tareas en simultáneo son posibles. ",
       visible: true,
       category: [
@@ -166,7 +168,7 @@ let json_products = [
       valuation: 4,
       stock: 23,
       brand: "Intel",
-      //type: "FCLGA1200",
+      type: "Dos núcleos",
       description: "Productividad y entretenimiento, todo disponible en tu computadora de escritorio.",
       visible: true,
       category: [
@@ -191,7 +193,7 @@ let json_products = [
       valuation: 4,
       stock: 3,
       brand: "Intel",
-      //type: "FCLGA1200",
+      type: "Celeron",
       description: "Productividad y entretenimiento, todo disponible en tu computadora de escritorio.",
       visible: true,
       category: [
@@ -216,7 +218,7 @@ let json_products = [
       valuation: 5,
       stock: 3,
       brand: "HyperX",
-      //type: "DDR4",
+      type: "DDR4",
       description: "HyperX® FURY DDR4 brinda un poderoso impulso para gaming, edición de video y renderización con velocidades de hasta 3733MHz.",
       visible: true,
       category: [
@@ -243,7 +245,7 @@ let json_products = [
       valuation: 5,
       stock: 10,
       brand: "HyperX",
-      //type: "DDR4",
+      type: "DDR4",
       description: "Si notás que tu computadora tiene bajo rendimiento o que su capacidad no se adapta a tus necesidades de uso, es momento de renovar su memoria RAM.",
       visible: true,
       category: [
@@ -270,7 +272,7 @@ let json_products = [
       valuation: 5,
       stock: 15,
       brand: "Kingston",
-      //type: "240GB",
+      type: "Disco solido",
       description: "Con la unidad en estado sólido Gigabyte vas a incrementar la capacidad de respuesta de tu equipo. Gracias a esta tecnología podrás invertir en velocidad y eficiencia para el inicio, la carga y la transferencia de datos.",
       visible: true,
       category: [
@@ -297,7 +299,7 @@ let json_products = [
       valuation: 5,
       stock: 19,
       brand: "Gygabyte",
-      //type: "240GB",
+      type: "Disco solido",
       description: "Con la unidad en estado sólido Gigabyte vas a incrementar la capacidad de respuesta de tu equipo.",
       visible: true,
       category: [
@@ -325,7 +327,7 @@ let json_products = [
       valuation: 5,
       stock: 2,
       brand: "Gygabyte",
-      //type: "240GB",
+      type: "240GB",
       description: "Nvidia es el fabricante líder de placas de video; su calidad asegura una experiencia positiva en el desarrollo del motor gráfico de tu computadora.",
       visible: true,
       category: [
@@ -352,7 +354,7 @@ let json_products = [
       valuation: 5,
       stock: 2,
       brand: "Gygabyte",
-      //type: "240GB",
+      type: "240GB",
       description: "Nvidia es el fabricante líder de placas de video; su calidad asegura una experiencia positiva en el desarrollo del motor gráfico de tu computadora.",
       visible: true,
       category: [
