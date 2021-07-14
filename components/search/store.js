@@ -1,10 +1,10 @@
 const {Product, Category, Image, Promotion, Seller, User} = require('../../db');
-const {simplificarProduct} = require('../../aux_functions');
+const {simplificarProduct, product_attributes} = require('../../aux_functions');
 
 const store = {
     getOne: async function(product_name){
         let response = await Product.findAll({
-            attributes: [ 'name','status','id','price','type','valuation','stock',"sold","warranty",'brand','description'],
+            attributes: product_attributes,
             include: [
                 {
                     model: Seller,
