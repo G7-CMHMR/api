@@ -3,8 +3,8 @@ const store = require('./store');
 const getAllCategory = async () => {
     return store.getAll()
 }
-const postCategory = async (category_name) => {
-    return store.postOne(category_name)
+const postCategory = async (category_data) => {
+    return store.postOne(category_data)
 }
 
 
