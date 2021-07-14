@@ -8,54 +8,65 @@ const store = {
         let param_condition =  params.condition ? params.condition : false;
         let param_min_price =  params.min_price ? params.min_price : false;
         let param_max_price =  params.max_price ? params.max_price : false;
-        // let param_type =  params.type ? params.type : false;
+        let param_type =  params.type ? params.type : false;
         let param_brand =  params.brand ? params.brand : false;
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',param_category, param_shipping, param_condition, param_min_price, param_max_price, param_brand)
 
     let all_products = await Product.findAll({
-        attributes: [ 'name','id','status','price','valuation','stock','brand','description'],
+        attributes: [ 'name','status','price','id','valuation','type','stock','brand','description', 'visible','sold','warranty'],
         include: [
             {
             model: Seller,
-            attributes: ["id"],
-            include: [{
-            model: User,
-            attributes: ["name"],
-                }]
+                attributes: ["id"],
+                include: [{
+                    model: User,
+                        attributes: ["name"],
+                        }]
                 },
                 {
-                model:Image,
+            model:Image,
                 attributes: ["image"],
                 },
                 {
-                model:Category,
+            model:Category,
                 attributes: ["title"],
                 },
                 {
-                model:Promotion,
+            model:Promotion,
                 attributes: ["value","delivery"],
                 }
             ],
         })
-    all_products = all_products.map( e => simplificarProduct(e));
-    if(param_category){
-        all_products = all_products.filter( e => {e.categories.includes(param_category)})
-    };
-    if(param_shipping){
-        all_products = all_products.filter( e => {e.delivery === true})
-    };
-    if(param_condition){
-        all_products = all_products.filter( e => {e.status == param_condition })
-    };
-    if(param_min_price){
-        all_products = all_products.filter(e => {e.price - (e.price * e.discount) >= param_min_price})
-    };
+        all_products = all_products.map( e => simplificarProduct(e));
+        // console.log(param_category)
+
     if(param_max_price){
-        all_products = all_products.filter(e => {e.price - (e.price * e.discount) <= param_max_price})
+        all_products = all_products.filter(e => (e.price - ((e.price / 100 )* e.discount)) <= param_max_price)
     };
+
+    if(param_min_price){
+        all_products = all_products.filter(e => (e.price - ((e.price / 100 )* e.discount)) >= param_min_price)
+    };
+
+    if(param_category){
+        all_products = all_products.filter( e =>  e.categories.includes(param_category))
+    };
+
+    if(param_type){
+        all_products = all_products.filter( e =>  e.type.includes(param_type))
+    };
+
     if(param_brand){
-        all_products = all_products.filter( e => {e.brand == param_brand})
+        all_products = all_products.filter( e => e.brand == param_brand)
     };
+
+    if(param_shipping){
+        all_products = all_products.filter( e => e.delivery == true)
+    };
+
+    if(param_condition){
+        all_products = all_products.filter( e => e.status == param_condition )
+    };
+
     return all_products;
     }
 };

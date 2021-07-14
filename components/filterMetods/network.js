@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     controller
-    .filterMetods(req.params)
+    .filterMetods(req.query)
     .then(e => response.sucess(req, res, 200, e))
     .catch(e => response.error(req, res, 404, e,'fallo en filtrar'))
 })
