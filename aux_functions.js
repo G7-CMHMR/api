@@ -1,4 +1,4 @@
-const {Product, Category, Image, Promotion, Seller, Type , User} = require('./db');
+const {Product, Category, Image, Promotion, Seller, Type , Cart, User} = require('./db');
 const json_users = require('./jsons_files/json_users')
 const json_categories = require('./jsons_files/json_categories')
 const json_products = require('./jsons_files/json_products')
@@ -39,6 +39,7 @@ const json_products = require('./jsons_files/json_products')
                         ,commission: add_user.seller.comission
                         ,userId: user_db.dataValues.id
                     };
+                    await Cart.create({userId: user_db.dataValues.id})
                     let seller_db = await Seller.create(new_seller);
                 })
             ).then(() => cargarProducts())
