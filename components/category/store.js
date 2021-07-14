@@ -15,9 +15,9 @@ const store = {
             ]});
         return response.map((el) => ({ title: el.title, types: el.types.map(el => el.title)}))
     },
-    postOne: async function(category_data){
-        console.log(category_data)
-        let response = await Category.create({title: category_data.title});
+    postOne: async function(category_name){
+        console.log(category_name)
+        let response = await Category.create({title: category_name.title})
         return response
     }
 };
