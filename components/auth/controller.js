@@ -48,7 +48,7 @@ const create = async (user) => {
         User.addCart(cart);
 
         // const url = `http://${req.headers.host}/auth/confirm-account/${newUser.emailToken}`;
-        const url = `http://localhost:3001/auth/confirm-account/${newUser.emailToken}`;
+        const url = `http://localhost:3000/confirm-account/${newUser.emailToken}`;
 
         sendEmail.send({
             email: newUser.email,
