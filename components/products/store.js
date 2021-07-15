@@ -1,6 +1,6 @@
 const {Product, Category, User,Image, Seller, Promotion} = require('../../db');
 const { Op } = require("sequelize");
-const {simplificarProduct} = require('../../aux_functions');
+const {simplificarProduct, product_attributes} = require('../../aux_functions');
 
 const store = {
     getAll_category: async function(category_name){
@@ -9,7 +9,7 @@ const store = {
                 where: {title: category_name},
                 include: [{
                     model: Product,
-                    attributes: [ 'name','id','status','price','type','valuation','stock','brand',"sold","warranty",'description'],
+                    attributes: product_attributes,
                     include: [
                         {
                             model: Seller,
@@ -39,7 +39,7 @@ const store = {
     },
     getAll: async function(){
         let response = await Product.findAll({
-            attributes: [ 'name','id','status','price','type',"sold","warranty",'valuation','stock','brand','description'],
+            attributes: product_attributes,
             include: [
                 {
                     model: Seller,
@@ -72,7 +72,7 @@ const store = {
             where:{ value: {[Op.ne]: 0} },
             include: [{
                 model: Product,
-                attributes: [ 'name','id','status','type','price',"sold","warranty",'valuation','stock','brand','description'],
+                attributes: product_attributes,
                 include: [
                     {
                         model: Seller,
