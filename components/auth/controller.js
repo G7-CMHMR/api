@@ -25,6 +25,8 @@ const login = async (user) => {
     return {
         id,
         name,
+        lastName,
+        email,
         token
     };
 
@@ -42,11 +44,8 @@ const create = async (user) => {
         const newUser = await User.create(user);
 
         const isNewUserCreated = Object.keys(newUser).length > 0;
-
-        const cart = await Cart.create(cart);
-
-        User.addCart(cart);
-
+        const cart = await Cart.create();
+        cart.setUser(newUser);
         // const url = `http://${req.headers.host}/auth/confirm-account/${newUser.emailToken}`;
         const url = `http://localhost:3000/confirm-account/${newUser.emailToken}`;
 
@@ -157,8 +156,8 @@ const googleSignIn = async (req, res) => {
                 password: '',
             }
             user = await User.create(data);
-            const cart = await Cart.create(cart);
-            User.addCart(cart);
+            const cart = await Cart.create();
+            cart.setUser(user);
         }
 
         const token = await generateJWT(user.id, user.name);
