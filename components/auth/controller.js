@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const { User } = require('../../db');
+const { User, Cart } = require('../../db');
 
 const hashPassword = require('./resources/utils/hashPassword');
 const { generateJWT } = require('./resources/utils/jwt');
@@ -42,6 +42,10 @@ const create = async (user) => {
         const newUser = await User.create(user);
 
         const isNewUserCreated = Object.keys(newUser).length > 0;
+
+        const cart = await Cart.create(cart);
+
+        User.addCart(cart);
 
         // const url = `http://${req.headers.host}/auth/confirm-account/${newUser.emailToken}`;
         const url = `http://localhost:3001/auth/confirm-account/${newUser.emailToken}`;
