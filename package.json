@@ -29,6 +29,7 @@
     "mongoose": "^5.13.2",
     "morgan": "^1.10.0",
     "nanoid": "^3.1.23",
+    "nodemailer": "^6.6.2",
     "pg": "^8.6.0",
     "sequelize": "^6.6.5",
     "socket.io": "^4.1.2"

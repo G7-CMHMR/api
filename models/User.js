@@ -44,20 +44,28 @@ module.exports = (sequelize) => {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
+		active: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+		},
+		emailToken: {
+			type: DataTypes.STRING,
+			defaultValue: UUIDV4,
+		},
+		// emailTokenExpiration: DataTypes.DATE,
+		// dni: {
+		// 	type: DataTypes.INTEGER,
+		// 	allowNull: false
+		// },
 		dni: {
 			type: DataTypes.INTEGER,
 		},
 		phone: {
 			type: DataTypes.STRING,
 		},
-		// active: {
-		// 	type: DataTypes.BOOLEAN,
-		// 	defaultValue: true,
-		// },
 		address: {
 			type: DataTypes.STRING,
 		},
-
 		// role: {
 		// 	type: DataTypes.ENUM(["ROLE_USER", "ROLE_ADMIN", "ROLE_SELLER"]),
 		// 	allowNull: false,

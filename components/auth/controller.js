@@ -5,11 +5,11 @@ const { User } = require('../../db');
 const hashPassword = require('./resources/utils/hashPassword');
 const { generateJWT } = require('./resources/utils/jwt');
 const { googleVerify } = require('./resources/utils/googleVerify')
-
+const sendEmail = require('../../email_config/handler');
 
 const login = async (user) => {
 
-    const userRegistered = await User.findOne({ where: { email: user.email } });
+    const userRegistered = await User.findOne({ where: { email: user.email, active: true } });
     if (!userRegistered)  throw { error:'El usuario no se encuentra registrado' };
 
     const isValidPassword = bcrypt.compareSync(user.password, userRegistered.password);
@@ -42,7 +42,20 @@ const create = async (user) => {
         const newUser = await User.create(user);
 
         const isNewUserCreated = Object.keys(newUser).length > 0;
+
+        // const url = `http://${req.headers.host}/auth/confirm-account/${newUser.emailToken}`;
+        const url = `http://localhost:3001/auth/confirm-account/${newUser.emailToken}`;
+
+        sendEmail.send({
+            email: newUser.email,
+            url,
+            emailToken: newUser.emailToken,
+            subject: 'Confirmación de cuenta',
+            htmlFile: 'confirm.html'
+        });
+        
         if (isNewUserCreated)   return { succesfull: 'El usuario se ha creado con exito' };
+
 
     // Atrapa en caso de haber algun error
     } catch (error) {
@@ -173,6 +186,26 @@ const googleSignIn = async (req, res) => {
 
 };
 
+const confirmAccount = async (req, res) => {
+
+    const user = await User.findOne({ where:{ emailToken: req.params.emailToken }});
+    // const user = await User.findOne({ where:{ email: req.params.email }});
+    
+    if (!user) {
+        return res.status(404).json({
+            msg: 'El usuario no existe'
+        });
+    };
+
+    user.active = true;
+    user.emailToken = null;
+    await user.save();
+
+    return res.json({
+        msg: 'Usuario confirmado'
+    })
+};
+
 
 module.exports = {
     create,
@@ -180,6 +213,7 @@ module.exports = {
     update,
     updatePassword,
     renewToken,
-    googleSignIn
+    googleSignIn,
+    confirmAccount
 }
 
