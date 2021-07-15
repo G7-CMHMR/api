@@ -64,69 +64,57 @@ const create = async (user) => {
 }
 
 
-const update = async (req, res) => {
+const update = async ( userId, { password: userPassword, ...dataToUpdate }) => {
 
-    const userId = req.id;
-    const dataUpdate = req.body;
+    try{
+        const user = await User.findByPk(userId);
+        if (!user)  throw { error:'El usuario no se encuentra registrado' };
 
-    try {
-        const user = await User.findByPk(userId, { attributes: { exclude: ["password"] } });
+        const isValidPassword = bcrypt.compareSync(userPassword, user.password);
+        if (!isValidPassword) throw { error: 'El password es incorrecto' };
 
-        if (!user) return res.status(400).json({ ok: false, msg: 'Usuario no encontrado' });
-
-        user.name = dataUpdate.name;
-        user.lastName = dataUpdate.lastName;
-        user.email = dataUpdate.email;
-
+        if(dataToUpdate.email){
+            const userRegisteredWithMail = await User.findOne({ where: { email: dataToUpdate.email } });
+            if (userRegisteredWithMail !== null)   throw { error: 'Este email ya está en uso' };
+        }
+        if(dataToUpdate.name)   user.name = dataToUpdate.name;
+        if(dataToUpdate.lastName)   user.lastName = dataToUpdate.lastName;
+        if(dataToUpdate.email)  user.email = dataToUpdate.email;
+       
         user.save();
 
-        return res.json({
-            ok: true,
-            user
-        })
-
-    } catch (error) {
-        return res.status(500).json({
-            ok: false,
-            error
-        });
+        return {
+            id: user.id,
+            name: user.name,
+            lastName: user.lastName,
+            email: user.email
+        }
     }
-
+    catch (error) {
+        console.log(error)
+        throw error;
+    }
 }
 
 
-const updatePassword = async (req, res) => {
+const updatePassword = async ( userId, password) => {
+    try{
+        const user = await User.findByPk(userId);
+        if (!user)  throw { error:'El usuario no se encuentra registrado' };
 
-    const userId = req.id;
+        const isValidPassword = bcrypt.compareSync(password.oldPassword, user.password);
+        if (!isValidPassword) throw { error: 'El password es incorrecto' };
 
-    const { oldPassword, newPassword, newPasswordConfirm } = req.body;
+        user.password = await hashPassword(password.newPassword);
 
-    const user = await User.findByPk(userId);
+        user.save();
 
+        return { succesfull: 'La contraseña se ha modificado con exito' };
 
-    if (!user) return res.status(401).json({ ok: false, msg: 'No se encuentra el usuario' });
-
-    if (!(await bcrypt.compare(oldPassword, user.password))) return res.status(400).json({
-        ok: false, msg: 'La contraseña actual no es correcta'
-    })
-
-    if (newPassword !== newPasswordConfirm) return res.json({
-        ok: false,
-        msg: 'Las constraseñas no coinciden'
-    })
-
-    const passwordHashed = await hashPassword(newPassword);
-
-    await user.update(
-        { password: passwordHashed }
-    )
-
-    return res.json({
-        ok: true,
-        msg: 'Contraseña actualizada'
-    })
-
-};
+    } catch (error) {
+        throw error;
+    }
+}
 
 
 const renewToken = async (req, res) => {

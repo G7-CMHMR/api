@@ -42,9 +42,28 @@ router.post('/create', [userValidator.create, validateFields], (req, res) => {
 		})
 });
 
-router.post('/update', [auth, userValidator.update, validateFields], update);
 
-router.post('/update-password', [auth, userValidator.updatePassword, validateFields], updatePassword);
+router.put('/update', [auth, userValidator.update, validateFields], (req ,res) => {
+	update(req.id, req.body)
+		.then( e => {
+			response.sucess(req, res, 201, e)
+		})
+		.catch( e => {
+			response.error(req, res, 401, e, 'No se pudo actualizar la informacion')
+		})
+});
+
+
+router.put('/update-password', [auth, userValidator.updatePassword, validateFields], (req, res) => {
+	updatePassword(req.id, req.body)
+		.then( e => {
+			response.sucess(req, res, 201, e)
+		})
+		.catch( e => {
+			response.error(req, res, 401, e, 'No se pudo actualizar la informacion')
+		})
+});
+
 
 router.get('/renew-token', auth, renewToken);
 
