@@ -157,6 +157,8 @@ const googleSignIn = async (req, res) => {
                 password: '',
             }
             user = await User.create(data);
+            const cart = await Cart.create(cart);
+            User.addCart(cart);
         }
 
         const token = await generateJWT(user.id, user.name);
