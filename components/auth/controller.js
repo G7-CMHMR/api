@@ -44,7 +44,7 @@ const create = async (user) => {
         const isNewUserCreated = Object.keys(newUser).length > 0;
 
         // const url = `http://${req.headers.host}/auth/confirm-account/${newUser.emailToken}`;
-        const url = `http://localhost:3001/auth/confirm-account/${newUser.emailToken}`;
+        const url = `http://localhost:3000/confirm-account/${newUser.emailToken}`;
 
         sendEmail.send({
             email: newUser.email,
