@@ -57,15 +57,15 @@ module.exports = (sequelize) => {
 		// 	type: DataTypes.INTEGER,
 		// 	allowNull: false
 		// },
-		// address: {
-		// 	type: DataTypes.STRING,
-		// 	allowNull: false
-		// },
-		// phone: {
-		// 	type: DataTypes.STRING,
-		// 	allowNull: false
-		// }
-
+		dni: {
+			type: DataTypes.INTEGER,
+		},
+		phone: {
+			type: DataTypes.STRING,
+		},
+		address: {
+			type: DataTypes.STRING,
+		},
 		// role: {
 		// 	type: DataTypes.ENUM(["ROLE_USER", "ROLE_ADMIN", "ROLE_SELLER"]),
 		// 	allowNull: false,

@@ -1,36 +1,35 @@
-const {Product, Category, Cart , Image, Promotion, Seller, User} = require('../../db');
+const {Product, Category, Image, Promotion, Seller, User} = require('../../db');
 const {simplificarProduct} = require('../../aux_functions');
 
 const store = {
-    addCart: async function(params){
+    addFavourite: async function(params){
 
-        const cart = await Cart.findOne({
-            where: {userId: params.userId},
+        const user = await User.findOne({
+            where: {id: params.userId},
         })
-
         const product = await Product.findOne({
             where: {id: params.productId},
         })
+        await user.addProduct(product);
 
-        await cart.addProduct(product);
-
-        return [cart,product]
+        return [user,product]
     },
-    removeCart: async function(params){
-        const cart = await Cart.findOne({
-            where: {userId: params.userId},
+    removeFavourite: async function(params){
+        const user = await User.findOne({
+            where: {id: params.userId},
         })
         const product = await Product.findOne({
             where: {id: params.productId},
         })
-        await cart.removeProduct(product)
+        await user.removeProduct(product)
+        .catch(err => console.log(err))
 
-        return [cart,product]
+        return [user,product]
         
     },
-    getCart: async function(userId){
-        const cart = await Cart.findOne({
-            where: {userId: userId},
+    getFavourites: async function(userId){
+        const user = await User.findOne({
+            where: {id: userId},
             include: [{
                 model: Product,
                 attributes: [ 'name','status','id','price','valuation',"sold","warranty",'stock','brand','description','type'],
@@ -58,7 +57,7 @@ const store = {
                 ],
             }],
         })
-        return cart.products.map((el) => simplificarProduct(el))
+        return user.products.map((el) => simplificarProduct(el))
     },
 };
 
