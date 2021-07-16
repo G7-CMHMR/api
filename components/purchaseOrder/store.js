@@ -10,28 +10,43 @@
 
 const { Purchase_order, Cart } = require('../../db');
 
-// const totalPrice = (cart) => {
-//     for (let i = 0; i < cart.length; i++){
-        
-//     }
+const totalPrice = (cart) => {
+    let total = 0;
+
+    for (let i = 0; i < cart.length; i++){
+        total += cart[i].amount*(cart[i].product.price - ((cart[i].product.price / 100) *cart[i].product.promotion.value))
+    }
+
+    return total;
 
 // }
 
+cart --> [{amount, product(price, discount)}, {} ,...{}]
+{
+    amount: el.amount,
+    product: el.dataValues.product
+}
+
 
 const createOrder = async(data) => {
-    // const { userId, payment_method, userAddress } = data;
-    // const date = new Date();
+    const { userId, payment_method, userAddress } = data;
+    const date = new Date();
 
-    // const userCart = getCart(userId);
+    const userCart = getCart(userId);
 
-    // const order = Purchase_order.create({
-    //     payment_method: payment_method, 
-    //     address: userAddress, 
-    //     status: 'created',
 
-    // })
-    // order.setUser(userId);
-    // order.addProducts()
+    const total = totalPrice(userCart);
+    const order = Purchase_order.create({
+        payment_method: payment_method, 
+        address: userAddress, 
+        status: 'created',
+        total_price: total
+    })
+    order.setUser(userId);
+    userCart.map( i => order.addProduct(i.product));
+
+    console.log('ESTA ES LA ORDER: ',order);
+    return order;
 
 }
 
