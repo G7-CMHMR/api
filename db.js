@@ -52,8 +52,11 @@ Seller_review.belongsTo(User);
 User.hasMany(Product_review);
 Product_review.belongsTo(User);
 
-Product.belongsToMany(Cart , { through: 'Product_Cart' });
-Cart.belongsToMany(Product , { through: 'Product_Cart' });
+Cart.hasMany(Items);
+Items.belongsTo(Cart);
+
+Product.hasMany(Items);
+Items.belongsTo(Product);
 
 Product.belongsToMany(User , { through: 'Favourite' });
 User.belongsToMany(Product , { through: 'Favourite' });
