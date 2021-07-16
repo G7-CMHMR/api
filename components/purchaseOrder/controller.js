@@ -5,14 +5,14 @@ const createOrder = async (data) => {
 	return store.createOrder(data);
 }
 
-const getOrders = async () => {
+const getOrders = async (userId) => {
 
-	return store.getOrders();
+	return store.getOrders(userId);
 }
 
 const getOrderDetail = async (orderId) => {
-
-	return store.getOrderDetail();
+	console.log(orderId)
+	return store.getOrderDetail(orderId);
 }
 
 const changeOrderStatus = async(orderId) => {

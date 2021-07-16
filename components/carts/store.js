@@ -92,8 +92,6 @@ const store = {
             };
             return item;
         })
-<<<<<<< HEAD
-=======
     },
 
     decrementItem: async function(params){
@@ -120,7 +118,6 @@ const store = {
         }else{throw ('no existe este elemento')}
 
         return [cart,items]
->>>>>>> 33abd64a1eae42c2515292ad237a33b29ee35a14
     },
 };
 

@@ -8,7 +8,8 @@
 // RETORNO:
 // 
 
-const { Purchase_order, Cart } = require('../../db');
+const { Purchase_order, Cart, Product } = require('../../db');
+const store = require('../carts/store')
 
 const totalPrice = (cart) => {
     let total = 0;
@@ -19,40 +20,42 @@ const totalPrice = (cart) => {
 
     return total;
 
-// }
-
-cart --> [{amount, product(price, discount)}, {} ,...{}]
-{
-    amount: el.amount,
-    product: el.dataValues.product
 }
+
 
 
 const createOrder = async(data) => {
     const { userId, payment_method, userAddress } = data;
     const date = new Date();
 
-    const userCart = getCart(userId);
+    const userCart = await store.getCart(userId);
 
 
     const total = totalPrice(userCart);
-    const order = Purchase_order.create({
+    const order = await Purchase_order.create({
         payment_method: payment_method, 
         address: userAddress, 
         status: 'created',
-        total_price: total
+        total_price: total,
+        date : date
     })
     order.setUser(userId);
-    userCart.map( i => order.addProduct(i.product));
+    // console.log(userCart[0].product)
+    // userCart.map( i =>
+    //     // console.log(i.product)
 
-    console.log('ESTA ES LA ORDER: ',order);
+    //     order.addProduct(i.product)
+    //     );
+
+    // console.log('ESTA ES LA ORDER: ',order);
     return order;
 
 }
 
-const getOrders = async (userId) => {
+const getOrders = async (param) => {
+
     const purchaseOrders = await Purchase_order.findAll({
-        where: {userId: userId}
+        where: {userId: param.userId}
     })
 
     return purchaseOrders;
@@ -62,8 +65,10 @@ const getOrders = async (userId) => {
 
 
 const getOrderDetail = async (orderId) => {
-    const purchaseOrder = await Purchase_order.findByPk(orderId)
 
+    const purchaseOrder = await Purchase_order.findByPk(orderId.orderId)
+
+    return purchaseOrder;
 }
 
 const changeOrderStatus = async(orderId) => {

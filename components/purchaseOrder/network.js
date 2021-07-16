@@ -20,16 +20,16 @@ router.get('/', ( req, res ) => {
 
 router.get('/:orderId', ( req, res ) => {
 	controller.
-		getOrderDetail(req.body)
-		.then ( e => response.success(req, res, 200, e))
-		.catch( e => response.error( req, res, 404, 'Fallo al obtener detalle de orden de compra'))
+		getOrderDetail(req.params)
+	    .then(e => response.sucess(req, res, 200, e))
+    	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las ordenes de compra'))
 })
 
 router.put('/status', (req, res) => {
 	controller.
 		changeOrderStatus(req.body)
-		.then( e => response.success(req, res, 200, e))
-		.catch( e => response.error(req, res, 404, 'Fallo al intentar cambiar el estado de la orden de compra'));
+		.then(e => response.success(req, res, 200, e))
+		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar cambiar el estado de la orden de compra'));
 })
 
 module.exports = router;
