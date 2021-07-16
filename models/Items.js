@@ -6,7 +6,8 @@ module.exports = (sequelize) => {
   sequelize.define('Items', {
     amount: {
       type: DataTypes.FLOAT,
-      allowNull: false
+      // allowNull: false,
+      defaultValue: 0
     }
   });
 };
