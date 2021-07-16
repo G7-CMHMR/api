@@ -3,7 +3,7 @@ const Sequelize = require('sequelize');
 
 module.exports = (sequelize) => {
 
-  sequelize.define('Items', {
+  sequelize.define('items', {
     amount: {
       type: DataTypes.FLOAT,
       // allowNull: false,
