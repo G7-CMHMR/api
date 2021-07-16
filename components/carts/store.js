@@ -35,10 +35,18 @@ const store = {
         const product = await Product.findOne({
             where: {id: params.productId},
         })
-        await cart.removeProduct(product)
 
-        return [cart,product]
-        
+        let items = await Items.findOne({
+            where: {cartId: cart.id,
+                productId: product.id
+            },
+        })
+
+        // await items.removeProduct(product);
+        // await items.removeCart(cart);
+        await items.destroy();
+
+        return `Se eliminó el producto "${product.name}" exitosamente`;
     },
     getCart: async function(userId){
         const cart = await Cart.findOne({
@@ -83,6 +91,32 @@ const store = {
             };
             return item;
         })
+    },
+
+    decrementItem: async function(params){
+        const cart = await Cart.findOne({
+            where: {userId: params.userId},
+        })
+        const product = await Product.findOne({
+            where: {id: params.productId},
+        })
+        let items = await Items.findOne({
+            where: {cartId: cart.id,
+                productId: product.id
+            },
+        })
+
+        if(items.amount){
+            if(items.amount > 1){
+                items.amount = items.amount -1;
+                items.save();
+            }else{
+                throw ('no se puede disminuir la cantidad de elementos')
+                }
+
+        }else{throw ('no existe este elemento')}
+
+        return [cart,items]
     },
 };
 
