@@ -43,8 +43,6 @@ const create = async (user) => {
 
         const newUser = await User.create(user);
 
-
-
         const isNewUserCreated = Object.keys(newUser).length > 0;
         const cart = await Cart.create();
         cart.setUser(newUser);

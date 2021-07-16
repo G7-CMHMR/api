@@ -18,6 +18,13 @@ router.post('/remove', (req, res) => {
     .catch(e => response.error(req, res, 404, e,'fallo quitar el producto del carrito'))
 })
 
+router.post('/decrement', (req, res) => {
+    controller
+    .decrementCart(req.body)
+    .then(e => response.sucess(req, res, 200, e))
+    .catch(e => response.error(req, res, 404, e,'fallo quitar el producto del carrito'))
+})
+
 
 router.get('/:userId', (req, res) => {
     controller
