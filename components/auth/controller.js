@@ -38,14 +38,12 @@ const create = async (user) => {
         if (userRegisteredWithMail !== null)   throw { error: 'Este email ya está en uso' };
 
         user.password = await hashPassword(user.password);
-
+        console.log(user)
         const newUser = await User.create(user);
 
         const isNewUserCreated = Object.keys(newUser).length > 0;
 
-        const cart = await Cart.create(cart);
-
-        User.addCart(cart);
+        await Cart.create({userId: newUser.dataValues.id});
 
         // const url = `http://${req.headers.host}/auth/confirm-account/${newUser.emailToken}`;
         const url = `http://localhost:3000/confirm-account/${newUser.emailToken}`;
@@ -157,8 +155,8 @@ const googleSignIn = async (req, res) => {
                 password: '',
             }
             user = await User.create(data);
-            const cart = await Cart.create(cart);
-            User.addCart(cart);
+            const cart = await Cart.create();
+            cart.setUser(user);
         }
 
         const token = await generateJWT(user.id, user.name);
