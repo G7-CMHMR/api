@@ -66,6 +66,10 @@ module.exports = (sequelize) => {
 		address: {
 			type: DataTypes.STRING,
 		},
+		isSeller: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+		}
 		// role: {
 		// 	type: DataTypes.ENUM(["ROLE_USER", "ROLE_ADMIN", "ROLE_SELLER"]),
 		// 	allowNull: false,

@@ -27,6 +27,7 @@ const login = async (user) => {
         name,
         lastName,
         email,
+        isSeller,
         token
     };
 
