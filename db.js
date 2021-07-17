@@ -79,8 +79,10 @@ Promotion.belongsTo(Product)
 Product.hasMany(Product_review);
 Product_review.belongsTo(Product);
 
-Product.belongsToMany(Purchase_order , { through: 'Order_Product' });
-Purchase_order.belongsToMany(Product , { through: 'Order_Product' });
+Purchase_order.hasMany(Items);
+Items.belongsTo(Purchase_order);
+// Product.belongsToMany(Purchase_order , { through: 'Order_Product' });
+// Purchase_order.belongsToMany(Product , { through: 'Order_Product' });
 
 Product.belongsToMany(Category , { through: 'Product_Category' });
 Category.belongsToMany(Product , { through: 'Product_Category' });

@@ -20,6 +20,7 @@ const { create, login, update, updatePassword, googleSignIn, renewToken, confirm
 // router.post('/login', [userValidator.login, validateFields], login);
 router.post('/login', [userValidator.login, validateFields], (req, res) => {
 	// controller.
+	console.log('ENTRO AL LOGIN: ')
 		login(req.body)
 		.then( e => {
 			response.sucess(req, res, 200, e);
