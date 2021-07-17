@@ -42,12 +42,10 @@ const store = {
             },
         })
 
-        // await items.removeProduct(product);
-        // await items.removeCart(cart);
         await items.destroy();
 
 
-        return `Se eliminó el producto "${product.name}" exitosamente`;
+        return `Se eliminó el producto '${product.name}' exitosamente`;
     },
     getCart: async function(userId){
         const cart = await Cart.findOne({

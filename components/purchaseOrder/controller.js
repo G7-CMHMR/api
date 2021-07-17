@@ -11,7 +11,7 @@ const getOrders = async (userId) => {
 }
 
 const getOrderDetail = async (orderId) => {
-	console.log(orderId)
+
 	return store.getOrderDetail(orderId);
 }
 

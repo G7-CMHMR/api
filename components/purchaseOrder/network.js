@@ -28,7 +28,7 @@ router.get('/:orderId', ( req, res ) => {
 router.put('/status', (req, res) => {
 	controller.
 		changeOrderStatus(req.body)
-		.then(e => response.success(req, res, 200, e))
+		.then(e => response.sucess(req, res, 200, e))
 		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar cambiar el estado de la orden de compra'));
 })
 
