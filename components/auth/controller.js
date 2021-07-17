@@ -16,7 +16,7 @@ const login = async (user) => {
     if (!isValidPassword) throw { error: 'El password es incorrecto' };
 
     // En este punto, el usuario existe e ingreso correctamente el password
-    const { id, name, lastName, email } = userRegistered;
+    const { id, name, lastName, email, isSeller } = userRegistered;
 
     // Genera un token 
     const token = await generateJWT(id, name);
