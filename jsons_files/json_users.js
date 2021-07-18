@@ -11,6 +11,9 @@ let json_users = [
         address: "bikini bottom",
         reputation: "4",
         comission: 21,
+        location: "Cordoba",
+        phone: "156-998877",
+        cuil: 12345678,
         products: {}
       }
     },
@@ -26,6 +29,9 @@ let json_users = [
         address: "my office 456",
         reputation: "5",
         comission: 21,
+        location: "Cordoba",
+        phone: "156-234567",
+        cuil: 11223344,
         products: {}
       }
     },
@@ -41,6 +47,9 @@ let json_users = [
         address: "kanto",
         reputation: "5",
         comission: 21,
+        location: "Buenos Aires",
+        phone: "442-9876",
+        cuil: 55667788,
         products: {}
       }
     },
@@ -56,6 +65,9 @@ let json_users = [
         address: "Lucemon's house",
         reputation: "3",
         comission: 21,
+        location: "San Juan",
+        phone: "264-776655",
+        cuil: 99887766,
         products: {}
       }
     },
@@ -71,6 +83,9 @@ let json_users = [
         address: "amazing mirror",
         reputation: "1",
         comission: 21,
+        location: "San Juan",
+        phone: "264-112233",
+        cuil: 99887766,
         products: {}
       }
     }

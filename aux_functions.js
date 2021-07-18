@@ -37,6 +37,9 @@ const json_products = require('./jsons_files/json_products')
                         accountBank: add_user.seller.accountBank
                         ,address: add_user.seller.address
                         ,commission: add_user.seller.comission
+                        ,location: add_user.seller.location
+                        ,phone: add_user.seller.phone
+                        ,cuil: add_user.seller.cuil
                         ,userId: user_db.dataValues.id
                     };
                     await Cart.create({userId: user_db.dataValues.id})
