@@ -41,10 +41,8 @@ const create = async (user) => {
         if (userRegisteredWithMail !== null)   throw { error: 'Este email ya está en uso' };
 
         user.password = await hashPassword(user.password);
-        console.log(user)
         const newUser = await User.create(user);
-
-        const isNewUserCreated = Object.keys(newUser).length > 0
+        const isNewUserCreated = Object.keys(newUser).length > 0;
         const cart = await Cart.create();
         cart.setUser(newUser);
         // const url = `http://${req.headers.host}/auth/confirm-account/${newUser.emailToken}`;
