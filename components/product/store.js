@@ -67,7 +67,52 @@ const store = {
         });
         await response.save()
         return simplificarProduct(response)
-    }
+    },
+    addOne: async function(product_data){
+        const user = await User.findOne({
+            where:{
+                id:product_data.userId},
+            include: [{
+                model: Seller}]
+        })
+
+        const product = await Product.create({
+            sellerId: user.seller.id,
+            name: product_data.name, 
+            status: product_data.status, 
+            price: product_data.price,
+            stock: product_data.stock,
+            description: product_data.description,
+            visible: product_data.visible,
+            brand: product_data.brand,
+            type: product_data.type,
+            warranty: product_data.warranty
+        })
+        const promotion = await Promotion.create({
+            title: product_data.promotion.title,
+            image: product_data.promotion.image,
+            value: product_data.promotion.value,
+            delivery: product_data.promotion.delivery
+        })
+
+        const category = await Category.findOne({
+            where:{
+                title:product_data.category
+            }
+        })
+        await product.addCategory(category);
+        // product_data.images.map(async (e) => 
+        //     {
+        //     await Image.create({
+        //         url: e
+        //     })
+        //     await image.setProduct(product.id)
+        //     }
+        // )
+        await product.setPromotion(promotion.id);
+
+        return product
+    },
 };
 
 module.exports = store;
