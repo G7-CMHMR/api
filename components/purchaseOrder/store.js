@@ -8,12 +8,11 @@
 // RETORNO:
 // 
 
-const { Purchase_order, Cart, Product, Items } = require('../../db');
+const { Purchase_order, Cart, Product, Items, Promotion } = require('../../db');
 const store = require('../carts/store')
 
 const totalPrice = (cart) => {
     let total = 0;
-
     for (let i = 0; i < cart.length; i++){
         total += cart[i].amount*(cart[i].product.price - ((cart[i].product.price / 100) *cart[i].product.promotion.value))
     }
@@ -32,11 +31,11 @@ const createOrder = async(data) => {
 
     const userCart = await Cart.findOne({
         where: {userId: userId},
-        include : [{model: Items}]
+        include : [{model: Items,include:{model: Product, include:{model:Promotion}}}]
     })
 
 
-    const total = totalPrice(userCart);
+    const total = totalPrice(userCart.items);
     const order = await Purchase_order.create({
         payment_method: payment_method, 
         address: userAddress, 
