@@ -1,7 +1,6 @@
 const {Product, Category, User,Image, Seller, Promotion} = require('../../db');
 const { Op } = require("sequelize");
 const {simplificarProduct, product_attributes} = require('../../aux_functions');
-const { response } = require('express');
 
 const store = {
     getAll_category: async function(category_name){
