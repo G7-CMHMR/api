@@ -37,7 +37,40 @@ const store = {
             })
         return response.products.map((el) => simplificarProduct(el))
     },
+    getAllVisible: async function(){
+
+        let response = await Product.findAll({
+            where:{visible:true},
+            attributes: product_attributes,
+            include: [
+                {
+                    model: Seller,
+                    attributes: ["id"],
+                    include: [{
+                        model: User,
+                         attributes: ["name"],
+                    }]
+                },
+                {
+                    model:Image,
+                    attributes: ["image"],
+                },
+                {
+                    model:Category,
+                    attributes: ["title"],
+                },
+                {
+                    model:Promotion,
+                    attributes: ["value","delivery"],
+                }
+            ],
+            
+        })
+
+        return response.map((el) => simplificarProduct(el))
+    },
     getAll: async function(){
+
         let response = await Product.findAll({
             attributes: product_attributes,
             include: [

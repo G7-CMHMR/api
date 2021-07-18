@@ -1,5 +1,9 @@
 const store = require('./store');
 
+const getAllVisibleProducts = async () => {
+    
+    return store.getAllVisible()
+}
 const getAllProducts = async () => {
     
     return store.getAll()
@@ -17,6 +21,7 @@ const getAllProductsOffer = async () => {
 
 module.exports = {
     getAllProducts,
+    getAllVisibleProducts,
     getAllProductsByCategory,
     getAllProductsOffer
 }
