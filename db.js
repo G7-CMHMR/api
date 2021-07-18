@@ -32,7 +32,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades 
 // Para relacionarlos hacemos un destructuring
-const { Category , Product_review ,Seller_review, Purchase_order , Cart , Type , Image , Product , Promotion, User, Seller } = sequelize.models;
+const { Category , Product_review ,Seller_review, Purchase_order , Cart , Type , Image , Product , Promotion, User, Seller, Items } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
@@ -52,8 +52,11 @@ Seller_review.belongsTo(User);
 User.hasMany(Product_review);
 Product_review.belongsTo(User);
 
-Product.belongsToMany(Cart , { through: 'Product_Cart' });
-Cart.belongsToMany(Product , { through: 'Product_Cart' });
+Cart.hasMany(Items);
+Items.belongsTo(Cart);
+
+Product.hasMany(Items);
+Items.belongsTo(Product);
 
 Product.belongsToMany(User , { through: 'Favourite' });
 User.belongsToMany(Product , { through: 'Favourite' });
@@ -76,8 +79,10 @@ Promotion.belongsTo(Product)
 Product.hasMany(Product_review);
 Product_review.belongsTo(Product);
 
-Product.belongsToMany(Purchase_order , { through: 'Order_Product' });
-Purchase_order.belongsToMany(Product , { through: 'Order_Product' });
+Purchase_order.hasMany(Items);
+Items.belongsTo(Purchase_order);
+// Product.belongsToMany(Purchase_order , { through: 'Order_Product' });
+// Purchase_order.belongsToMany(Product , { through: 'Order_Product' });
 
 Product.belongsToMany(Category , { through: 'Product_Category' });
 Category.belongsToMany(Product , { through: 'Product_Category' });
