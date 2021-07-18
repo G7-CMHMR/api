@@ -10,7 +10,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     status: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM,
+      values: ['Usado', 'Nuevo', 'Reacondicionado']
     },
     price: {
         type: DataTypes.FLOAT,
