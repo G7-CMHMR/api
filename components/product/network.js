@@ -11,6 +11,12 @@ router.get('/:product_id', (req, res) => {
     .then(e => response.sucess(req, res, 200, e))
     .catch(e => response.error(req, res, 404, e,'fallo en conseguir el producto'))
 })
+router.post('/', (req, res) => {
+    controller
+    .addProduct(req.body)
+    .then(e => response.sucess(req, res, 200, e))
+    .catch(e => response.error(req, res, 404, e,'fallo en conseguir el producto'))
+})
 router.post('/update/:product_id', (req, res) => {
     controller
     .updateProduct(req.params.product_id, req.body)
