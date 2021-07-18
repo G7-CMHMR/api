@@ -18,10 +18,15 @@ const getAllProductsOffer = async () => {
     return store.getAll_offer()
 }
 
+const getSellerProducts = async (params) => {
+    
+    return store.getSeller(params)
+}
 
 module.exports = {
     getAllProducts,
     getAllVisibleProducts,
     getAllProductsByCategory,
-    getAllProductsOffer
+    getAllProductsOffer,
+    getSellerProducts,
 }
