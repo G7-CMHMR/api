@@ -1,8 +1,8 @@
 const store = require('./store');
 
-const getAllVisibleProducts = async () => {
-    
-    return store.getAllVisible()
+const getAllVisibleProducts = async (params) => {
+    if(!params){params = {condition : true}}
+    return store.getAllVisible(params)
 }
 const getAllProducts = async () => {
     
