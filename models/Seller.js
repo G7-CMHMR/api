@@ -18,8 +18,17 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    cuil: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     creation_date: {
         type: DataTypes.DATE,
+        allowNull: false,
     },
     commission: {
         type: DataTypes.FLOAT,

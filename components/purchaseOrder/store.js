@@ -8,12 +8,12 @@
 // RETORNO:
 // 
 
-const { Purchase_order, Cart, Product, Items } = require('../../db');
+const { Purchase_order, Cart, Product, Items, Promotion, Category, Image, Seller, User } = require('../../db');
 const store = require('../carts/store')
+const { product_attributes} = require('../../aux_functions');
 
 const totalPrice = (cart) => {
     let total = 0;
-
     for (let i = 0; i < cart.length; i++){
         total += cart[i].amount*(cart[i].product.price - ((cart[i].product.price / 100) *cart[i].product.promotion.value))
     }
@@ -32,11 +32,11 @@ const createOrder = async(data) => {
 
     const userCart = await Cart.findOne({
         where: {userId: userId},
-        include : [{model: Items}]
+        include : [{model: Items,include:{model: Product, include:{model:Promotion}}}]
     })
 
 
-    const total = totalPrice(userCart);
+    const total = totalPrice(userCart.items);
     const order = await Purchase_order.create({
         payment_method: payment_method, 
         address: userAddress, 
@@ -59,7 +59,33 @@ const createOrder = async(data) => {
 const getOrders = async (param) => {
 
     const purchaseOrders = await Purchase_order.findAll({
-        where: {userId: param.userId}
+        where: {userId: param.userId},
+            include : [{model: Items,include:
+                {model: Product, 
+                    attributes: product_attributes,
+                    include: [
+                        {
+                            model: Seller,
+                            attributes: ["id"],
+                            include: [{
+                                model: User,
+                                 attributes: ["name"],
+                            }]
+                        },
+                        {
+                            model:Image,
+                            attributes: ["image"],
+                        },
+                        {
+                            model:Category,
+                            attributes: ["title"],
+                        },
+                        {
+                            model:Promotion,
+                            attributes: ["value","delivery"],
+                        }
+                    ],    
+                }}]
     })
 
     return purchaseOrders;
@@ -70,7 +96,38 @@ const getOrders = async (param) => {
 
 const getOrderDetail = async (orderId) => {
 
-    const purchaseOrder = await Purchase_order.findByPk(orderId.orderId)
+    // findByPk(orderId.orderId)
+    const purchaseOrder = await await Purchase_order.findOne({
+        where: {orderId: orderId.orderId,
+            include : [{model: Items,include:
+                {model: Product, 
+                    attributes: product_attributes,
+                    include: [
+                        {
+                            model: Seller,
+                            attributes: ["id"],
+                            include: [{
+                                model: User,
+                                 attributes: ["name"],
+                            }]
+                        },
+                        {
+                            model:Image,
+                            attributes: ["image"],
+                        },
+                        {
+                            model:Category,
+                            attributes: ["title"],
+                        },
+                        {
+                            model:Promotion,
+                            attributes: ["value","delivery"],
+                        }
+                    ],    
+                }}]
+        }
+    })
+    
     
     return purchaseOrder;
 }

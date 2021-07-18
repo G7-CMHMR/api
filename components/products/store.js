@@ -37,10 +37,10 @@ const store = {
             })
         return response.products.map((el) => simplificarProduct(el))
     },
-    getAllVisible: async function(){
+    getAllVisible: async function(params){
 
         let response = await Product.findAll({
-            where:{visible:true},
+            where:{visible:params.condition},
             attributes: product_attributes,
             include: [
                 {

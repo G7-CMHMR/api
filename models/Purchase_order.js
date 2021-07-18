@@ -13,7 +13,6 @@ module.exports = (sequelize) => {
     payment_method: {
       type: DataTypes.ENUM,
       values: ['mercado-pago', 'credit-card'],
-      allowNull: false,
     },
     date: {
       type: DataTypes.DATE,
