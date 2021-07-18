@@ -10,7 +10,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     status: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM,
+      values: ['Usado', 'Nuevo', 'Reacondicionado']
     },
     price: {
         type: DataTypes.FLOAT,
@@ -34,6 +35,10 @@ module.exports = (sequelize) => {
     visible: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+    },
+    Visible_lvl_2: {    //el producto se puede ver x más q el vendedor lo haya eliminado
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
     },
     type: {
       type: DataTypes.STRING,

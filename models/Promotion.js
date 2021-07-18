@@ -11,10 +11,10 @@ module.exports = (sequelize) => {
     value: {
       type: DataTypes.FLOAT,
     },
-    image: {
-        type: DataTypes.STRING,
-        isUrl: true,
-    },
+    // image: {
+    //     type: DataTypes.STRING,  //ahora no tiene imagen
+    //     isUrl: true,
+    // },
     delivery: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,

@@ -1,5 +1,5 @@
 const {Product, Category, Cart , Image, Promotion, Seller, User, Items} = require('../../db');
-const {simplificarProduct, product_attributes} = require('../../aux_functions');
+const {product_attributes} = require('../../aux_functions');
 
 const store = {
     addCart: async function(params){
@@ -42,11 +42,10 @@ const store = {
             },
         })
 
-        // await items.removeProduct(product);
-        // await items.removeCart(cart);
         await items.destroy();
 
-        return `Se eliminó el producto "${product.name}" exitosamente`;
+
+        return `Se eliminó el producto '${product.name}' exitosamente`;
     },
     getCart: async function(userId){
         const cart = await Cart.findOne({

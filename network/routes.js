@@ -7,6 +7,8 @@ const networksearch = require('../components/search/network');
 const networkfav = require('../components/favourite/network');
 const networkcart = require('../components/carts/network');
 const networkMercadoPago = require('../components/mercadopago/network')
+const networkpurchaseOrder = require('../components/purchaseOrder/network');
+const networkSeller = require('../components/seller/network');
 
 const routes = (server) => {
     server.use('/products', networkProducts);
@@ -18,6 +20,8 @@ const routes = (server) => {
     server.use('/favourite', networkfav);
     server.use('/cart', networkcart);
     server.use('/checkout', networkMercadoPago);
+    server.use('/purchaseOrder', networkpurchaseOrder);
+    server.use('/seller', networkSeller);
 }
 
 module.exports = routes;

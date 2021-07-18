@@ -1,5 +1,9 @@
 const store = require('./store');
 
+const getAllVisibleProducts = async (params) => {
+    if(!params){params = {condition : true}}
+    return store.getAllVisible(params)
+}
 const getAllProducts = async () => {
     
     return store.getAll()
@@ -14,9 +18,15 @@ const getAllProductsOffer = async () => {
     return store.getAll_offer()
 }
 
+const getSellerProducts = async (params) => {
+    
+    return store.getSeller(params)
+}
 
 module.exports = {
     getAllProducts,
+    getAllVisibleProducts,
     getAllProductsByCategory,
-    getAllProductsOffer
+    getAllProductsOffer,
+    getSellerProducts,
 }

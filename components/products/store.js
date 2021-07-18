@@ -37,7 +37,40 @@ const store = {
             })
         return response.products.map((el) => simplificarProduct(el))
     },
+    getAllVisible: async function(params){
+
+        let response = await Product.findAll({
+            where:{visible:params.condition},
+            attributes: product_attributes,
+            include: [
+                {
+                    model: Seller,
+                    attributes: ["id"],
+                    include: [{
+                        model: User,
+                         attributes: ["name"],
+                    }]
+                },
+                {
+                    model:Image,
+                    attributes: ["image"],
+                },
+                {
+                    model:Category,
+                    attributes: ["title"],
+                },
+                {
+                    model:Promotion,
+                    attributes: ["value","delivery"],
+                }
+            ],
+            
+        })
+
+        return response.map((el) => simplificarProduct(el))
+    },
     getAll: async function(){
+
         let response = await Product.findAll({
             attributes: product_attributes,
             include: [
@@ -100,6 +133,39 @@ const store = {
 
         })
         return response.map(el => simplificarProduct(el.product))
+    },
+    getSeller: async function(params){
+        const seller = await Seller.findOne({
+            where: { userId: params.userId },
+            include: [{
+                model: Product,
+                where: {visible: params.visible},
+                attributes: product_attributes,
+                include: [
+                    {
+                        model: Seller,
+                        attributes: ["id"],
+                        include: [{
+                            model: User,
+                             attributes: ["name"],
+                        }]
+                    },
+                    {
+                        model:Image,
+                        attributes: ["image"],
+                    },
+                    {
+                        model:Category,
+                        attributes: ["title"],
+                    },
+                    {
+                        model:Promotion,
+                        attributes: ["value","delivery"],
+                    }
+                ],
+            }]
+        })
+        return seller.products.map((el) => simplificarProduct(el))
     }
 };
 

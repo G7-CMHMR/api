@@ -16,7 +16,7 @@ const login = async (user) => {
     if (!isValidPassword) throw { error: 'El password es incorrecto' };
 
     // En este punto, el usuario existe e ingreso correctamente el password
-    const { id, name, lastName, email } = userRegistered;
+    const { id, name, lastName, email, isSeller } = userRegistered;
 
     // Genera un token 
     const token = await generateJWT(id, name);
@@ -27,6 +27,7 @@ const login = async (user) => {
         name,
         lastName,
         email,
+        isSeller,
         token
     };
 
@@ -40,9 +41,7 @@ const create = async (user) => {
         if (userRegisteredWithMail !== null)   throw { error: 'Este email ya está en uso' };
 
         user.password = await hashPassword(user.password);
-
         const newUser = await User.create(user);
-
         const isNewUserCreated = Object.keys(newUser).length > 0;
         const cart = await Cart.create();
         cart.setUser(newUser);

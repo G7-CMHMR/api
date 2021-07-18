@@ -8,9 +8,14 @@ const updateProduct = async (product_id, product_body) => {
 
     return store.updateOne(product_id, product_body)
 }
+const addProduct = async (product_body) => {
+
+    return store.addOne(product_body)
+}
 
 
 module.exports = {
     getProduct,
-    updateProduct
+    updateProduct,
+    addProduct
 }
