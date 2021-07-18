@@ -1,6 +1,7 @@
 const {Product, Category, User,Image, Seller, Promotion} = require('../../db');
 const { Op } = require("sequelize");
 const {simplificarProduct, product_attributes} = require('../../aux_functions');
+const { response } = require('express');
 
 const store = {
     getAll_category: async function(category_name){
@@ -100,6 +101,39 @@ const store = {
 
         })
         return response.map(el => simplificarProduct(el.product))
+    },
+    getSeller: async function(params){
+        const seller = await Seller.findOne({
+            where: { userId: params.userId },
+            include: [{
+                model: Product,
+                where: {visible: params.visible},
+                attributes: product_attributes,
+                include: [
+                    {
+                        model: Seller,
+                        attributes: ["id"],
+                        include: [{
+                            model: User,
+                             attributes: ["name"],
+                        }]
+                    },
+                    {
+                        model:Image,
+                        attributes: ["image"],
+                    },
+                    {
+                        model:Category,
+                        attributes: ["title"],
+                    },
+                    {
+                        model:Promotion,
+                        attributes: ["value","delivery"],
+                    }
+                ],
+            }]
+        })
+        return seller.products.map((el) => simplificarProduct(el))
     }
 };
 
