@@ -1,5 +1,5 @@
 const {Product, Category, Cart , Image, Promotion, Seller, User, Items} = require('../../db');
-const {simplificarProduct, product_attributes} = require('../../aux_functions');
+const {product_attributes} = require('../../aux_functions');
 
 const store = {
     addCart: async function(params){
