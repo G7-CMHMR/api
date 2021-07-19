@@ -49,6 +49,11 @@ let json_categories = [
     image : null,
     types: []
     },
+    {
+    title:'PC',
+    image : null,
+    types: []
+    },
 ];
 
 module.exports = json_categories;
