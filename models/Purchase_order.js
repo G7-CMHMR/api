@@ -16,9 +16,11 @@ module.exports = (sequelize) => {
     },
     date: {
       type: DataTypes.DATE,
+      allowNull: false
     },
     address: {
         type: DataTypes.STRING,
+        allowNull: false
     },
     // status: {
     //     type: DataTypes.STRING,
@@ -26,9 +28,14 @@ module.exports = (sequelize) => {
     // },
     status: {
       type: DataTypes.ENUM,
-      values: ['created', 'processing', 'canceled', 'expired','complete']
+      values: ['created', 'processing', 'canceled', 'expired','complete'],
+      allowNull: false
     },
     total_price: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+    },
+    mercadopagoId: {
         type: DataTypes.FLOAT,
     }
   });

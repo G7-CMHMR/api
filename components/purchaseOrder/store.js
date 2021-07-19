@@ -38,7 +38,7 @@ const createOrder = async(data) => {
 
     const total = totalPrice(userCart.items);
     const order = await Purchase_order.create({
-        id: id,
+        mercadopagoId: id,
         payment_method: payment_method, 
         address: userAddress, 
         status: 'created',
