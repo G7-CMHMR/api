@@ -41,9 +41,7 @@ const store = {
                 productId: product.id
             },
         })
-
         await items.destroy();
-
 
         return `Se eliminó el producto '${product.name}' exitosamente`;
     },
