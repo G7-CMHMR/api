@@ -129,7 +129,8 @@ const renewToken = async (req, res) => {
         ok: true,
         id,
         name,
-        token
+        token,
+
     })
     
 };

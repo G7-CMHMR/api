@@ -3,15 +3,15 @@ const {simplificarProduct} = require('../../aux_functions');
 
 const store = {
     addFavourite: async function(params){
-
+        
         const user = await User.findOne({
             where: {id: params.userId},
         })
         const product = await Product.findOne({
             where: {id: params.productId},
         })
-        await user.addProduct(product);
 
+        await user.addProduct(product);
         return [user,product]
     },
     removeFavourite: async function(params){
