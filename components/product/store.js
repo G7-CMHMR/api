@@ -70,10 +70,8 @@ const store = {
     },
     addOne: async function(product_data){
         const user = await User.findOne({
-            where:{
-                id:product_data.userId},
-            include: [{
-                model: Seller}]
+            where:{id:product_data.userId},
+                include: [{model: Seller}]
         })
 
         const product = await Product.create({
