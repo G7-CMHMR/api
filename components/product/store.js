@@ -80,18 +80,18 @@ const store = {
             sellerId: user.seller.id,
             name: product_data.name, 
             status: product_data.status, 
-            price: product_data.price,
-            stock: product_data.stock,
+            price: parseInt(product_data.price),
+            stock: parseInt(product_data.stock),
             description: product_data.description,
             visible: product_data.visible,
             brand: product_data.brand,
             type: product_data.type,
-            warranty: product_data.warranty
+            warranty: parseInt(product_data.warranty)
         })
         const promotion = await Promotion.create({
             title: product_data.promotion.title,
             image: product_data.promotion.image,
-            value: product_data.promotion.value,
+            value: parseInt(product_data.promotion.value),
             delivery: product_data.promotion.delivery
         })
 
