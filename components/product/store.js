@@ -78,7 +78,7 @@ const store = {
         })
         console.log(user)
         const product = await Product.create({
-            sellerId: user.seller.Id,
+            sellerId: user.seller.id,
             name: product_data.name, 
             status: product_data.status, 
             price: parseInt(product_data.price),
@@ -87,7 +87,7 @@ const store = {
             visible: product_data.visible,
             brand: product_data.brand,
             type: product_data.type,
-            warranty: parseInt(product_data.warranty)
+            warranty: parseInt(product_data.warranty),
         })
         const promotion = await Promotion.create({
             title: product_data.title,
@@ -102,14 +102,14 @@ const store = {
             }
         })
         await product.addCategory(category);
-        // product_data.images.map(async (e) => 
-        //     {
-        //     await Image.create({
-        //         url: e
-        //     })
-        //     await image.setProduct(product.id)
-        //     }
-        // )
+        product_data.images.map(async (e) => 
+            {
+            let image = await Image.create({
+                image: e
+            })
+            await image.setProduct(product)
+            }
+        )
         await product.setPromotion(promotion.id);
 
         return product

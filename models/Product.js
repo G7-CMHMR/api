@@ -19,6 +19,7 @@ module.exports = (sequelize) => {
     },
     valuation: {
         type: DataTypes.FLOAT,
+        defaultValue: 0,
     },
     stock: {
         type: DataTypes.INTEGER,
