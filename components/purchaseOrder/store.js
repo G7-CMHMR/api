@@ -25,7 +25,7 @@ const totalPrice = (cart) => {
 
 
 const createOrder = async(data) => {
-    const { userId, payment_method, userAddress } = data;
+    const { userId, payment_method, userAddress, id } = data;
     const date = new Date();
 
     // const userCart = await store.getCart(userId);
@@ -38,6 +38,7 @@ const createOrder = async(data) => {
 
     const total = totalPrice(userCart.items);
     const order = await Purchase_order.create({
+        id: id,
         payment_method: payment_method, 
         address: userAddress, 
         status: 'created',
@@ -96,9 +97,8 @@ const getOrders = async (param) => {
 
 const getOrderDetail = async (orderId) => {
 
-    // findByPk(orderId.orderId)
-    const purchaseOrder = await await Purchase_order.findOne({
-        where: {orderId: orderId.orderId,
+    const purchaseOrder = await Purchase_order.findOne({
+        where: {id: orderId.orderId},
             include : [{model: Items,include:
                 {model: Product, 
                     attributes: product_attributes,
@@ -125,7 +125,6 @@ const getOrderDetail = async (orderId) => {
                         }
                     ],    
                 }}]
-        }
     })
     
     
@@ -135,7 +134,33 @@ const getOrderDetail = async (orderId) => {
 const changeOrderStatus = async(param) => {
 
     let purchase_order = await Purchase_order.findOne({
-        where: {id: param.orderId}
+        where: {id: param.orderId},
+            include : [{model: Items,include:
+                {model: Product, 
+                    attributes: product_attributes,
+                    include: [
+                        {
+                            model: Seller,
+                            attributes: ["id"],
+                            include: [{
+                                model: User,
+                                 attributes: ["name"],
+                            }]
+                        },
+                        {
+                            model:Image,
+                            attributes: ["image"],
+                        },
+                        {
+                            model:Category,
+                            attributes: ["title"],
+                        },
+                        {
+                            model:Promotion,
+                            attributes: ["value","delivery"],
+                        }
+                    ],    
+                }}]
     })
 
     switch(param.status){
@@ -155,7 +180,7 @@ const changeOrderStatus = async(param) => {
 
     await purchase_order.save();
 
-    return `Se cambio el estado del producto a '${param.status}' exitosamente`;
+    return purchase_order;
 }
 
 module.exports = {
