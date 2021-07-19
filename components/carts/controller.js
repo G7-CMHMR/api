@@ -15,6 +15,11 @@ const getCart = async (params) => {
     return store.getCart(params)
 }
 
+const eraseCart = async (params) => {
+    
+    return store.eraseCart(params)
+}
+
 const decrementCart = async (params) => {
     
     return store.decrementItem(params)
@@ -23,5 +28,6 @@ module.exports = {
     addCart,
     removeCart,
     getCart,
-    decrementCart
+    decrementCart,
+    eraseCart
 }
