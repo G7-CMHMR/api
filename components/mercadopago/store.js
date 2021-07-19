@@ -10,36 +10,35 @@ const store = {
 
         let items = []
         let shipping = 0;
+
         params.map((element) => {
-            if(!element.product.promotion.delivery){shipping=400}
-            console.log(element.product.promotion.delivery)
-            items.push({
-                title: element.product.name,
-                unit_price: element.product.price+shipping,
-                quantity: element.amount,
-            })
-            
+
+            if (!element.product.promotion.delivery) { shipping = 400 }
+        items.push({
+            title: element.product.name,
+            unit_price: Math.floor(((element.product.price) - ((element.product.price * element.product.promotion.value)/100)) + shipping),
+            quantity: element.amount,
         })
 
-        console.log(items)
+    })
+
 
         let preference = {
-            items,
-            back_urls: {
-                "success": "http://localhost:3001/Compras",
-                "failure": "http://localhost:3001/Carrito",
-                "pending": "http://localhost:3001/Compras"
-            },
-            auto_return: 'approved',
-        };
+        items,
+        back_urls: {
+            "success": "http://localhost:3000/Compras",
+            "failure": "http://localhost:3000/Carrito",
+            "pending": "http://localhost:3000/Compras"
+        },
+        auto_return: 'approved',
+    };
 
-        console.log('2')
+
 
         const res = await mercadopago.preferences.create(preference)
 
-        console.log('3')
         return res;
-    },
+},
 
 };
 

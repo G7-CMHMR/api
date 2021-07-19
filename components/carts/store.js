@@ -3,9 +3,11 @@ const {product_attributes} = require('../../aux_functions');
 
 const store = {
     addCart: async function(params){
+        console.log(params)
         const cart = await Cart.findOne({
             where: {userId: params.userId},
         })
+        console.log(cart.id)
         const product = await Product.findOne({
             where: {id: params.productId},
         })
