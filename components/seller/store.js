@@ -1,10 +1,10 @@
 const {Seller, User} = require('../../db');
 
 const store = {
-	createSeller: async function(userId, data){
+	createSeller: async function(data){
 		try {
-			const { accountBank, address, commission, location, phone, cuil } = data;
-			const userRegistered = await User.findOne({ where: { id: userId } });
+			const { accountBank, address, commission, location, phone, cuil, id } = data;
+			const userRegistered = await User.findOne({ where: { id: id } });
 		    if (!userRegistered)   throw { error: 'El usuario no existe' };
 		    if (userRegistered.isSeller)	throw { error: 'El usuario ya es vendedor'};
 
@@ -27,7 +27,14 @@ const store = {
 			userRegistered.save();
 			newSeller.setUser(userRegistered);
 
-			return newSeller;
+			return {
+				id: userRegistered.id,
+				email: userRegistered.email,
+				name: userRegistered.name,
+				lastName: userRegistered.lastName,
+				isSeller: userRegistered.isSeller,
+				token: userRegistered.token				
+			};
 
 	    } catch (error) {
 	        throw error;

@@ -1,8 +1,8 @@
 const store = require('./store');
 
-const createSeller = async (userId, data) => {
+const createSeller = async (data) => {
 
-	return store.createSeller(userId, data);
+	return store.createSeller(data);
 }
 
 const getSeller = async (userId) => {
