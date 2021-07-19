@@ -318,32 +318,32 @@ let json_products = [
         "https://http2.mlstatic.com/D_NQ_NP_852767-MLA40255137010_122019-O.webp",
       ]
     },
-    {
-      name: "----soy invisibleeeeeeeeeeeeeeeeeeeeeeeee, tengo visible=false----",
-      status: "Nuevo",
-      price: "4588",
-      valuation: 5,
-      stock: 19,
-      brand: "Gygabyte",
-      type: "Disco solido",
-      description: "Con la unidad en estado sólido Gigabyte vas a incrementar la capacidad de respuesta de tu equipo.",
-      visible: false,
-      category: [
-        "Almacenamiento"
-      ],
-      promotion: {
-        title: null,
-        value: 5,
-        image: null,
-        delivery: "false"
-      },
-      seller: "Nacho",
-      image: [
-        "https://http2.mlstatic.com/D_NQ_NP_839339-MLA40255016455_122019-O.webp",
-        "https://http2.mlstatic.com/D_NQ_NP_814612-MLA40255016458_122019-O.webp",
-        "https://http2.mlstatic.com/D_NQ_NP_852767-MLA40255137010_122019-O.webp",
-      ]
-    },
+    // {
+    //   name: "----soy invisibleeeeeeeeeeeeeeeeeeeeeeeee, tengo visible=false----",
+    //   status: "Nuevo",
+    //   price: "4588",
+    //   valuation: 5,
+    //   stock: 19,
+    //   brand: "Gygabyte",
+    //   type: "Disco solido",
+    //   description: "Con la unidad en estado sólido Gigabyte vas a incrementar la capacidad de respuesta de tu equipo.",
+    //   visible: false,
+    //   category: [
+    //     "Almacenamiento"
+    //   ],
+    //   promotion: {
+    //     title: null,
+    //     value: 5,
+    //     image: null,
+    //     delivery: "false"
+    //   },
+    //   seller: "Nacho",
+    //   image: [
+    //     "https://http2.mlstatic.com/D_NQ_NP_839339-MLA40255016455_122019-O.webp",
+    //     "https://http2.mlstatic.com/D_NQ_NP_814612-MLA40255016458_122019-O.webp",
+    //     "https://http2.mlstatic.com/D_NQ_NP_852767-MLA40255137010_122019-O.webp",
+    //   ]
+    // },
 
 
     {
