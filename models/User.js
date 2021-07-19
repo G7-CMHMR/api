@@ -5,13 +5,13 @@ const Sequelize = require('sequelize');
 module.exports = (sequelize) => {
 
 	sequelize.define('user', {
-		// id: {
-		// 	primaryKey: true,
-		// 	// autoIncrement: true,
-		// 	type: DataTypes.UUID,
-		// 	defaultValue: UUIDV4,
-		// 	allowNull: false
-		// },
+		 id: {
+		 	primaryKey: true,
+		 	// autoIncrement: true,
+		 	type: DataTypes.UUID,
+		 	defaultValue: UUIDV4,
+		 	allowNull: false
+		 },
 		name: {
 			type: DataTypes.STRING(15),
 			allowNull: false,
