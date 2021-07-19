@@ -77,7 +77,7 @@ const store = {
         })
 
         const product = await Product.create({
-            sellerId: user.seller.id,
+            sellerId: user.seller.Id,
             name: product_data.name, 
             status: product_data.status, 
             price: parseInt(product_data.price),
@@ -89,10 +89,10 @@ const store = {
             warranty: parseInt(product_data.warranty)
         })
         const promotion = await Promotion.create({
-            title: product_data.promotion.title,
-            image: product_data.promotion.image,
-            value: parseInt(product_data.promotion.value),
-            delivery: product_data.promotion.delivery
+            title: product_data.title,
+            image: product_data.images,
+            value: parseInt(product_data.discount),
+            delivery: product_data.delivery
         })
 
         const category = await Category.findOne({
