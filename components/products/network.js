@@ -11,12 +11,6 @@ router.get('/category/:category_name', (req, res) => {
     .catch(e => response.error(req, res, 404, e,'fallo en conseguir los productos por categoria'))
 })
 
-router.get('/:condition', (req, res) => {
-    controller
-    .getAllVisibleProducts(req.params)
-    .then(e => response.sucess(req, res, 200, e))
-    .catch(e => response.error(req, res, 404, e,'fallo en conseguir los productos'))
-})
 router.get('/', (req, res) => {
     controller
     .getAllVisibleProducts()
@@ -42,6 +36,12 @@ router.get('/seller/:userId/:visible', (req, res) => {
     .getSellerProducts(req.params)
     .then(e => response.sucess(req, res, 200, e))
     .catch(e => response.error(req, res, 404, e,'fallo en conseguir los productos en oferta'))
+})
+router.get('/:condition', (req, res) => {
+    controller
+    .getAllVisibleProducts(req.params)
+    .then(e => response.sucess(req, res, 200, e))
+    .catch(e => response.error(req, res, 404, e,'fallo en conseguir los productos'))
 })
 
 module.exports = router;
