@@ -20,7 +20,15 @@ const login = async (user) => {
 
     // Genera un token 
     const token = await generateJWT(id, name);
-
+/* 
+    console.log({
+        id,
+        name,
+        lastName,
+        email,
+        isSeller,
+        token
+    }) */
     // Envía como respuesta el usuario junto al token
     return {
         id,
@@ -89,7 +97,8 @@ const update = async ( userId, { password: userPassword, ...dataToUpdate }) => {
             id: user.id,
             name: user.name,
             lastName: user.lastName,
-            email: user.email
+            email: user.email,
+            isSeller: user.isSeller
         }
     }
     catch (error) {
@@ -120,17 +129,22 @@ const updatePassword = async ( userId, password) => {
 
 
 const renewToken = async (req, res) => {
-
-    const {id, name} = req;
+    const {id} = req;
+    const userRegistered = await User.findOne({ where: { id: id, /* active: true */ } });
+    const { name, lastName, email, isSeller } = userRegistered;
+    
 
     const token = await generateJWT(id, name);
 
     return res.json({
         ok: true,
         id,
+        lastName,
+        email,
+        isSeller,
         name,
-        token,
-
+        token
+        
     })
     
 };
@@ -153,7 +167,8 @@ const googleSignIn = async (req, res) => {
                 name: name.split(" ")[0],
                 lastName: name.split(" ")[1] || ' ',
                 email,
-                password: '',
+                password: ''
+                
             }
             user = await User.create(data);
             const cart = await Cart.create();
@@ -161,10 +176,13 @@ const googleSignIn = async (req, res) => {
         }
 
         const token = await generateJWT(user.id, user.name);
-
+        
         return res.json({
             ok: true,
             name: user.name,
+            isSeller: user.isSeller,
+            email: user.email,
+            id: user.id,
             token
         });
 
