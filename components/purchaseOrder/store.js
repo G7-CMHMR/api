@@ -50,7 +50,8 @@ const createOrder = async(data) => {
 
     userCart.items.map(async el => {
         await order.addItems(el)
-        await userCart.removeItems(el)}
+        // await userCart.removeItems(el)
+    }
         )
     
     return order;

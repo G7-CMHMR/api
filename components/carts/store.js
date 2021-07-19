@@ -28,6 +28,17 @@ const store = {
 
         return [cart,items]
     },
+    eraseCart: async function(params){
+
+        const userCart = await Cart.findOne({
+            where: {userId: params.userId},
+            include : [{model: Items}]
+        })
+    
+        userCart.items.map(async el => {
+            await userCart.removeItems(el)
+        })
+    },
     removeCart: async function(params){
         const cart = await Cart.findOne({
             where: {userId: params.userId},
