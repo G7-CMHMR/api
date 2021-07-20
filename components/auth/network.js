@@ -70,7 +70,15 @@ router.get('/renew-token', auth, renewToken);
 
 router.post('/google', googleSignIn);
 
-router.get('/confirm-account/:emailToken', confirmAccount);
+router.get('/confirm-account/:emailToken', (req, res) => {
+	confirmAccount(req.params.emailToken)
+		.then( e => {
+			response.sucess(req, res, 200, e)
+		})
+		.catch( e => {
+			response.error(req, res, 401, e, 'No se pudo confirmar la cuenta')
+		})
+});
 
 
 module.exports = router;

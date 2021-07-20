@@ -197,24 +197,17 @@ const googleSignIn = async (req, res) => {
 
 };
 
-const confirmAccount = async (req, res) => {
+const confirmAccount = async (emailToken) => {
 
-    const user = await User.findOne({ where:{ emailToken: req.params.emailToken }});
-    // const user = await User.findOne({ where:{ email: req.params.email }});
-    
-    if (!user) {
-        return res.status(404).json({
-            msg: 'El usuario no existe'
-        });
-    };
+    const user = await User.findOne({ where:{ emailToken: emailToken }});
+
+    if(!user)   throw { error: 'El usuario no existe'};
 
     user.active = true;
     user.emailToken = null;
     await user.save();
 
-    return res.json({
-        msg: 'Usuario confirmado'
-    })
+    return user;
 };
 
 
