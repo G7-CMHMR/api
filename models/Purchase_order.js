@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
         allowNull: false
     },
     mercadopagoId: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.STRING,
     }
   });
 };
