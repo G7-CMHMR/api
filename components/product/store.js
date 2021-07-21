@@ -65,6 +65,22 @@ const store = {
         propierties.forEach(e => {
             response[e] = product_body[e]
         });
+        if(product_body.category || product_body.category != ''){
+            let old_category = await Category.findOne({
+                where:{title: response.Category.title}
+            });
+            let new_category = await Category.findOne({
+                where:{title: product_body.category}
+            })
+            response.removeCategory(old_category);
+            response.addCategory(new_category)
+        };
+        if(product_body.delivery || product_body.delivery != ''){
+            response.Promotion.delivery = product_body.delivery
+        };
+        if(product_body.discount || product_body.discount != ''){
+            response.Promotion.value = product_body.discount
+        };
         await response.save()
         return simplificarProduct(response)
     },
