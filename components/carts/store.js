@@ -56,7 +56,7 @@ const store = {
         })
         await items.destroy();
 
-        return `Se eliminó el producto '${product.name}' exitosamente`;
+        return cart;
     },
     getCart: async function(userId){
         const cart = await Cart.findOne({
