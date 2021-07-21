@@ -1,6 +1,6 @@
 const {Product, Category, Image, Promotion, Seller, User} = require('../../db');
 const {simplificarProduct, product_attributes} = require('../../aux_functions');
-const e = require('cors');
+// const e = require('cors');
 
 const store = {
     getOne: async function(product_id){
@@ -61,36 +61,39 @@ const store = {
             ],
         })
         let propierties = Object.keys(product_body);
-        console.log(product_body);
         propierties.forEach(e => {
-            response[e] = product_body[e]
+            if(e == 'category' || e == 'images' || e == 'discount' || e == 'delivery'){
+            }else{
+                response[e] = product_body[e]
+            }
         });
         if(product_body.category || product_body.category != ''){
             let old_category = await Category.findOne({
-                where:{title: response.Category.title}
+                where:{title: response.categories[0].title}
             });
             let new_category = await Category.findOne({
                 where:{title: product_body.category}
             })
-            response.removeCategory(old_category);
-            response.addCategory(new_category)
+            await response.removeCategories(old_category);
+            await response.addCategory(new_category)
         };
         if(product_body.delivery || product_body.delivery != ''){
-            response.Promotion.delivery = product_body.delivery
+            response.promotion.delivery = product_body.delivery
         };
         if(product_body.discount || product_body.discount != ''){
-            response.Promotion.value = product_body.discount
+            response.promotion.value = product_body.discount
         };
         await response.save()
-        return simplificarProduct(response)
+        
+        return await this.getOne(response.id)
     },
     addOne: async function(product_data){
-        console.log(product_data)
+        // console.log(product_data)
         const user = await User.findOne({
             where:{id:product_data.userId},
                 include: [{model: Seller}]
         })
-        console.log(user)
+        // console.log(user)
         const product = await Product.create({
             sellerId: user.seller.id,
             name: product_data.name, 
