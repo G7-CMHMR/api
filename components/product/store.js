@@ -67,7 +67,7 @@ const store = {
                 response[e] = product_body[e]
             }
         });
-        if(product_body.category || product_body.category != ''){
+        if(product_body.category && product_body.category != ''){
             let old_category = await Category.findOne({
                 where:{title: response.categories[0].title}
             });
@@ -77,14 +77,14 @@ const store = {
             await response.removeCategories(old_category);
             await response.addCategory(new_category)
         };
-        if(product_body.delivery || product_body.delivery != ''){
+        if(product_body.delivery && product_body.delivery != ''){
             response.promotion.delivery = product_body.delivery
         };
-        if(product_body.discount || product_body.discount != ''){
+        if(product_body.discount && product_body.discount != ''){
             response.promotion.value = product_body.discount
         };
         await response.save()
-        
+
         return await this.getOne(response.id)
     },
     addOne: async function(product_data){
