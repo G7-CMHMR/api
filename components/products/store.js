@@ -1,4 +1,4 @@
-const {Product, Category, User,Image, Seller, Promotion} = require('../../db');
+const {Product, Category, User, Image, Seller, Promotion} = require('../../db');
 const { Op } = require("sequelize");
 const {simplificarProduct, product_attributes} = require('../../aux_functions');
 
