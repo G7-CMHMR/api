@@ -57,7 +57,7 @@ const getProductQuestions = async (param) => {
     return questions;
 }
 
-const answerQuestion = async (param) => {
+const updateResponse = async (param) => {
     const questions = await Questions.findOne({
         where: {id: param.questionId},
     })
@@ -66,61 +66,18 @@ const answerQuestion = async (param) => {
     return questions
 }
 
-// const changeOrderStatus = async(param) => {
+const deleteQuestion = async (param) => {
+    const questions = await Questions.findOne({
+        where: {id: param.questionId},
+    })
+    await questions.destroy()
+}
 
-//     let purchase_order = await Purchase_order.findOne({
-//         where: {id: param.orderId},
-//             include : [{model: Items,include:
-//                 {model: Product, 
-//                     attributes: product_attributes,
-//                     include: [
-//                         {
-//                             model: Seller,
-//                             attributes: ["id"],
-//                             include: [{
-//                                 model: User,
-//                                  attributes: ["name"],
-//                             }]
-//                         },
-//                         {
-//                             model:Image,
-//                             attributes: ["image"],
-//                         },
-//                         {
-//                             model:Category,
-//                             attributes: ["title"],
-//                         },
-//                         {
-//                             model:Promotion,
-//                             attributes: ["value","delivery"],
-//                         }
-//                     ],    
-//                 }}]
-//     })
-
-//     switch(param.status){
-//         case 'processing':
-//             purchase_order.status = 'processing'
-//         break
-//         case 'canceled':
-//             purchase_order.status = 'canceled'
-//         break
-//         case 'expired':
-//             purchase_order.status = 'expired'
-//         break
-//         case 'complete':
-//             purchase_order.status = 'complete'
-//         break
-//     }
-
-//     await purchase_order.save();
-
-//     return purchase_order;
-// }
 
 module.exports = {
 	createQuestion,
     getAllUserQuestion,
     getProductQuestions,
-    answerQuestion
+    updateResponse,
+    deleteQuestion
 }

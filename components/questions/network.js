@@ -11,9 +11,9 @@ router.post('/create', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la pregunta'))
 })
 
-router.get('/user', ( req, res ) => {
+router.get('/seller', ( req, res ) => {
 	controller.
-		getAllUserQuestion(req.body)
+		getAllSellerQuestion(req.body)
 	    .then(e => response.sucess(req, res, 200, e))
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las preguntas del vendedor'))
 })
@@ -25,18 +25,19 @@ router.get('/product', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las preguntas del producto'))
 })
 
-router.put('/answer', (req, res) => {
+router.put('/response', (req, res) => {
 	controller.
-		answerQuestion(req.body)
+		updateResponse(req.body)
 		.then(e => response.sucess(req, res, 200, e))
 		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar responder 😞'));
 })
 
-router.put('/question/edit', (req, res) => {
+router.delete('/', (req, res) => {
 	controller.
-		updateQuestion(req.body)
+		deleteQuestion(req.body)
 		.then(e => response.sucess(req, res, 200, e))
-		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar modificar 😞'));
+		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar borrar 😞'));
 })
+
 
 module.exports = router;

@@ -15,20 +15,20 @@ const getProductQuestions = async (productId) => {
 	return store.getProductQuestions(productId);
 }
 
-const answerQuestion = async(params) => {
+const updateResponse = async(params) => {
 
-	return store.answerQuestion(params);
+	return store.updateResponse(params);
 }
 
-const updateQuestion = async(params) => {
+const deleteQuestion = async(params) => {
 
-	return store.updateQuestion(params);
+	return store.deleteQuestion(params);
 }
 
 module.exports = {
 	createQuestion,
 	getAllUserQuestion,
 	getProductQuestions,
-	answerQuestion,
-	updateQuestion,
+	updateResponse,
+	deleteQuestion
 };
