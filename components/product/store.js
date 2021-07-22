@@ -34,6 +34,7 @@ const store = {
         return simplificarProduct(response)
     },
     updateOne: async function(product_id, product_body){
+        console.log('ESTA ES LA MODIFICACION QUE ME LLEGA: ',product_body)
         let response = await Product.findOne({
             where: { id: product_id},
             attributes: product_attributes,
@@ -61,7 +62,8 @@ const store = {
             ],
         })
         let propierties = Object.keys(product_body);
-        console.log(product_body);
+        console.log('ESTAS SON LAS PROPERTIES: ', propierties)
+        console.log('ESTA ES LA RESPONSE (EL PRODUCTO QUE ENCONTRO: ',response);
         propierties.forEach(e => {
             response[e] = product_body[e]
         });
@@ -69,12 +71,13 @@ const store = {
         return simplificarProduct(response)
     },
     addOne: async function(product_data){
-        console.log(product_data)
+        console.log('ESTE ES EL PRODUCTO QUE ME LLEGA: ', product_data)
+        // console.log(product_data)
         const user = await User.findOne({
             where:{id:product_data.userId},
                 include: [{model: Seller}]
         })
-        console.log(user)
+        // console.log(user)
         const product = await Product.create({
             sellerId: user.seller.id,
             name: product_data.name, 
@@ -109,6 +112,7 @@ const store = {
             }
         )
         await product.setPromotion(promotion.id);
+        console.log('ESTE ES EL PRODUCTO QUE CREE: ',product)
 
         return product
     },
