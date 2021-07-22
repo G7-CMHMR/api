@@ -8,8 +8,6 @@ const store = {
 
     createPreferences: async function (params) {
 
-        console.log(params)
-
         let items = []
         let shipping = 0;
         let error = '';
@@ -41,14 +39,9 @@ const store = {
                     id : element.product.id
                 }
             })
-            console.log(products.stock)
-            console.log(typeof(element.amount))
-            console.log(element.amount)
-            console.log(products.stock - element.amount)
             products.stock = products.stock - element.amount
             if(products.stock == 0){products.visible = false}
             await products.save()
-            //console.log(products)
         })
 
         let preference = {
