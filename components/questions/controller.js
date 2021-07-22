@@ -6,7 +6,7 @@ const createQuestion = async (data) => {
 }
 
 const getAllUserQuestion = async (userId) => {
-	console.log(userId)
+	
 	return store.getAllUserQuestion(userId);
 }
 
@@ -15,14 +15,20 @@ const getProductQuestions = async (productId) => {
 	return store.getProductQuestions(productId);
 }
 
-// const changeOrderStatus = async(orderId) => {
+const updateResponse = async(params) => {
 
-// 	return store.changeOrderStatus(orderId);
-// }
+	return store.updateResponse(params);
+}
+
+const deleteQuestion = async(params) => {
+
+	return store.deleteQuestion(params);
+}
 
 module.exports = {
 	createQuestion,
 	getAllUserQuestion,
 	getProductQuestions,
-	// changeOrderStatus
+	updateResponse,
+	deleteQuestion
 };

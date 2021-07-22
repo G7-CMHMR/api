@@ -11,25 +11,33 @@ router.post('/create', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la pregunta'))
 })
 
-router.get('/user', ( req, res ) => {
+router.get('/seller', ( req, res ) => {
 	controller.
-		getAllUserQuestion(req.body)
+		getAllSellerQuestion(req.body)
 	    .then(e => response.sucess(req, res, 200, e))
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las preguntas del vendedor'))
 })
 
 router.get('/product', ( req, res ) => {
 	controller.
-		getProductQuestions(req.params)
+		getProductQuestions(req.body)
 	    .then(e => response.sucess(req, res, 200, e))
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las preguntas del producto'))
 })
 
-// router.put('/status', (req, res) => {
-// 	controller.
-// 		changeOrderStatus(req.body)
-// 		.then(e => response.sucess(req, res, 200, e))
-// 		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar cambiar el estado de la orden de compra'));
-// })
+router.put('/response', (req, res) => {
+	controller.
+		updateResponse(req.body)
+		.then(e => response.sucess(req, res, 200, e))
+		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar responder 😞'));
+})
+
+router.delete('/', (req, res) => {
+	controller.
+		deleteQuestion(req.body)
+		.then(e => response.sucess(req, res, 200, e))
+		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar borrar 😞'));
+})
+
 
 module.exports = router;
