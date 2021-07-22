@@ -1,6 +1,6 @@
-const {Product, Category, Image, Promotion, Seller, User} = require('../../db');
+const {Product, Category, Image, Promotion, Seller, User, Questions} = require('../../db');
 const {simplificarProduct, product_attributes} = require('../../aux_functions');
-const e = require('cors');
+// const e = require('cors');
 
 const store = {
     getOne: async function(product_id){
@@ -25,6 +25,10 @@ const store = {
                     attributes: ["title"],
                 },
                 {
+                    model:Questions,
+                    attributes: ["question","response","date"],
+                },
+                {
                     model:Promotion,
                     attributes: ["value","delivery"],
                 }
@@ -34,7 +38,7 @@ const store = {
         return simplificarProduct(response)
     },
     updateOne: async function(product_id, product_body){
-        console.log('ESTA ES LA MODIFICACION QUE ME LLEGA: ',product_body)
+
         let response = await Product.findOne({
             where: { id: product_id},
             attributes: product_attributes,
@@ -62,16 +66,34 @@ const store = {
             ],
         })
         let propierties = Object.keys(product_body);
-        console.log('ESTAS SON LAS PROPERTIES: ', propierties)
-        console.log('ESTA ES LA RESPONSE (EL PRODUCTO QUE ENCONTRO: ',response);
+
         propierties.forEach(e => {
-            response[e] = product_body[e]
+            if(e == 'category' || e == 'images' || e == 'discount' || e == 'delivery'){
+            }else{
+                response[e] = product_body[e]
+            }
         });
+        if(product_body.category && product_body.category != ''){
+            let old_category = await Category.findOne({
+                where:{title: response.categories[0].title}
+            });
+            let new_category = await Category.findOne({
+                where:{title: product_body.category}
+            })
+            await response.removeCategories(old_category);
+            await response.addCategory(new_category)
+        };
+        if(product_body.delivery && product_body.delivery != ''){
+            response.promotion.delivery = product_body.delivery
+        };
+        if(product_body.discount && product_body.discount != ''){
+            response.promotion.value = product_body.discount
+        };
         await response.save()
-        return simplificarProduct(response)
+
+        return await this.getOne(response.id)
     },
     addOne: async function(product_data){
-        console.log('ESTE ES EL PRODUCTO QUE ME LLEGA: ', product_data)
         // console.log(product_data)
         const user = await User.findOne({
             where:{id:product_data.userId},
@@ -112,7 +134,6 @@ const store = {
             }
         )
         await product.setPromotion(promotion.id);
-        console.log('ESTE ES EL PRODUCTO QUE CREE: ',product)
 
         return product
     },

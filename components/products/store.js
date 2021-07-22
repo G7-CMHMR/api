@@ -1,4 +1,4 @@
-const {Product, Category, User,Image, Seller, Promotion} = require('../../db');
+const {Product, Category, User, Image, Seller, Promotion} = require('../../db');
 const { Op } = require("sequelize");
 const {simplificarProduct, product_attributes} = require('../../aux_functions');
 
@@ -135,7 +135,8 @@ const store = {
         return response.map(el => simplificarProduct(el.product))
     },
     getSeller: async function(params){
-        const seller = await Seller.findOne({
+        try
+{        const seller = await Seller.findOne({
             where: { userId: params.userId },
             include: [{
                 model: Product,
@@ -165,7 +166,8 @@ const store = {
                 ],
             }]
         })
-        return seller.products.map((el) => simplificarProduct(el))
+        return seller.products.map((el) => simplificarProduct(el))}
+        catch{return []}
     }
 };
 

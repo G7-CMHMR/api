@@ -4,7 +4,11 @@ const Sequelize = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('product', {
+  sequelize.define('save_product_state', {
+    seller: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -17,14 +21,6 @@ module.exports = (sequelize) => {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    valuation: {
-        type: DataTypes.FLOAT,
-        defaultValue: 0,
-    },
-    stock: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-    },
     brand: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -33,28 +29,14 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    visible: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-    },
-    Visible_lvl_2: {    //el producto se puede ver x más q el vendedor lo haya eliminado
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
-    },
     type: {
       type: DataTypes.STRING,
     },
-    warranty: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    prom_delivery: {
+      type: DataTypes.STRING,
     },
-    sold: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-    state: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    prom_value: {
+      type: DataTypes.STRING,
     },
   });
 };
