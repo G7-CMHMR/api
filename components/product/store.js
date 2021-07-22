@@ -26,7 +26,8 @@ const store = {
                 },
                 {
                     model:Questions,
-                    attributes: ["question","response","date"],
+                    attributes: {exclude: ['createdAt','updatedAt']}
+                    // attributes: ["question","response","date"],
                 },
                 {
                     model:Promotion,

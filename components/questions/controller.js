@@ -6,7 +6,7 @@ const createQuestion = async (data) => {
 }
 
 const getAllUserQuestion = async (userId) => {
-	console.log(userId)
+	
 	return store.getAllUserQuestion(userId);
 }
 

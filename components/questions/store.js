@@ -34,7 +34,7 @@ const createQuestion = async(params) => {
     })
     await new_question.setUser(user);
     await new_question.setSeller(seller);
-    await new_question.setProduct(product);
+    await new_question.setProduct(product); 
     
     return new_question;
 }
@@ -48,41 +48,15 @@ const getAllUserQuestion = async (param) => {
     return questions;
 }
 
+const getProductQuestions = async (param) => {
 
+    const questions = await Questions.findAll({
+        where: {productId: param.productId},
+    })
 
+    return questions;
+}
 
-// const getOrderDetail = async (orderId) => {
-
-//     const purchaseOrder = await Purchase_order.findOne({
-//         where: {id: orderId.orderId},
-//             include : [{model: Items,include:
-//                 {model: Product, 
-//                     attributes: product_attributes,
-//                     include: [
-//                         {
-//                             model: Seller,
-//                             attributes: ["id"],
-//                             include: [{
-//                                 model: User,
-//                                  attributes: ["name"],
-//                             }]
-//                         },
-//                         {
-//                             model:Image,
-//                             attributes: ["image"],
-//                         },
-//                         {
-//                             model:Category,
-//                             attributes: ["title"],
-//                         },
-//                         {
-//                             model:Promotion,
-//                             attributes: ["value","delivery"],
-//                         }
-//                     ],    
-//                 }}]
-//     })
-    
     
 //     return purchaseOrder;
 // }
@@ -142,6 +116,6 @@ const getAllUserQuestion = async (param) => {
 module.exports = {
 	createQuestion,
     getAllUserQuestion,
-	// getOrderDetail,
+    getProductQuestions,
 	// changeOrderStatus
 }

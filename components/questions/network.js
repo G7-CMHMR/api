@@ -20,7 +20,7 @@ router.get('/user', ( req, res ) => {
 
 router.get('/product', ( req, res ) => {
 	controller.
-		getProductQuestions(req.params)
+		getProductQuestions(req.body)
 	    .then(e => response.sucess(req, res, 200, e))
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las preguntas del producto'))
 })
