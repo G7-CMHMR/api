@@ -34,7 +34,7 @@ const createQuestion = async(params) => {
     })
     await new_question.setUser(user);
     await new_question.setSeller(seller);
-    await new_question.setProduct(product);
+    await new_question.setProduct(product); 
     
     return new_question;
 }
@@ -48,100 +48,36 @@ const getAllUserQuestion = async (param) => {
     return questions;
 }
 
+const getProductQuestions = async (param) => {
 
+    const questions = await Questions.findAll({
+        where: {productId: param.productId},
+    })
 
+    return questions;
+}
 
-// const getOrderDetail = async (orderId) => {
+const updateResponse = async (param) => {
+    const questions = await Questions.findOne({
+        where: {id: param.questionId},
+    })
+    questions.response = param.response
+    questions.save()
+    return questions
+}
 
-//     const purchaseOrder = await Purchase_order.findOne({
-//         where: {id: orderId.orderId},
-//             include : [{model: Items,include:
-//                 {model: Product, 
-//                     attributes: product_attributes,
-//                     include: [
-//                         {
-//                             model: Seller,
-//                             attributes: ["id"],
-//                             include: [{
-//                                 model: User,
-//                                  attributes: ["name"],
-//                             }]
-//                         },
-//                         {
-//                             model:Image,
-//                             attributes: ["image"],
-//                         },
-//                         {
-//                             model:Category,
-//                             attributes: ["title"],
-//                         },
-//                         {
-//                             model:Promotion,
-//                             attributes: ["value","delivery"],
-//                         }
-//                     ],    
-//                 }}]
-//     })
-    
-    
-//     return purchaseOrder;
-// }
+const deleteQuestion = async (param) => {
+    const questions = await Questions.findOne({
+        where: {id: param.questionId},
+    })
+    await questions.destroy()
+}
 
-// const changeOrderStatus = async(param) => {
-
-//     let purchase_order = await Purchase_order.findOne({
-//         where: {id: param.orderId},
-//             include : [{model: Items,include:
-//                 {model: Product, 
-//                     attributes: product_attributes,
-//                     include: [
-//                         {
-//                             model: Seller,
-//                             attributes: ["id"],
-//                             include: [{
-//                                 model: User,
-//                                  attributes: ["name"],
-//                             }]
-//                         },
-//                         {
-//                             model:Image,
-//                             attributes: ["image"],
-//                         },
-//                         {
-//                             model:Category,
-//                             attributes: ["title"],
-//                         },
-//                         {
-//                             model:Promotion,
-//                             attributes: ["value","delivery"],
-//                         }
-//                     ],    
-//                 }}]
-//     })
-
-//     switch(param.status){
-//         case 'processing':
-//             purchase_order.status = 'processing'
-//         break
-//         case 'canceled':
-//             purchase_order.status = 'canceled'
-//         break
-//         case 'expired':
-//             purchase_order.status = 'expired'
-//         break
-//         case 'complete':
-//             purchase_order.status = 'complete'
-//         break
-//     }
-
-//     await purchase_order.save();
-
-//     return purchase_order;
-// }
 
 module.exports = {
 	createQuestion,
     getAllUserQuestion,
-	// getOrderDetail,
-	// changeOrderStatus
+    getProductQuestions,
+    updateResponse,
+    deleteQuestion
 }
