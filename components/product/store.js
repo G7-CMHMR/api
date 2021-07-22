@@ -39,6 +39,7 @@ const store = {
         return response
     },
     updateOne: async function(product_id, product_body){
+
         let response = await Product.findOne({
             where: { id: product_id},
             attributes: product_attributes,
@@ -65,13 +66,14 @@ const store = {
             ],
         })
         let propierties = Object.keys(product_body);
+
         propierties.forEach(e => {
             if(e == 'category' || e == 'images' || e == 'discount' || e == 'delivery'){
             }else{
                 response[e] = product_body[e]
             }
         });
-        if(product_body.category || product_body.category != ''){
+        if(product_body.category && product_body.category != ''){
             let old_category = await Category.findOne({
                 where:{title: response.categories[0].title}
             });
@@ -81,19 +83,20 @@ const store = {
             await response.removeCategories(old_category);
             await response.addCategory(new_category)
         };
+
         const thepromotion = await Promotion.findOne({
             where:{id: response.promotion.id}
         })
-        if(product_body.delivery || product_body.delivery != ''){
+        if(product_body.delivery && product_body.delivery != ''){
             thepromotion.delivery = product_body.delivery
         };
 
-        if(product_body.discount || product_body.discount != ''){
+        if(product_body.discount && product_body.discount != ''){
             thepromotion.value = product_body.discount
         };
         await response.save()
         await thepromotion.save()
-        
+
         return await this.getOne(response.id)
     },
     addOne: async function(product_data){

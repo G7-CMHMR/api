@@ -115,6 +115,7 @@ const json_products = require('./jsons_files/json_products')
             sold: product.sold,
             warranty: product.warranty,
             sellerId: product.seller.id,
+            visible: product.visible
 
         }
         return res;

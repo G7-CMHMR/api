@@ -69,6 +69,10 @@ module.exports = (sequelize) => {
 		isSeller: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false,
+		},
+		isGoogleAccount: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,	
 		}
 		// role: {
 		// 	type: DataTypes.ENUM(["ROLE_USER", "ROLE_ADMIN", "ROLE_SELLER"]),
