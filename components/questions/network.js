@@ -11,7 +11,7 @@ router.post('/create', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
 })
 
-router.get('/user/questions', ( req, res ) => {
+router.get('/user', ( req, res ) => {
 	controller.
 		getAllUserQuestion(req.body)
 	    .then(e => response.sucess(req, res, 200, e))

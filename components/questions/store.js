@@ -17,7 +17,12 @@ const createQuestion = async(params) => {
     const date = new Date();
 
     const product = await Product.findOne({
-        where: {id: params.productId}
+        where: {id: params.productId},
+        include: [{model: Seller,
+            attributes: ["id"]}]
+    })
+    const seller = await Seller.findOne({
+        where: {id: product.seller.id}
     })
     const user = await User.findOne({
         where: {id: params.userId}
@@ -28,45 +33,20 @@ const createQuestion = async(params) => {
         date : date
     })
     await new_question.setUser(user);
+    await new_question.setSeller(seller);
     await new_question.setProduct(product);
     
     return new_question;
 }
 
-// const getOrders = async (param) => {
+const getAllUserQuestion = async (param) => {
 
-//     const purchaseOrders = await Purchase_order.findAll({
-//         where: {userId: param.userId},
-//             include : [{model: Items,include:
-//                 {model: Product, 
-//                     attributes: product_attributes,
-//                     include: [
-//                         {
-//                             model: Seller,
-//                             attributes: ["id"],
-//                             include: [{
-//                                 model: User,
-//                                  attributes: ["name"],
-//                             }]
-//                         },
-//                         {
-//                             model:Image,
-//                             attributes: ["image"],
-//                         },
-//                         {
-//                             model:Category,
-//                             attributes: ["title"],
-//                         },
-//                         {
-//                             model:Promotion,
-//                             attributes: ["value","delivery"],
-//                         }
-//                     ],    
-//                 }}]
-//     })
+    const questions = await Questions.findAll({
+        where: {sellerId: param.sellerId},
+    })
 
-//     return purchaseOrders;
-// }
+    return questions;
+}
 
 
 
@@ -161,7 +141,7 @@ const createQuestion = async(params) => {
 
 module.exports = {
 	createQuestion,
-	// getOrders,
+    getAllUserQuestion,
 	// getOrderDetail,
 	// changeOrderStatus
 }
