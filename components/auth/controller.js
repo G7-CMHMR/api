@@ -15,27 +15,18 @@ const login = async (user) => {
     const isValidPassword = bcrypt.compareSync(user.password, userRegistered.password);
     if (!isValidPassword) throw { error: 'El password es incorrecto' };
 
-    // En este punto, el usuario existe e ingreso correctamente el password
-    const { id, name, lastName, email, isSeller } = userRegistered;
+    const { id, name, lastName, email, phone, isSeller, isGoogleAccount } = userRegistered;
 
-    // Genera un token 
     const token = await generateJWT(id, name);
-/* 
-    console.log({
-        id,
-        name,
-        lastName,
-        email,
-        isSeller,
-        token
-    }) */
-    // Envía como respuesta el usuario junto al token
+
     return {
         id,
         name,
         lastName,
         email,
+        phone,
         isSeller,
+        isGoogleAccount,
         token
     };
 
@@ -63,11 +54,8 @@ const create = async (user) => {
             subject: 'Confirmación de cuenta',
             htmlFile: 'confirm.html'
         });
-        
         if (isNewUserCreated)   return { succesfull: 'El usuario se ha creado con exito' };
-
-
-    // Atrapa en caso de haber algun error
+    
     } catch (error) {
         throw error;
     }
@@ -80,16 +68,22 @@ const update = async ( userId, { password: userPassword, ...dataToUpdate }) => {
         const user = await User.findByPk(userId);
         if (!user)  throw { error:'El usuario no se encuentra registrado' };
 
-        const isValidPassword = bcrypt.compareSync(userPassword, user.password);
-        if (!isValidPassword) throw { error: 'El password es incorrecto' };
+        if(!user.isGoogleAccount){
+            const isValidPassword = bcrypt.compareSync(userPassword, user.password);
+            if (!isValidPassword) throw { error: 'El password es incorrecto' };
+        }
 
         if(dataToUpdate.email){
-            const userRegisteredWithMail = await User.findOne({ where: { email: dataToUpdate.email } });
-            if (userRegisteredWithMail !== null)   throw { error: 'Este email ya está en uso' };
+            if(user.email !== dataToUpdate.email){
+                const userRegisteredWithMail = await User.findOne({ where: { email: dataToUpdate.email } });
+                if (userRegisteredWithMail !== null)   throw { error: 'Este email ya está en uso' };
+                user.email = dataToUpdate.email;
+            }
         }
         if(dataToUpdate.name)   user.name = dataToUpdate.name;
         if(dataToUpdate.lastName)   user.lastName = dataToUpdate.lastName;
         if(dataToUpdate.email)  user.email = dataToUpdate.email;
+        if(dataToUpdate.phone)  user.phone = dataToUpdate.phone;
        
         user.save();
 
@@ -98,7 +92,9 @@ const update = async ( userId, { password: userPassword, ...dataToUpdate }) => {
             name: user.name,
             lastName: user.lastName,
             email: user.email,
-            isSeller: user.isSeller
+            phone: user.phone,
+            isSeller: user.isSeller,
+            isGoogleAccount: user.isGoogleAccount
         }
     }
     catch (error) {
@@ -128,73 +124,59 @@ const updatePassword = async ( userId, password) => {
 }
 
 
-const renewToken = async (req, res) => {
-    const {id} = req;
+const renewToken = async (id) => {
+    // const {id} = req;
     const userRegistered = await User.findOne({ where: { id: id, /* active: true */ } });
-    const { name, lastName, email, isSeller } = userRegistered;
+    const { name, lastName, email, isSeller, phone, isGoogleAccount } = userRegistered;
     
 
     const token = await generateJWT(id, name);
 
-    return res.json({
-        ok: true,
-        id,
-        lastName,
-        email,
-        isSeller,
-        name,
-        token
-        
-    })
+        return {
+            id,
+            name,
+            lastName,
+            email,
+            phone,
+            isSeller,
+            isGoogleAccount,
+            token
+        }
     
 };
 
-
-const googleSignIn = async (req, res) => {
-    const { id_token } = req.body;
-
+const googleSignIn = async (id_token) => {
     try {
         const googleUser = await googleVerify(id_token);
-
         const { name, email } = googleUser;
 
         let user = await User.findOne({ where: { email } });
-
-        // TODO: ver como manejar el password cuando es de google
-        ///////////////////////////////////////////////////////////
         if (!user) {  
-            const data = {
+            user = await User.create({
                 name: name.split(" ")[0],
                 lastName: name.split(" ")[1] || ' ',
                 email,
-                password: ''
-                
-            }
-            user = await User.create(data);
+                password: '',
+                isGoogleAccount: true
+            });
             const cart = await Cart.create();
             cart.setUser(user);
         }
-
         const token = await generateJWT(user.id, user.name);
-        
-        return res.json({
-            ok: true,
-            name: user.name,
-            isSeller: user.isSeller,
-            email: user.email,
+    
+        return {
             id: user.id,
-            token
-        });
-
+            name: user.name,
+            lastName: user.lastName,
+            email: user.email,
+            phone: user.phone,
+            isSeller: user.isSeller,
+            isGoogleAccount: user.isGoogleAccount,
+            token: token
+        };
     } catch (error) {
-        return res.status(400).json({
-            ok: false,
-            msg: 'El token de Google no es válido',
-            error
-        })
+        throw error
     }
-
-
 };
 
 const confirmAccount = async (emailToken) => {
