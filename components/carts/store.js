@@ -3,11 +3,10 @@ const {product_attributes} = require('../../aux_functions');
 
 const store = {
     addCart: async function(params){
-        console.log(params)
+
         const cart = await Cart.findOne({
             where: {userId: params.userId},
         })
-        console.log(cart.id)
         const product = await Product.findOne({
             where: {id: params.productId},
         })
@@ -18,8 +17,6 @@ const store = {
         })
 
         if(items){
-            items.amount = items.amount +1;
-            items.save();
         }else{
             items = await Items.create({
                 amount: 1
@@ -125,6 +122,26 @@ const store = {
                 }
 
         }else{throw ('no existe este elemento')}
+
+        return [cart,items]
+    },
+    incrementItem: async function(params){
+        const cart = await Cart.findOne({
+            where: {userId: params.userId},
+        })
+        const product = await Product.findOne({
+            where: {id: params.productId},
+        })
+        let items = await Items.findOne({
+            where: {cartId: cart.id,
+                productId: product.id
+            },
+        })
+
+        if(items.amount){
+            items.amount = items.amount +1;
+            items.save();
+            }
 
         return [cart,items]
     },
