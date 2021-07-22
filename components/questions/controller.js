@@ -5,10 +5,10 @@ const createQuestion = async (data) => {
 	return store.createQuestion(data);
 }
 
-// const getOrders = async (userId) => {
+const getAllUserQuestion = async (userId) => {
 
-// 	return store.getOrders(userId);
-// }
+	return store.getAllUserQuestion(userId);
+}
 
 // const getOrderDetail = async (orderId) => {
 
@@ -22,7 +22,7 @@ const createQuestion = async (data) => {
 
 module.exports = {
 	createQuestion,
-	// getOrders,
+	getAllUserQuestion,
 	// getOrderDetail,
 	// changeOrderStatus
 };
