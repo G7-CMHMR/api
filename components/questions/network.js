@@ -8,22 +8,22 @@ router.post('/create', ( req, res ) => {
 	controller.
 		createQuestion(req.body)
 	    .then(e => response.sucess(req, res, 200, e))
-    	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
+    	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la pregunta'))
 })
 
 router.get('/user', ( req, res ) => {
 	controller.
 		getAllUserQuestion(req.body)
 	    .then(e => response.sucess(req, res, 200, e))
-    	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las ordenes de compra'))
+    	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las preguntas del vendedor'))
 })
 
-// router.get('/:orderId', ( req, res ) => {
-// 	controller.
-// 		getOrderDetail(req.params)
-// 	    .then(e => response.sucess(req, res, 200, e))
-//     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las ordenes de compra'))
-// })
+router.get('/product', ( req, res ) => {
+	controller.
+		getProductQuestions(req.params)
+	    .then(e => response.sucess(req, res, 200, e))
+    	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las preguntas del producto'))
+})
 
 // router.put('/status', (req, res) => {
 // 	controller.

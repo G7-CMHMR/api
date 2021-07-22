@@ -10,10 +10,10 @@ const getAllUserQuestion = async (userId) => {
 	return store.getAllUserQuestion(userId);
 }
 
-// const getOrderDetail = async (orderId) => {
+const getProductQuestions = async (productId) => {
 
-// 	return store.getOrderDetail(orderId);
-// }
+	return store.getProductQuestions(productId);
+}
 
 // const changeOrderStatus = async(orderId) => {
 
@@ -23,6 +23,6 @@ const getAllUserQuestion = async (userId) => {
 module.exports = {
 	createQuestion,
 	getAllUserQuestion,
-	// getOrderDetail,
+	getProductQuestions,
 	// changeOrderStatus
 };
