@@ -11,12 +11,12 @@ router.post('/create', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
 })
 
-// router.get('/', ( req, res ) => {
-// 	controller.
-// 		getOrders(req.body)
-// 	    .then(e => response.sucess(req, res, 200, e))
-//     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las ordenes de compra'))
-// })
+router.get('/user/questions', ( req, res ) => {
+	controller.
+		getAllUserQuestion(req.body)
+	    .then(e => response.sucess(req, res, 200, e))
+    	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las ordenes de compra'))
+})
 
 // router.get('/:orderId', ( req, res ) => {
 // 	controller.
