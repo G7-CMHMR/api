@@ -46,7 +46,7 @@ const store = {
             include: [
                 {
                     model: Seller,
-                    attributes: ["id"],
+                    attributes: ["id","location"],
                     include: [{
                         model: User,
                          attributes: ["name"],
