@@ -25,11 +25,18 @@ router.get('/product', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las preguntas del producto'))
 })
 
-// router.put('/status', (req, res) => {
-// 	controller.
-// 		changeOrderStatus(req.body)
-// 		.then(e => response.sucess(req, res, 200, e))
-// 		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar cambiar el estado de la orden de compra'));
-// })
+router.put('/answer', (req, res) => {
+	controller.
+		answerQuestion(req.body)
+		.then(e => response.sucess(req, res, 200, e))
+		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar responder 😞'));
+})
+
+router.put('/question/edit', (req, res) => {
+	controller.
+		updateQuestion(req.body)
+		.then(e => response.sucess(req, res, 200, e))
+		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar modificar 😞'));
+})
 
 module.exports = router;

@@ -15,14 +15,20 @@ const getProductQuestions = async (productId) => {
 	return store.getProductQuestions(productId);
 }
 
-// const changeOrderStatus = async(orderId) => {
+const answerQuestion = async(params) => {
 
-// 	return store.changeOrderStatus(orderId);
-// }
+	return store.answerQuestion(params);
+}
+
+const updateQuestion = async(params) => {
+
+	return store.updateQuestion(params);
+}
 
 module.exports = {
 	createQuestion,
 	getAllUserQuestion,
 	getProductQuestions,
-	// changeOrderStatus
+	answerQuestion,
+	updateQuestion,
 };

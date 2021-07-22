@@ -57,9 +57,14 @@ const getProductQuestions = async (param) => {
     return questions;
 }
 
-    
-//     return purchaseOrder;
-// }
+const answerQuestion = async (param) => {
+    const questions = await Questions.findOne({
+        where: {id: param.questionId},
+    })
+    questions.response = param.response
+    questions.save()
+    return questions
+}
 
 // const changeOrderStatus = async(param) => {
 
@@ -117,5 +122,5 @@ module.exports = {
 	createQuestion,
     getAllUserQuestion,
     getProductQuestions,
-	// changeOrderStatus
+    answerQuestion
 }
