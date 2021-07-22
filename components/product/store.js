@@ -1,4 +1,4 @@
-const {Product, Category, Image, Promotion, Seller, User} = require('../../db');
+const {Product, Category, Image, Promotion, Seller, User, Questions} = require('../../db');
 const {simplificarProduct, product_attributes} = require('../../aux_functions');
 // const e = require('cors');
 
@@ -23,6 +23,10 @@ const store = {
                 {
                     model:Category,
                     attributes: ["title"],
+                },
+                {
+                    model:Questions,
+                    attributes: ["question","response","date"],
                 },
                 {
                     model:Promotion,
