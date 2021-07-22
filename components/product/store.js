@@ -35,7 +35,7 @@ const store = {
             ],
             
         })
-        return simplificarProduct(response)
+        return response
     },
     updateOne: async function(product_id, product_body){
 
@@ -60,8 +60,7 @@ const store = {
                     attributes: ["title"],
                 },
                 {
-                    model:Promotion,
-                    attributes: ["value","delivery"],
+                    model:Promotion
                 }
             ],
         })
@@ -83,13 +82,19 @@ const store = {
             await response.removeCategories(old_category);
             await response.addCategory(new_category)
         };
+
+        const thepromotion = await Promotion.findOne({
+            where:{id: response.promotion.id}
+        })
         if(product_body.delivery && product_body.delivery != ''){
-            response.promotion.delivery = product_body.delivery
+            thepromotion.delivery = product_body.delivery
         };
+
         if(product_body.discount && product_body.discount != ''){
-            response.promotion.value = product_body.discount
+            thepromotion.value = product_body.discount
         };
         await response.save()
+        await thepromotion.save()
 
         return await this.getOne(response.id)
     },
