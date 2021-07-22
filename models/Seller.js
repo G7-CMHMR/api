@@ -38,10 +38,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    phone: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     cuil: {
       type: DataTypes.FLOAT,
       allowNull: false

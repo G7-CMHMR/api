@@ -4,6 +4,7 @@ const {simplificarProduct, product_attributes} = require('../../aux_functions');
 const store = {
     getOne: async function(product_name){
         let response = await Product.findAll({
+            where: {visible: true},
             attributes: product_attributes,
             include: [
                 {

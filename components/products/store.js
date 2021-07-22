@@ -9,6 +9,7 @@ const store = {
                 where: {title: category_name},
                 include: [{
                     model: Product,
+                    where: {visible: true},
                     attributes: product_attributes,
                     include: [
                         {
@@ -105,6 +106,7 @@ const store = {
             where:{ value: {[Op.ne]: 0} },
             include: [{
                 model: Product,
+                where: {visible: true},
                 attributes: product_attributes,
                 include: [
                     {
