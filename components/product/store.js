@@ -35,7 +35,7 @@ const store = {
             ],
             
         })
-        return simplificarProduct(response)
+        return response
     },
     updateOne: async function(product_id, product_body){
         let response = await Product.findOne({
