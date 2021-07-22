@@ -144,15 +144,21 @@ const store = {
         return await this.getCart(params.userId)
     },
     adjustItemAmount: async function(params){
+        const cart = await Cart.findOne({
+            where: {userId: params.userId},
+        })
         let items = await Items.findOne({
-            where: {id : params.itemsId
+            where: {cartId: cart.id,
+                productId: params.productId
             },
         })
 
         if(items.amount){
-            items.amount = items.amount +1;
-            items.save();
+            items.amount = params.amount
+            await items.save();
             }
+
+        return await this.getCart(params.userId)
     },
 };
 

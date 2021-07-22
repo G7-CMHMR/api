@@ -39,6 +39,13 @@ router.get('/eraseCart', (req, res) => {
     .catch(e => response.error(req, res, 404, e,'fallo quitar el producto del carrito'))
 })
 
+router.put('/adjustItemAmount', (req, res) => {
+    controller
+    .adjustItemAmount(req.body)
+    .then(e => response.sucess(req, res, 200, e))
+    .catch(e => response.error(req, res, 404, e,'fallo quitar el producto del carrito'))
+})
+
 router.get('/:userId', (req, res) => {
     controller
     .getCart(req.params.userId)
