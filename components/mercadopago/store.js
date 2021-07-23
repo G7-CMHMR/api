@@ -7,7 +7,7 @@ mercadopago.configurations.setAccessToken("TEST-3725861636699344-071813-cc6fb369
 const store = {
 
     createPreferences: async function (params) {
-
+        console.log(params)
         let items = []
         let shipping = 0;
         let error = '';
@@ -22,9 +22,8 @@ const store = {
             if (element.product.stock < element.amount) {
                 errorChangeAmount = `¡No hay suficientes ${element.product.name.substring(0, 24)}, cambiamos la cantidad a ${element.product.stock} unidades!`;
                 newAmount = element.product.stock
+                productid = element.product.id
             }
-            if (error != '') { return { error, productid } }
-            if (errorChangeAmount != '') { return { errorChangeAmount, newAmount } }
 
             items.push({
                 title: element.product.name,
@@ -32,6 +31,9 @@ const store = {
                 quantity: element.amount,
             })
         })
+
+        if (error != '') { return { error, productid } }
+        if (errorChangeAmount != '') { return { errorChangeAmount, newAmount, productid } }
 
         params.map(async (element) => {
             let products = await Product.findOne({
