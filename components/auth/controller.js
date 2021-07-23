@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 
-const { User, Cart } = require('../../db');
+const { User, Cart, Seller } = require('../../db');
 
 const hashPassword = require('./resources/utils/hashPassword');
 const { generateJWT } = require('./resources/utils/jwt');
@@ -16,6 +16,11 @@ const login = async (user) => {
     if (!isValidPassword) throw { error: 'El password es incorrecto' };
 
     const { id, name, lastName, email, phone, isSeller, isGoogleAccount } = userRegistered;
+
+    if (isSeller){
+        const { id: idSeller } = await Seller.findOne({ where: { idUser: id }});
+        console.log('EL ID USER: ',idSeller);
+    }
 
     const token = await generateJWT(id, name);
 
@@ -163,6 +168,10 @@ const googleSignIn = async (id_token) => {
             cart.setUser(user);
         }
         const token = await generateJWT(user.id, user.name);
+
+        if (user.isSeller){
+            const { id: idSeller } = await Seller.findOne({ where: { userId: user.id }});
+        }
     
         return {
             id: user.id,
@@ -171,6 +180,7 @@ const googleSignIn = async (id_token) => {
             email: user.email,
             phone: user.phone,
             isSeller: user.isSeller,
+            idSeller: idSeller,
             isGoogleAccount: user.isGoogleAccount,
             token: token
         };
