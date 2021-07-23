@@ -1,0 +1,122 @@
+const {Seller, Image, Promotion, Category, Save_product_state, Seller_sells, User, Product, Items} = require('../../db');
+const { product_attributes} = require('../../aux_functions');
+
+const store = {
+	getItems: async function(){
+		let response = await Seller_sells.findAll({
+			attributes: {exclude: ['createdAt','updatedAt']},
+			include:{
+				model: Items,
+				attributes: ['amount'],
+				include: [{model: Product, 
+					attributes: product_attributes,
+					include: [
+						{
+							model: Seller,
+							attributes: ["id"],
+							include: [{
+								model: User,
+								 attributes: ["name"],
+							}]
+						},
+						{
+							model:Image,
+							attributes: ["image"],
+						},
+						{
+							model:Category,
+							attributes: ["title"],
+						},
+						{
+							model:Promotion,
+							attributes: ["value","delivery"],
+						}
+					],    
+				},{
+					model: Save_product_state,
+					attributes: {exclude: ['createdAt','updatedAt']}
+				}],
+			}
+		});
+		return response;
+	},
+	getSellerItems:  function(data){
+		let response = await Seller.findOne({
+			where:{id: data.id},
+			include:{
+				model: Seller_sells,
+				attributes: {exclude: ['createdAt','updatedAt']},
+				include:{
+					model: Items,
+					attributes: ['amount'],
+					include: [{model: Product, 
+						attributes: product_attributes,
+						include: [
+							{
+								model: Seller,
+								attributes: ["id"],
+								include: [{
+									model: User,
+									 attributes: ["name"],
+								}]
+							},
+							{
+								model:Image,
+								attributes: ["image"],
+							},
+							{
+								model:Category,
+								attributes: ["title"],
+							},
+							{
+								model:Promotion,
+								attributes: ["value","delivery"],
+							}
+						],    
+					},{
+						model: Save_product_state,
+						attributes: {exclude: ['createdAt','updatedAt']},
+						include: [
+							{
+								model:Category,
+								attributes: ["title"],
+							},
+						]
+					}],
+				}
+			}
+		})
+		return response.Seller_sells;
+	},
+	getSellerItemsFilter:  function(data){
+		let response = this.getSellerItems(data)
+
+		if(data.status){
+			response = response.filter((sellerSell) => sellerSell.product_status == data.status);
+		}
+
+		if(sellerSell.items.product){
+			if(data.category){
+				response = response.filter((sellerSell) => sellerSell.items.product.category.includes(data.category));
+			}else if(data.productId){
+				response = response.filter((sellerSell) => sellerSell.productId === data.productId);
+			}
+		}else if(sellerSell.items.Save_product_state){
+			if(data.category){
+				response = response.filter((sellerSell) => sellerSell.items.Save_product_state.category.includes(data.category));
+			}else if(data.productId){
+				response = response.filter((sellerSell) => sellerSell.productId === data.productId);
+			}
+		}
+		return response;
+	},
+	changeItemStatus:  function(data){
+		let response = await Seller_sells.findOne({where: {id: data.sellId},attributes: {exclude: ['createdAt','updatedAt']}});
+		response.product_status = data.status;
+		response.save();
+	}
+};
+
+module.exports = store;
+
+

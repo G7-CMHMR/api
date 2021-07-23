@@ -8,7 +8,7 @@
 // RETORNO:
 // 
 
-const { Purchase_order, Cart, Product, Items, Promotion, Category, Image, Seller, User } = require('../../db');
+const { Purchase_order, Cart, Product,Save_product_state, Items, Promotion, Category, Image, Seller, User } = require('../../db');
 const store = require('../carts/store')
 const { product_attributes} = require('../../aux_functions');
 
@@ -41,7 +41,7 @@ const createOrder = async(data) => {
         mercadopagoId: id,
         payment_method: payment_method, 
         address: userAddress, 
-        status: 'created',
+        //status: 'created',
         total_price: total,
         date : date
     })
@@ -51,8 +51,7 @@ const createOrder = async(data) => {
     userCart.items.map(async el => {
         await order.addItems(el)
         // await userCart.removeItems(el)
-    }
-        )
+    })
     
     return order;
 
@@ -62,8 +61,10 @@ const getOrders = async (param) => {
 
     const purchaseOrders = await Purchase_order.findAll({
         where: {userId: param.userId},
-            include : [{model: Items,include:
-                {model: Product, 
+            include : [{
+                model: Items,
+                include:[{
+                    model: Product, 
                     attributes: product_attributes,
                     include: [
                         {
@@ -87,7 +88,16 @@ const getOrders = async (param) => {
                             attributes: ["value","delivery"],
                         }
                     ],    
-                }}]
+                },{
+                    model:Save_product_state,
+                    attributes: {exclude: ['createdAt','updatedAt']},
+						include: [
+							{
+								model:Category,
+								attributes: ["title"],
+							},
+						]
+                }]}]
     })
 
     return purchaseOrders;
@@ -100,8 +110,9 @@ const getOrderDetail = async (orderId) => {
 
     const purchaseOrder = await Purchase_order.findOne({
         where: {id: orderId.orderId},
-            include : [{model: Items,include:
-                {model: Product, 
+            include : [{model: Items,
+                include:
+                [{model: Product, 
                     attributes: product_attributes,
                     include: [
                         {
@@ -125,70 +136,79 @@ const getOrderDetail = async (orderId) => {
                             attributes: ["value","delivery"],
                         }
                     ],    
-                }}]
+                },{
+                    model:Save_product_state,
+                    attributes: {exclude: ['createdAt','updatedAt']},
+						include: [
+							{
+								model:Category,
+								attributes: ["title"],
+							},
+						]
+                }]}]
     })
     
     
     return purchaseOrder;
 }
 
-const changeOrderStatus = async(param) => {
+// const changeOrderStatus = async(param) => {
 
-    let purchase_order = await Purchase_order.findOne({
-        where: {id: param.orderId},
-            include : [{model: Items,include:
-                {model: Product, 
-                    attributes: product_attributes,
-                    include: [
-                        {
-                            model: Seller,
-                            attributes: ["id"],
-                            include: [{
-                                model: User,
-                                 attributes: ["name"],
-                            }]
-                        },
-                        {
-                            model:Image,
-                            attributes: ["image"],
-                        },
-                        {
-                            model:Category,
-                            attributes: ["title"],
-                        },
-                        {
-                            model:Promotion,
-                            attributes: ["value","delivery"],
-                        }
-                    ],    
-                }}]
-    })
+//     let purchase_order = await Purchase_order.findOne({
+//         where: {id: param.orderId},
+//             include : [{model: Items,include:
+//                 {model: Product, 
+//                     attributes: product_attributes,
+//                     include: [
+//                         {
+//                             model: Seller,
+//                             attributes: ["id"],
+//                             include: [{
+//                                 model: User,
+//                                  attributes: ["name"],
+//                             }]
+//                         },
+//                         {
+//                             model:Image,
+//                             attributes: ["image"],
+//                         },
+//                         {
+//                             model:Category,
+//                             attributes: ["title"],
+//                         },
+//                         {
+//                             model:Promotion,
+//                             attributes: ["value","delivery"],
+//                         }
+//                     ],    
+//                 }}]
+//     })
 
-    switch(param.status){
-        case 'processing':
-            purchase_order.status = 'processing'
-        break
-        case 'canceled':
-            purchase_order.status = 'canceled'
-        break
-        case 'expired':
-            purchase_order.status = 'expired'
-        break
-        case 'complete':
-            purchase_order.status = 'complete'
-        break
-    }
+//     switch(param.status){
+//         case 'processing':
+//             purchase_order.status = 'processing'
+//         break
+//         case 'canceled':
+//             purchase_order.status = 'canceled'
+//         break
+//         case 'expired':
+//             purchase_order.status = 'expired'
+//         break
+//         case 'complete':
+//             purchase_order.status = 'complete'
+//         break
+//     }
 
-    await purchase_order.save();
+//     await purchase_order.save();
 
-    return purchase_order;
-}
+//     return purchase_order;
+// }
 
 module.exports = {
 	createOrder,
 	getOrders,
 	getOrderDetail,
-	changeOrderStatus
+	//changeOrderStatus
 }
 
     // addCart: async function(params){

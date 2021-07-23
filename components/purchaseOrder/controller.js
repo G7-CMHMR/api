@@ -15,10 +15,10 @@ const getOrderDetail = async (orderId) => {
 	return store.getOrderDetail(orderId);
 }
 
-const changeOrderStatus = async(orderId) => {
+// const changeOrderStatus = async(orderId) => {
 
-	return store.changeOrderStatus(orderId);
-}
+// 	return store.changeOrderStatus(orderId);
+// }
 
 module.exports = {
 	createOrder,
