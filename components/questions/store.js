@@ -43,6 +43,10 @@ const getAllUserQuestion = async (param) => {
 
     const questions = await Questions.findAll({
         where: {sellerId: param.sellerId},
+            include :[{model: User,
+                attributes: ['name']
+                // attributes: {exclude: ['createdAt','updatedAt']}
+                }]
     })
 
     return questions;
@@ -52,6 +56,8 @@ const getProductQuestions = async (param) => {
 
     const questions = await Questions.findAll({
         where: {productId: param.productId},
+        include :[{model: User,
+            attributes: ['name']}]
     })
 
     return questions;
@@ -60,6 +66,8 @@ const getProductQuestions = async (param) => {
 const updateResponse = async (param) => {
     const questions = await Questions.findOne({
         where: {id: param.questionId},
+        include :[{model: User,
+            attributes: ['name']}]
     })
     questions.response = param.response
     questions.save()
@@ -69,6 +77,8 @@ const updateResponse = async (param) => {
 const deleteQuestion = async (param) => {
     const questions = await Questions.findOne({
         where: {id: param.questionId},
+        include :[{model: User,
+            attributes: ['name']}]
     })
     await questions.destroy()
 }
