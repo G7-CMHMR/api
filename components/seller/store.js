@@ -32,8 +32,10 @@ const store = {
 				email: userRegistered.email,
 				name: userRegistered.name,
 				lastName: userRegistered.lastName,
+				phone: userRegistered.phone,
 				isSeller: userRegistered.isSeller,
-				token: userRegistered.token				
+				isGoogleAccount: userRegistered.isGoogleAccount,	
+				idSeller: newSeller.id
 			};
 
 	    } catch (error) {
