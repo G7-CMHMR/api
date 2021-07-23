@@ -25,11 +25,11 @@ router.get('/:orderId', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las ordenes de compra'))
 })
 
-router.put('/status', (req, res) => {
-	controller.
-		changeOrderStatus(req.body)
-		.then(e => response.sucess(req, res, 200, e))
-		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar cambiar el estado de la orden de compra'));
-})
+// router.put('/status', (req, res) => {
+// 	controller.
+// 		changeOrderStatus(req.body)
+// 		.then(e => response.sucess(req, res, 200, e))
+// 		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar cambiar el estado de la orden de compra'));
+// })
 
 module.exports = router;

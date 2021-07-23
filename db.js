@@ -91,8 +91,8 @@ Questions.belongsTo(User);
 Seller.hasMany(Questions);
 Questions.belongsTo(Seller);
 
-Items.hasMany(Questions);
-Questions.belongsTo(Items);
+Items.hasOne(Seller_sells);
+Seller_sells.belongsTo(Items);
 
 Product.hasOne(Promotion);
 Promotion.belongsTo(Product)
@@ -105,6 +105,9 @@ Items.belongsTo(Purchase_order);
 
 Product.belongsToMany(Category , { through: 'Product_Category' });
 Category.belongsToMany(Product , { through: 'Product_Category' });
+
+Save_product_state.belongsToMany(Category , { through: 'Save_product_state_Category' });
+Category.belongsToMany(Save_product_state , { through: 'Save_product_state_Category' });
 
 
 module.exports = {
