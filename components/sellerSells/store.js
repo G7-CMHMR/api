@@ -40,7 +40,7 @@ const store = {
 		});
 		return response;
 	},
-	getSellerItems:  function(data){
+	getSellerItems: async function(data){
 		let response = await Seller.findOne({
 			where:{id: data.id},
 			include:{
@@ -88,8 +88,8 @@ const store = {
 		})
 		return response.Seller_sells;
 	},
-	getSellerItemsFilter:  function(data){
-		let response = this.getSellerItems(data)
+	getSellerItemsFilter: async function(data){
+		let response = await this.getSellerItems(data)
 
 		if(data.status){
 			response = response.filter((sellerSell) => sellerSell.product_status == data.status);
@@ -110,7 +110,7 @@ const store = {
 		}
 		return response;
 	},
-	changeItemStatus:  function(data){
+	changeItemStatus: async function(data){
 		let response = await Seller_sells.findOne({where: {id: data.sellId},attributes: {exclude: ['createdAt','updatedAt']}});
 		response.product_status = data.status;
 		response.save();
