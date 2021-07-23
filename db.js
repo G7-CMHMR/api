@@ -91,6 +91,9 @@ Questions.belongsTo(User);
 Seller.hasMany(Questions);
 Questions.belongsTo(Seller);
 
+Items.hasMany(Questions);
+Questions.belongsTo(Items);
+
 Product.hasOne(Promotion);
 Promotion.belongsTo(Product)
 

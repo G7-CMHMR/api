@@ -17,9 +17,10 @@ module.exports = (sequelize) => {
         allowNull: false,
     },
     product_status: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-    },
+        type: DataTypes.ENUM,
+        values: ['created', 'processing', 'canceled', 'expired','complete'],
+        allowNull: false
+      },
     address: {
         type: DataTypes.FLOAT,
         allowNull: false,

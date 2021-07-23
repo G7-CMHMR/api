@@ -51,8 +51,8 @@ module.exports = (sequelize) => {
     sold: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
-    },
-    state: {
+    }, 
+    state: {      //este valor es el q se usa para hacer los save_product_state
       type: DataTypes.INTEGER,
       defaultValue: 0,
     },

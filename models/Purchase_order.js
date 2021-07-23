@@ -6,10 +6,6 @@ const Sequelize = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('purchase_order', {
-    // payment_method: {
-    //   type: DataTypes.STRING,
-    //   allowNull: false,
-    // },
     payment_method: {
       type: DataTypes.ENUM,
       values: ['mercado-pago', 'credit-card'],
@@ -21,15 +17,6 @@ module.exports = (sequelize) => {
     address: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-    // status: {
-    //     type: DataTypes.STRING,
-    //     // ENUM: pending, expired, paid
-    // },
-    status: {
-      type: DataTypes.ENUM,
-      values: ['created', 'processing', 'canceled', 'expired','complete'],
-      allowNull: false
     },
     total_price: {
         type: DataTypes.FLOAT,
