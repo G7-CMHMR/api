@@ -24,5 +24,5 @@ module.exports = {
 	createOrder,
 	getOrders,
 	getOrderDetail,
-	changeOrderStatus
+	//changeOrderStatus
 };
