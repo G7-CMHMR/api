@@ -17,7 +17,9 @@ const createQuestion = async(params) => {
     const date = new Date();
 
     const product = await Product.findOne({
-        where: {id: params.productId}
+        where: {id: params.productId},
+        include: [{model: Seller,
+            attributes: ["id"]}]
     })
     const seller = await Seller.findOne({
         where: {id: product.seller.id}
