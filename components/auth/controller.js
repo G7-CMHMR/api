@@ -7,6 +7,31 @@ const { generateJWT } = require('./resources/utils/jwt');
 const { googleVerify } = require('./resources/utils/googleVerify')
 const sendEmail = require('../../email_config/handler');
 
+
+
+const prepareUserDataResponse = async (user) => {
+    const userDataResponse = {};
+
+    const token = await generateJWT(user.id, user.name);
+
+    userDataResponse.id = user.id;
+    userDataResponse.name = user.name;
+    userDataResponse.lastName = user.lastName;
+    userDataResponse.email = user.email;
+    userDataResponse.phone = user.phone;
+    userDataResponse.isSeller = user.isSeller;
+    userDataResponse.isGoogleAccount = user.isGoogleAccount;
+    userDataResponse.token = token;
+
+    if (user.isSeller){
+        const { id: idSeller } = await Seller.findOne({ where: { userId: user.id }});
+        userDataResponse.idSeller = idSeller;
+    }
+
+    return userDataResponse;
+}
+
+
 const login = async (user) => {
 
     const userRegistered = await User.findOne({ where: { email: user.email, active: true } });
@@ -15,25 +40,7 @@ const login = async (user) => {
     const isValidPassword = bcrypt.compareSync(user.password, userRegistered.password);
     if (!isValidPassword) throw { error: 'El password es incorrecto' };
 
-    const { id, name, lastName, email, phone, isSeller, isGoogleAccount } = userRegistered;
-
-    if (isSeller){
-        const { id: idSeller } = await Seller.findOne({ where: { idUser: id }});
-        console.log('EL ID USER: ',idSeller);
-    }
-
-    const token = await generateJWT(id, name);
-
-    return {
-        id,
-        name,
-        lastName,
-        email,
-        phone,
-        isSeller,
-        isGoogleAccount,
-        token
-    };
+    return prepareUserDataResponse(userRegistered);
 
 }
 
@@ -92,15 +99,7 @@ const update = async ( userId, { password: userPassword, ...dataToUpdate }) => {
        
         user.save();
 
-        return {
-            id: user.id,
-            name: user.name,
-            lastName: user.lastName,
-            email: user.email,
-            phone: user.phone,
-            isSeller: user.isSeller,
-            isGoogleAccount: user.isGoogleAccount
-        }
+        return prepareUserDataResponse(user);
     }
     catch (error) {
         console.log(error)
@@ -130,23 +129,10 @@ const updatePassword = async ( userId, password) => {
 
 
 const renewToken = async (id) => {
-    // const {id} = req;
-    const userRegistered = await User.findOne({ where: { id: id, /* active: true */ } });
-    const { name, lastName, email, isSeller, phone, isGoogleAccount } = userRegistered;
+
+    const userRegistered = await User.findOne({ where: { id: id } });
     
-
-    const token = await generateJWT(id, name);
-
-        return {
-            id,
-            name,
-            lastName,
-            email,
-            phone,
-            isSeller,
-            isGoogleAccount,
-            token
-        }
+    return prepareUserDataResponse(userRegistered);
     
 };
 
@@ -167,23 +153,9 @@ const googleSignIn = async (id_token) => {
             const cart = await Cart.create();
             cart.setUser(user);
         }
-        const token = await generateJWT(user.id, user.name);
 
-        if (user.isSeller){
-            const { id: idSeller } = await Seller.findOne({ where: { userId: user.id }});
-        }
-    
-        return {
-            id: user.id,
-            name: user.name,
-            lastName: user.lastName,
-            email: user.email,
-            phone: user.phone,
-            isSeller: user.isSeller,
-            idSeller: idSeller,
-            isGoogleAccount: user.isGoogleAccount,
-            token: token
-        };
+        return prepareUserDataResponse(user);
+
     } catch (error) {
         throw error
     }
@@ -192,14 +164,13 @@ const googleSignIn = async (id_token) => {
 const confirmAccount = async (emailToken) => {
 
     const user = await User.findOne({ where:{ emailToken: emailToken }});
-
     if(!user)   throw { error: 'El usuario no existe'};
 
     user.active = true;
     user.emailToken = null;
     await user.save();
 
-    return user;
+    return { succesfull: 'La cuenta se ha activado con exito' }
 };
 
 
