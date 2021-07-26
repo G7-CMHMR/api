@@ -11,6 +11,7 @@
 const { Purchase_order, Cart, Product,Save_product_state, Items, Promotion, Category, Image, Seller, User } = require('../../db');
 const store = require('../carts/store')
 const { product_attributes} = require('../../aux_functions');
+const { response } = require('express');
 
 const totalPrice = (cart) => {
     let total = 0;
@@ -21,8 +22,6 @@ const totalPrice = (cart) => {
     return total;
 
 }
-
-
 
 const createOrder = async(data) => {
     const { userId, payment_method, userAddress, id } = data;
@@ -44,7 +43,7 @@ const createOrder = async(data) => {
         //status: 'created',
         total_price: total,
         date : date,
-        paid_out : true
+        paid_out : false
     })
     await order.setUser(userId);
 
@@ -53,8 +52,24 @@ const createOrder = async(data) => {
         await order.addItems(el)
         // await userCart.removeItems(el)
     })
-    
-    return order;
+    setTimeout(async function(){
+        if(order.paid_out !== true){
+
+            const dsa = await Purchase_order.findOne({
+                where: {id: order.id},
+                attributes : ['id'],
+                include : [{model: Items}]
+            })
+            dsa.items.map(async (e)=>{
+                const asd = await Product.findOne({
+                    where:{id : e.productId}
+                })
+                asd.stock += e.amount
+                await asd.save()
+                })
+            }
+    }, 60000);
+        // return order
 
 }
 
@@ -153,6 +168,40 @@ const getOrderDetail = async (orderId) => {
     return purchaseOrder;
 }
 
+const getItemsFromUser = async(data) =>{
+    let response = [];
+    const user = await User.findOne({
+        where:{id : data.userId},
+        include:[{model:Purchase_order,
+            include:[{model:Items,
+                attributes: {exclude: ['createdAt','updatedAt']},
+                include:[{model:Product,
+                    attributes: {exclude: ['createdAt','updatedAt']},
+                    include:[{model:Promotion},{model:Image},{model:Category}]},
+                {model:Purchase_order,
+                    attributes: {exclude: ['createdAt','updatedAt']},},
+                {model:Save_product_state}
+            ]
+        }]}]
+    })
+    user.purchase_orders.map(PurchaseO=>{
+        PurchaseO.items.map(item=>{
+            response.push(item)
+        })
+    })
+    return response
+}
+
+const changeOrder = async(data) =>{
+    order = await findOne({
+        where: {mercadopagoId : data.mercadopagoId}
+    })
+    order.paid_out = true
+    await order.save()
+    let id = {userId : data.userId}
+    return await this.getItemsFromUser(id)
+}
+
 // const changeOrderStatus = async(param) => {
 
 //     let purchase_order = await Purchase_order.findOne({
@@ -209,6 +258,8 @@ module.exports = {
 	createOrder,
 	getOrders,
 	getOrderDetail,
+    changeOrder,
+    getItemsFromUser
 	//changeOrderStatus
 }
 

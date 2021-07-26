@@ -18,11 +18,25 @@ router.get('/', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las ordenes de compra'))
 })
 
+router.get('/user', ( req, res ) => {
+	controller.
+		getItemsFromUser(req.body)
+		.then(e => response.sucess(req, res, 200, e))
+		.catch(e => response.error(req, res, 404, e, 'Fallo al obtener los items del usuario'))
+})
+
 router.get('/:orderId', ( req, res ) => {
 	controller.
 		getOrderDetail(req.params)
 	    .then(e => response.sucess(req, res, 200, e))
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las ordenes de compra'))
+})
+
+router.put('/', ( req, res ) => {
+	controller.
+		changeOrder(req.body)
+	    .then(e => response.sucess(req, res, 200, e))
+    	.catch(e => response.error(req, res, 404, e, 'Fallo en editar el out_paid'))
 })
 
 // router.put('/status', (req, res) => {
