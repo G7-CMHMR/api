@@ -43,7 +43,8 @@ const createOrder = async(data) => {
         address: userAddress, 
         //status: 'created',
         total_price: total,
-        date : date
+        date : date,
+        paid_out : true
     })
     await order.setUser(userId);
 
