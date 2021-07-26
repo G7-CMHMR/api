@@ -30,7 +30,8 @@ const createQuestion = async(params) => {
 
     const new_question = await Questions.create({
         question: params.question,
-        date : date
+        date : date,
+        userName : user.name
     })
     await new_question.setUser(user);
     await new_question.setSeller(seller);

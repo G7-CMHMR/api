@@ -24,6 +24,10 @@ module.exports = (sequelize) => {
     },
     mercadopagoId: {
         type: DataTypes.STRING,
+    },
+    paid_out: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   });
 };
