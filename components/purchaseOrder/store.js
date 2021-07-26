@@ -173,6 +173,7 @@ const getItemsFromUser = async(data) =>{
     const user = await User.findOne({
         where:{id : data.userId},
         include:[{model:Purchase_order,
+            where:{paid_out : true},
             include:[{model:Items,
                 attributes: {exclude: ['createdAt','updatedAt']},
                 include:[{model:Product,
