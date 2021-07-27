@@ -32,7 +32,7 @@ router.post('/increment', (req, res) => {
     .catch(e => response.error(req, res, 404, e,'fallo en aumentar la cantidad del item'))
 })
 
-router.get('/eraseCart', (req, res) => {
+router.post('/eraseCart', (req, res) => {
     controller
     .eraseCart(req.body)
     .then(e => response.sucess(req, res, 200, e))

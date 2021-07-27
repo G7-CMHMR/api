@@ -95,7 +95,7 @@ const store = {
                 productId: product.id
             },
         })
-        await items.destroy();
+        await cart.removeItems(items)
 
         return await this.getCart(params.userId)
     },
