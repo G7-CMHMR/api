@@ -10,6 +10,11 @@ const changePass = async (data) => {
 	return store.changePass(data);
 }
 
+const becomeUser = async (data) => {
+
+	return store.becomeUser(data);
+}
+
 const delUser = async (data) => {
 
 	return store.delUser(data);
@@ -19,5 +24,6 @@ const delUser = async (data) => {
 module.exports = {
 	getUsers,
 	delUser,
-	changePass
+	changePass,
+	becomeUser
 };
