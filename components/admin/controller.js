@@ -25,11 +25,17 @@ const getAllPC = async (data) => {
 	return store.getAllPC(data);
 }
 
+const makeReview = async (data) => {
+
+	return store.makeReview(data);
+}
+
 
 module.exports = {
 	getUsers,
 	delUser,
 	changePass,
 	becomeUser,
-	getAllPC
+	getAllPC,
+	makeReview
 };

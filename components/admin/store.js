@@ -32,6 +32,18 @@ const store = {
             await user.save()
         }
     },
+    makeReview: async function(data){
+        let admin = await User.findOne({
+            where:{id : data.userId}
+        })
+        if(admin.isAdmin || admin.superAdmin){
+            let product = await Product.findOne({
+                where:{id: data.productId}
+            })
+            product.valuation = data.valuation
+            product.save()
+        }
+    },
     getAllPC: async function(data){
         let admin = await User.findOne({
             where:{id : data.userId}

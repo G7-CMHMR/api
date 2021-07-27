@@ -18,6 +18,13 @@ router.put('/Pass/', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
 })
 
+router.put('/giveMeAReview/', ( req, res ) => {
+	controller.
+		changePass(req.body)
+	    .then(e => response.sucess(req, res, 200, e))
+    	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
+})
+
 router.post('/MakeMeUser/', ( req, res ) => {
 	controller.
 		becomeUser(req.body)
