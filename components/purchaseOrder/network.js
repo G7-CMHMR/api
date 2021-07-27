@@ -19,7 +19,6 @@ router.get('/', ( req, res ) => {
 })
 
 router.get('/user/:userId', ( req, res ) => {
-	console.log(req.query)
 	controller.
 		getItemsFromUser(req.params)
 		.then(e => response.sucess(req, res, 200, e))
