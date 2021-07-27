@@ -8,7 +8,7 @@
 // RETORNO:
 // 
 
-const { Purchase_order, Cart, Product,Save_product_state, Items, Promotion, Category, Image, Seller, User } = require('../../db');
+const { Purchase_order, Cart, Product,Save_product_state, Items, Promotion, Category, Image, Seller, User, Seller_sells } = require('../../db');
 const store = require('../carts/store')
 const { product_attributes} = require('../../aux_functions');
 const { response } = require('express');
@@ -181,6 +181,8 @@ const getItemsFromUser = async(data) =>{
                     include:[{model:Promotion},{model:Image},{model:Category}]},
                 {model:Purchase_order,
                     attributes: {exclude: ['createdAt','updatedAt']},},
+                {model:Seller_sells,
+                    attributes:{product_status}},
                 {model:Save_product_state}
             ]
         }]}]
@@ -194,7 +196,7 @@ const getItemsFromUser = async(data) =>{
 }
 
 const changeOrder = async(data) =>{
-    order = await findOne({
+    order = await PurchaseOrder.findOne({
         where: {mercadopagoId : data.mercadopagoId}
     })
     order.paid_out = true
