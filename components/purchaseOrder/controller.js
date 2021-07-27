@@ -16,12 +16,12 @@ const getOrderDetail = async (orderId) => {
 }
 
 const changeOrder = async (orderId) => {
-
+	
 	return store.changeOrder(orderId);
 }
 
 const getItemsFromUser = async (orderId) => {
-	
+	console.log(orderId)
 	return store.getItemsFromUser(orderId);
 }
 
