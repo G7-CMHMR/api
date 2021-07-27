@@ -32,7 +32,19 @@ const store = {
             await user.save()
         }
     },
-    postReview: async function(data){
+    makeReview: async function(data){
+        let admin = await User.findOne({
+            where:{id : data.userId}
+        })
+        if(admin.isAdmin || admin.superAdmin){
+            let product = await Product.findOne({
+                where:{id: data.productId}
+            })
+            product.valuation = data.valuation
+            product.save()
+        }
+    },
+    getAllPC: async function(data){
         let admin = await User.findOne({
             where:{id : data.userId}
         })
@@ -40,9 +52,11 @@ const store = {
             let pc = await Category.findAll({
                 where:{title: 'PC'},
                 include:{model: Product,
+                    where:{valide: false},
                     attributes: {exclude: ['createdAt','updatedAt']},
             }
             })
+            return pc
         }
     },
     changePass: async function(data){
