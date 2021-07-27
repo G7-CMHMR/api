@@ -196,7 +196,7 @@ const getItemsFromUser = async(data) =>{
 }
 
 const changeOrder = async(data) =>{
-    order = await PurchaseOrder.findOne({
+    order = await Purchase_order.findOne({
         where: {mercadopagoId : data.mercadopagoId}
     })
     order.paid_out = true
