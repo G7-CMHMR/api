@@ -32,6 +32,19 @@ const store = {
             await user.save()
         }
     },
+    postReview: async function(data){
+        let admin = await User.findOne({
+            where:{id : data.userId}
+        })
+        if(admin.isAdmin || admin.superAdmin){
+            let pc = await Category.findAll({
+                where:{title: 'PC'},
+                include:{model: Product,
+                    attributes: {exclude: ['createdAt','updatedAt']},
+            }
+            })
+        }
+    },
     changePass: async function(data){
         let admin = await User.findOne({
             where: {id: data.adminId}
