@@ -60,6 +60,7 @@ const store = {
         await cart.destroy()
         }
     }}
+    
 };
 
 
