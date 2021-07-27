@@ -33,7 +33,9 @@ const createOrder = async(data) => {
         where: {userId: userId},
         include : [{model: Items,include:{model: Product, include:{model:Promotion}}}]
     })
-
+    const buyer = await User.findOne({
+        where:{id : userId}
+    })
 
     const total = totalPrice(userCart.items);
     const order = await Purchase_order.create({
@@ -50,6 +52,19 @@ const createOrder = async(data) => {
 
     userCart.items.map(async el => {
         await order.addItems(el)
+        const a = Items.findOne({
+            where: {id: el.id},
+                include:[{model:Product}]
+        })
+        await Seller_sells.create({
+            date: date,
+            id_buyer: userId,
+            buyer: buyer.name,
+            product_status: 'created',
+            address: userAddress,
+            productId: a.product.id,
+            amount: a.amount,
+        })
         // await userCart.removeItems(el)
     })
     setTimeout(async function(){
