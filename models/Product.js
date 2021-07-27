@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         allowNull: false,
     },
-    Visible_lvl_2: {    //el producto se puede ver x más q el vendedor lo haya eliminado
+    visible_lvl_2: {    //el producto se puede ver x más q el vendedor lo haya eliminado
         type: DataTypes.BOOLEAN,
         defaultValue: true,
     },
