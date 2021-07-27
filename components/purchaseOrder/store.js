@@ -49,14 +49,17 @@ const createOrder = async(data) => {
     })
     await order.setUser(userId);
 
-
     userCart.items.map(async el => {
         await order.addItems(el)
-        const a = Items.findOne({
+        const a = await Items.findOne({
             where: {id: el.id},
-                include:[{model:Product}]
+                include:[{model:Product,
+                include:{model:Seller}}]
         })
-        await Seller_sells.create({
+        const sel = await Seller.findOne({
+            where: {id : a.product.seller.id}
+        })
+        const sellerS = await Seller_sells.create({
             date: date,
             id_buyer: userId,
             buyer: buyer.name,
@@ -65,6 +68,7 @@ const createOrder = async(data) => {
             productId: a.product.id,
             amount: a.amount,
         })
+        await sellerS.setSeller(sel)
         // await userCart.removeItems(el)
     })
     setTimeout(async function(){

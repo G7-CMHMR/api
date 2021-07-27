@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
         allowNull: false,
     },
     buyer: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     product_status: {
@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
         allowNull: false
       },
     address: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     productId: {
