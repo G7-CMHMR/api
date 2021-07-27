@@ -11,6 +11,7 @@ const networkpurchaseOrder = require('../components/purchaseOrder/network');
 const networkquestions = require('../components/questions/network');
 const networkSeller = require('../components/seller/network');
 const networkSellerSells = require('../components/sellerSells/network');
+const networkAdmin = require('../components/admin/network');
 
 const routes = (server) => {
     server.use('/products', networkProducts);
@@ -25,6 +26,7 @@ const routes = (server) => {
     server.use('/purchaseOrder', networkpurchaseOrder);
     server.use('/questions', networkquestions);
     server.use('/seller', networkSeller);
+    server.use('/admin', networkAdmin);
     server.use('/sellerSells', networkSellerSells);
 }
 

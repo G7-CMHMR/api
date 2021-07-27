@@ -70,6 +70,14 @@ module.exports = (sequelize) => {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false,
 		},
+		isAdmin: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+		},
+		superAdmin: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false,
+		},
 		isGoogleAccount: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false,	
