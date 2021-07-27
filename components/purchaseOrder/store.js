@@ -170,7 +170,7 @@ const getOrderDetail = async (orderId) => {
 
 const getItemsFromUser = async(data) =>{
     let response = [];
-    const user = await User.findAll({
+    const user = await User.findOne({
         where:{id : data.userId},
         include:[{model:Purchase_order,
             where:{paid_out : true},
