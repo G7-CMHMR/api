@@ -16,7 +16,6 @@ const store = {
         let newAmount = ''
 
         params.map((element) => {
-
             if (!element.product.promotion.delivery) { shipping = 400 } //result.name.substring(0, maxCharactersResults)
             if (element.product.stock < 1) { error = `No hay mas stock del producto ${element.product.name.substring(0, 24)}, tuvimos que removerlo de tu carrito`; productid = element.product.id }
             if (element.product.stock < element.amount) {
@@ -38,29 +37,59 @@ const store = {
         params.map(async (element) => {
             let products = await Product.findOne({
                 where: {
-                    id : element.product.id
+                    id: element.product.id
                 }
             })
             products.stock = products.stock - element.amount
-            if(products.stock == 0){products.visible = false}
+            if (products.stock == 0) { products.visible = false }
             await products.save()
         })
 
+        let date = new Date();
+        date.setHours(date.getHours() - 3);
+        date = date.toISOString()
+        date = date.replace('Z', '-03:00');
+        let dateExpired = new Date();
+        dateExpired.setHours(dateExpired.getHours() - 3);
+        dateExpired.setMinutes(dateExpired.getMinutes() + 1);
+        let dateExpiredParsed = dateExpired.toISOString();
+        dateExpired = dateExpiredParsed.replace('Z', '-03:00');
+
+        // console.log(date)
+        // console.log(dateExpired)
+
+
         let preference = {
             items,
-            back_urls: {
-                "success": "http://localhost:3000/Compras",
-                "failure": "http://localhost:3000/Carrito",
-                "pending": "http://localhost:3000/Compras"
+            binary_mode: true,
+            expires: true,
+            expiration_date_from: date,
+            expiration_date_to: dateExpired,
+
+            payment_methods: {
+                //Para SACAR ALGUNA TARJETA EN ESPECIFICO:
+                // excluded_payment_methods: [
+                //     {    
+                //         "id": "master"
+                //     }
+                // ],
+                excluded_payment_types: [
+                    {
+                        id: "ticket",
+                    },
+                    {
+                        id: "atm"
+                    }
+                ],
+                installments: 12
             },
-            auto_return: 'approved',
         };
 
-
         const res = await mercadopago.preferences.create(preference)
-
         return res;
     },
+
+
 
 };
 
