@@ -33,6 +33,7 @@ router.post('/increment', (req, res) => {
 })
 
 router.post('/eraseCart', (req, res) => {
+    console.log(req.body)
     controller
     .eraseCart(req.body)
     .then(e => response.sucess(req, res, 200, e))
