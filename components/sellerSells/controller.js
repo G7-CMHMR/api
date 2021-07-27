@@ -6,7 +6,7 @@ const getItems = async (data) => {
 }
 
 const getSellerItems = async (data) => {
-
+	console.log(data)
 	return store.getSellerItems(data);
 }
 

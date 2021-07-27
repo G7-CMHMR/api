@@ -11,9 +11,9 @@ router.get('/', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener los items'))
 })
 
-router.get('/all', ( req, res ) => {
+router.get('/all/:id', ( req, res ) => {
 	controller.
-		getSellerItems(req.body)
+		getSellerItems(req.params)
 	    .then(e => response.sucess(req, res, 200, e))
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener los items del vendedor'))
 })
