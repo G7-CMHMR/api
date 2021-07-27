@@ -182,7 +182,7 @@ const getItemsFromUser = async(data) =>{
                 {model:Purchase_order,
                     attributes: {exclude: ['createdAt','updatedAt']},},
                 {model:Seller_sells,
-                    attributes:{product_status}},
+                    attributes:['product_status']},
                 {model:Save_product_state}
             ]
         }]}]
@@ -202,7 +202,7 @@ const changeOrder = async(data) =>{
     order.paid_out = true
     await order.save()
     let id = {userId : data.userId}
-    return await this.getItemsFromUser(id)
+    return await getItemsFromUser(id)
 }
 
 // const changeOrderStatus = async(param) => {
