@@ -41,6 +41,7 @@ const store = {
 		return response;
 	},
 	getSellerItems: async function(data){
+		console.log(data)
 		let response = await Seller.findOne({
 			where:{id: data.id},
 			include:{

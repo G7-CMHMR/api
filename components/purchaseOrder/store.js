@@ -169,6 +169,8 @@ const getOrderDetail = async (orderId) => {
 }
 
 const getItemsFromUser = async(data) =>{
+    console.log('DATA DE GETITEMSFROMUSER')
+    console.log(data)
     let response = [];
     const user = await User.findOne({
         where:{id : data.userId},
@@ -187,8 +189,10 @@ const getItemsFromUser = async(data) =>{
             ]
         }]}]
     })
-    user.purchase_orders.map(PurchaseO=>{
-        PurchaseO.items.map(item=>{
+    // console.log('USER:')
+    // console.log(user)
+    await user.purchase_orders.map(async PurchaseO=>{
+        await PurchaseO.items.map(async item=>{
             response.push(item)
         })
     })
@@ -199,10 +203,10 @@ const changeOrder = async(data) =>{
     order = await Purchase_order.findOne({
         where: {mercadopagoId : data.mercadopagoId}
     })
+    // console.log(order)
     order.paid_out = true
     await order.save()
-    let id = {userId : data.userId}
-    return await getItemsFromUser(id)
+    return await getItemsFromUser(data)
 }
 
 // const changeOrderStatus = async(param) => {

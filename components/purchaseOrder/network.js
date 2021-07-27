@@ -18,9 +18,10 @@ router.get('/', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las ordenes de compra'))
 })
 
-router.get('/user', ( req, res ) => {
+router.get('/user/:userId', ( req, res ) => {
+	console.log(req.query)
 	controller.
-		getItemsFromUser(req.body)
+		getItemsFromUser(req.params)
 		.then(e => response.sucess(req, res, 200, e))
 		.catch(e => response.error(req, res, 404, e, 'Fallo al obtener los items del usuario'))
 })
