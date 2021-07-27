@@ -33,6 +33,10 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    valide: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+    },
     visible: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
