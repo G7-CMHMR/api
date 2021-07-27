@@ -169,10 +169,8 @@ const getOrderDetail = async (orderId) => {
 }
 
 const getItemsFromUser = async(data) =>{
-    console.log('DATA DE GETITEMSFROMUSER')
-    console.log(data)
     let response = [];
-    const user = await User.findOne({
+    const user = await User.findAll({
         where:{id : data.userId},
         include:[{model:Purchase_order,
             where:{paid_out : true},
@@ -189,8 +187,6 @@ const getItemsFromUser = async(data) =>{
             ]
         }]}]
     })
-    // console.log('USER:')
-    // console.log(user)
     await user.purchase_orders.map(async PurchaseO=>{
         await PurchaseO.items.map(async item=>{
             response.push(item)
@@ -203,7 +199,6 @@ const changeOrder = async(data) =>{
     order = await Purchase_order.findOne({
         where: {mercadopagoId : data.mercadopagoId}
     })
-    // console.log(order)
     order.paid_out = true
     await order.save()
     return await getItemsFromUser(data)
@@ -267,20 +262,4 @@ module.exports = {
 	getOrderDetail,
     changeOrder,
     getItemsFromUser
-	//changeOrderStatus
 }
-
-    // addCart: async function(params){
-
-    //     const cart = await Cart.findOne({
-    //         where: {userId: params.userId},
-    //     })
-
-    //     const product = await Product.findOne({
-    //         where: {id: params.productId},
-    //     })
-
-    //     await cart.addProduct(product);
-
-    //     return [cart,product]
-    // },

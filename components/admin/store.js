@@ -5,23 +5,49 @@ const store = {
         let admin = await User.findOne({
             where: {id: data.adminId}
         })
-        if(admin.isAdmin){
+        if(admin.superAdmin){
             let users = await Users.findAll()
+            return users
+        }
+        else if(admin.isAdmin){
+            let users = await Users.findAll({
+                where:{superAdmin: false,
+                    isAdmin: false}
+            })
             return users
         }else{
             let array = []
             return array
         }
     },
+    becomeUser: async function(data){
+        let admin = await User.findOne({
+            where:{id : data.userId}
+        })
+        if(admin.superAdmin){
+            let user = await Users.findOne({
+                where:{id: data.userId}
+            })
+            user.isAdmin = true
+            await user.save()
+        }
+    },
     changePass: async function(data){
         let admin = await User.findOne({
             where: {id: data.adminId}
         })
-        if(admin.isAdmin){
+        if(admin.superAdmin){
             let user = await Users.findOne({
                 where:{id:data.userId}
             })
-            if(user.superAdmin == false){
+            user.password = data.password
+            await user.save()
+        }
+        else if(admin.isAdmin){
+            let user = await Users.findOne({
+                where:{id:data.userId}
+            })
+            if(user.superAdmin == false && user.isAdmin == false ){
                 user.password = data.password
                 await user.save()
             }
@@ -60,7 +86,7 @@ const store = {
         await cart.destroy()
         }
     }}
-    
+
 };
 
 
