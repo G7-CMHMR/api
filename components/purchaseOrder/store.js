@@ -175,7 +175,7 @@ const getItemsFromUser = async(data) =>{
     const user = await User.findOne({
         where:{id : data.userId},
         include:[{model:Purchase_order,
-            where:{paid_out : false},
+            where:{paid_out : true},
             include:[{model:Items,
                 attributes: {exclude: ['createdAt','updatedAt']},
                 include:[{model:Product,
@@ -184,13 +184,13 @@ const getItemsFromUser = async(data) =>{
                 {model:Purchase_order,
                     attributes: {exclude: ['createdAt','updatedAt']},},
                 {model:Seller_sells,
-                    attributes:["product_status"]},
+                    attributes:['product_status']},
                 {model:Save_product_state}
             ]
         }]}]
     })
-    console.log('USER:')
-    console.log(user)
+    // console.log('USER:')
+    // console.log(user)
     await user.purchase_orders.map(async PurchaseO=>{
         await PurchaseO.items.map(async item=>{
             response.push(item)
@@ -200,15 +200,12 @@ const getItemsFromUser = async(data) =>{
 }
 
 const changeOrder = async(data) =>{
-    console.log(data)
-    console.log(data.mercadopagoId)
     order = await Purchase_order.findOne({
         where: {mercadopagoId : data.mercadopagoId}
     })
-    console.log(order)
-    //order.paid_out = true
+    // console.log(order)
+    order.paid_out = true
     await order.save()
-    //let id = {userId : data.userId}
     return await getItemsFromUser(data)
 }
 
