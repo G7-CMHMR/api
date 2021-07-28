@@ -9,6 +9,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    visible: {
+      type: DataTypes.BOOLEAN,
+			defaultValue: true,
+    },
     image: {
       type: DataTypes.STRING,
       isUrl: true,
