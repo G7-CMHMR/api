@@ -2,7 +2,11 @@ const { Product, User, Seller, Cart, Category } = require('../../db');
 
 const store = {
     getUsers: async function (data) {
-        let admin = await User.findByPk(data.adminId)
+        let admin = await User.findOne({
+            where: {
+                id: data.adminId
+            }
+        })
         if (admin.superAdmin) {
             let users = await User.findAll()
             return users
