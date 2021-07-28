@@ -22,7 +22,7 @@ const store = {
     },
     becomeUser: async function(data){
         let admin = await User.findOne({
-            where:{id : data.userId}
+            where:{id : data.adminId}
         })
         if(admin.superAdmin){
             let user = await Users.findOne({
@@ -34,7 +34,7 @@ const store = {
     },
     makeReview: async function(data){
         let admin = await User.findOne({
-            where:{id : data.userId}
+            where:{id : data.adminId}
         })
         if(admin.isAdmin || admin.superAdmin){
             let product = await Product.findOne({
@@ -46,7 +46,7 @@ const store = {
     },
     getAllPC: async function(data){
         let admin = await User.findOne({
-            where:{id : data.userId}
+            where:{id : data.adminId}
         })
         if(admin.isAdmin || admin.superAdmin){
             let pc = await Category.findAll({

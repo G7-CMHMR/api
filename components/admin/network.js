@@ -4,7 +4,7 @@ const response = require('../../network/response');
 
 const router = express.Router();
 
-router.get('/Users/', ( req, res ) => {
+router.post('/Users/', ( req, res ) => {
 	controller.
 		getUsers(req.params)
 	    .then(e => response.sucess(req, res, 200, e))
