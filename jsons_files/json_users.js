@@ -105,7 +105,7 @@ let json_users = [
       }
     },
     {
-      name: "Ignacio",
+      name: "Admin1",
       lastName: "Pellido",
       mail: "admin1@gmail.com",
       dni: 42856752,
@@ -126,7 +126,7 @@ let json_users = [
       }
     },
     {
-      name: "Mariela",
+      name: "Admin2",
       lastName: "Nieva",
       mail: "admin2@gmail.com",
       dni: 42876752,
@@ -147,7 +147,7 @@ let json_users = [
       }
     },
     {
-      name: "MatiTron",
+      name: "SuperAdmin",
       lastName: "Bocado",
       mail: "superadmin1@gmail.com",
       dni: 42676752,

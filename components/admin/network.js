@@ -4,9 +4,16 @@ const response = require('../../network/response');
 
 const router = express.Router();
 
+router.post('/Search/', ( req, res ) => {
+	controller.
+		searchUser(req.body)
+	    .then(e => response.sucess(req, res, 200, e))
+    	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
+})
+
 router.post('/Users/', ( req, res ) => {
 	controller.
-		getUsers(req.query)
+		getUsers(req.body)
 	    .then(e => response.sucess(req, res, 200, e))
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
 })
