@@ -67,6 +67,7 @@ const createOrder = async(data) => {
             address: userAddress,
             productId: a.product.id,
             amount: a.amount,
+            itemId: a.id
         })
         await sellerS.setSeller(sel)
         // await userCart.removeItems(el)
