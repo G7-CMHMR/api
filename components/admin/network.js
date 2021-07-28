@@ -46,8 +46,7 @@ router.get('/notValidePC/', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
 })
 
-router.delete('/User/', ( req, res ) => {
-	console.log(req.body)
+router.post('/User/', ( req, res ) => {
 	controller.
 		delUser(req.body)
 	    .then(e => response.sucess(req, res, 200, e))

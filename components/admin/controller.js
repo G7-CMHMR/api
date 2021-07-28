@@ -21,7 +21,7 @@ const becomeUser = async (data) => {
 }
 
 const delUser = async (data) => {
-
+	console.log(data)
 	return store.delUser(data);
 }
 
