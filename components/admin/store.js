@@ -1,16 +1,14 @@
-const {Product, User, Seller, Cart} = require('../../db');
+const {Product, User, Seller, Cart, Category} = require('../../db');
 
 const store = {
     getUsers: async function(data){
-        let admin = await User.findOne({
-            where: {id: data.adminId}
-        })
+        let admin = await User.findByPk(data.adminId)
         if(admin.superAdmin){
-            let users = await Users.findAll()
+            let users = await User.findAll()
             return users
         }
         else if(admin.isAdmin){
-            let users = await Users.findAll({
+            let users = await User.findAll({
                 where:{superAdmin: false,
                     isAdmin: false}
             })
@@ -22,10 +20,10 @@ const store = {
     },
     becomeUser: async function(data){
         let admin = await User.findOne({
-            where:{id : data.userId}
+            where:{id : data.adminId}
         })
         if(admin.superAdmin){
-            let user = await Users.findOne({
+            let user = await User.findOne({
                 where:{id: data.userId}
             })
             user.isAdmin = true
@@ -41,14 +39,12 @@ const store = {
                 where:{id: data.productId}
             })
             product.valuation = data.valuation
-            product.save()
+            await product.save()
         }
+       
     },
-    getAllPC: async function(data){
-        let admin = await User.findOne({
-            where:{id : data.userId}
-        })
-        if(admin.isAdmin || admin.superAdmin){
+    getAllPC: async function(){
+        
             let pc = await Category.findAll({
                 where:{title: 'PC'},
                 include:{model: Product,
@@ -57,21 +53,21 @@ const store = {
             }
             })
             return pc
-        }
+        
     },
     changePass: async function(data){
         let admin = await User.findOne({
             where: {id: data.adminId}
         })
         if(admin.superAdmin){
-            let user = await Users.findOne({
+            let user = await User.findOne({
                 where:{id:data.userId}
             })
             user.password = data.password
             await user.save()
         }
         else if(admin.isAdmin){
-            let user = await Users.findOne({
+            let user = await User.findOne({
                 where:{id:data.userId}
             })
             if(user.superAdmin == false && user.isAdmin == false ){
