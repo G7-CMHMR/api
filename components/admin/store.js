@@ -92,7 +92,7 @@ const store = {
             let user = await User.findOne({
                 where: { id: data.userId }
             })
-            user.password = data.password
+            user.passReset = false
             await user.save()
         }
         else if (admin.isAdmin) {
@@ -100,7 +100,7 @@ const store = {
                 where: { id: data.userId }
             })
             if (user.superAdmin == false && user.isAdmin == false) {
-                user.password = data.password
+                user.passReset = false
                 await user.save()
             }
         }
