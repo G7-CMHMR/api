@@ -73,9 +73,6 @@ const store = {
             let it = await Items.findAll({
                 where:{ productId : response.id}
             })
-            it.map((e)=>{
-                console.log(e.id)
-            })
             let save = await Save_product_state.create({
                 seller: response.seller.user.name,
                 name: response.name,
@@ -92,6 +89,15 @@ const store = {
                 e.productId = null
                 await e.save()
             })
+            if(response.images[0].id){
+                response.images.map(async (e)=>{
+                    let im = await Image.findOne({
+                        where: {id: e.id}
+                    })
+                    im.saveProductStateId = save.id
+                    await im.save()
+                })
+            }
         }
 
         propierties.forEach(e => {
