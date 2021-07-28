@@ -47,6 +47,7 @@ router.get('/notValidePC/', ( req, res ) => {
 })
 
 router.delete('/User/', ( req, res ) => {
+	console.log(req.body)
 	controller.
 		delUser(req.body)
 	    .then(e => response.sucess(req, res, 200, e))
