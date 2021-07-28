@@ -26,7 +26,7 @@ const store = {
         })
         if(admin.superAdmin){
             let users = await Users.findAll()
-            users.filter((e)=> e.name.includes(data.name))
+            users.filter((e)=> e.name.includes(data.name) || e.email.includes(data.name))
             return users
         }
         else if(admin.isAdmin){
