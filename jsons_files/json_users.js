@@ -149,7 +149,7 @@ let json_users = [
     {
       name: "SuperAdmin",
       lastName: "Bocado",
-      mail: "superadmin@gmail.com",
+      mail: "superadmin1@gmail.com",
       dni: 42676752,
       phone: "769-4692",
       address: "matiHouseTron",
