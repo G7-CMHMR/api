@@ -39,6 +39,7 @@ module.exports = (sequelize) => {
     },
     visible: {
         type: DataTypes.BOOLEAN,
+        defaultValue: false,
         allowNull: false,
     },
     visible_lvl_2: {    //el producto se puede ver x más q el vendedor lo haya eliminado
