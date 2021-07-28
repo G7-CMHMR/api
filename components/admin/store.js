@@ -111,12 +111,11 @@ const store = {
         })
         if (admin.isAdmin) {
             let user = await User.findOne({
-                where: { id: data.userId },
-                include: { model: Cart },
-                include: {
-                    model: Seller,
+            where: { id: data.userId },
+                include: [{ model: Cart },
+                    {model: Seller,
                     include: { model: Product }
-                }
+                }]
             })
             if (user.isAdmin == false && user.superAdmin == false) {
                 let cart = await Cart.findOne({
@@ -130,7 +129,7 @@ const store = {
                         let product = await Product.findOne({
                             where: { id: e.id }
                         })
-                        await product.removeSeller(seller);
+                        product.sellerId = null;
                         product.visible_lvl_2 = false
                         await product.save()
                     })
