@@ -22,6 +22,8 @@ const prepareUserDataResponse = async (user) => {
     userDataResponse.isSeller = user.isSeller;
     userDataResponse.isGoogleAccount = user.isGoogleAccount;
     userDataResponse.token = token;
+    userDataResponse.isAdmin = user.isAdmin;
+    userDataResponse.isSuperAdmin = user.superAdmin;
 
     if (user.isSeller){
         const { id: idSeller } = await Seller.findOne({ where: { userId: user.id }});

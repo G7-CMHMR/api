@@ -18,7 +18,7 @@ router.get('/all/:id', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener los items del vendedor'))
 })
 
-router.get('/filter', ( req, res ) => {
+router.post('/filter', ( req, res ) => {
 	controller.
 		getSellerItemsFilter(req.body)
 	    .then(e => response.sucess(req, res, 200, e))

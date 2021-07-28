@@ -31,6 +31,9 @@ const json_products = require('./jsons_files/json_products')
                         ,dni:add_user.dni
                         ,phone:add_user.phone
                         ,address:add_user.address
+                        ,isSeller: add_user.isSeller
+                        ,isAdmin: add_user.isAdmin
+                        ,superAdmin: add_user.superAdmin
                     };
                     let user_db = await User.create(new_user);
                     let new_seller = {
