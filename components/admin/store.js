@@ -1,4 +1,4 @@
-const {Product, User, Seller, Cart} = require('../../db');
+const {Product, User, Seller, Cart, Category} = require('../../db');
 
 const store = {
     getUsers: async function(data){
@@ -20,7 +20,7 @@ const store = {
     },
     becomeUser: async function(data){
         let admin = await User.findOne({
-            where:{id : data.userId}
+            where:{id : data.adminId}
         })
         if(admin.superAdmin){
             let user = await User.findOne({
@@ -39,14 +39,12 @@ const store = {
                 where:{id: data.productId}
             })
             product.valuation = data.valuation
-            product.save()
+            await product.save()
         }
+       
     },
-    getAllPC: async function(data){
-        let admin = await User.findOne({
-            where:{id : data.userId}
-        })
-        if(admin.isAdmin || admin.superAdmin){
+    getAllPC: async function(){
+        
             let pc = await Category.findAll({
                 where:{title: 'PC'},
                 include:{model: Product,
@@ -55,7 +53,7 @@ const store = {
             }
             })
             return pc
-        }
+        
     },
     changePass: async function(data){
         let admin = await User.findOne({
