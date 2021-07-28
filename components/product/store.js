@@ -1,4 +1,4 @@
-const {Product, Category, Image, Promotion, Seller, User, Questions} = require('../../db');
+const {Product,Save_product_state, Category, Image, Promotion, Seller, Items,  User, Questions} = require('../../db');
 const {simplificarProduct, product_attributes} = require('../../aux_functions');
 // const e = require('cors');
 
@@ -61,11 +61,38 @@ const store = {
                     attributes: ["title"],
                 },
                 {
+                    model:Items,
+                },
+                {
                     model:Promotion
                 }
             ],
         })
         let propierties = Object.keys(product_body);
+        if(response.sold !== response.state){
+            let it = await Items.findAll({
+                where:{ productId : response.id}
+            })
+            it.map((e)=>{
+                console.log(e.id)
+            })
+            let save = await Save_product_state.create({
+                seller: response.seller.user.name,
+                name: response.name,
+                status: response.status,
+                price: response.price,
+                brand: response.brand,
+                description: response.description,
+                type: response.type,
+                prom_delivery: response.promotion.delivery,
+                prom_value: response.promotion.value
+            })
+            it.map(async(e)=>{
+                e.saveProductStateId = save.id
+                e.productId = null
+                await e.save()
+            })
+        }
 
         propierties.forEach(e => {
             if(e == 'category' || e == 'images' || e == 'discount' || e == 'delivery'){
