@@ -1,8 +1,26 @@
 const { Product, User, Seller, Cart, Category } = require('../../db');
 
 const store = {
+    changeCategory: async function (data) {
+        let admin = await User.findOne({
+            where:{id: data.adminId}
+        })
+        if (admin.superAdmin || admin.superAdmin) {
+            let category = await Category.findOne({
+                where: {title: data.category},
+                include:{model: Product}
+            })
+            category.visible = data.status
+            category.product.map((e)=>{
+
+            })
+            category.save()
+        }
+    },
     getUsers: async function (data) {
-        let admin = await User.findByPk(data.adminId)
+        let admin = await User.findOne({
+            where:{id: data.adminId}
+        })
         if (admin.superAdmin) {
             let users = await User.findAll()
             return users
@@ -21,20 +39,21 @@ const store = {
         }
     },
     searchUser: async function(data){
+        data.name = data.name.toLowerCase()
         let admin = await User.findOne({
             where: {id: data.adminId}
         })
         if(admin.superAdmin){
-            let users = await Users.findAll()
-            users.filter((e)=> e.name.includes(data.name) || e.email.includes(data.name))
+            let users = await User.findAll()
+            users = users.filter((e)=> e.name.toLowerCase().includes(data.name) || e.email.toLowerCase().includes(data.name))
             return users
         }
         else if(admin.isAdmin){
-            let users = await Users.findAll({
+            let users = await User.findAll({
                 where:{superAdmin: false,
                     isAdmin: false}
             })
-            users.filter((e)=> e.name.includes(data.name))
+            users = users.filter((e)=> e.name.toLowerCase().includes(data.name) || e.email.toLowerCase().includes(data.name))
             return users
         }else{
             let array = []

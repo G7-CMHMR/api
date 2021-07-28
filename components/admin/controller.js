@@ -35,6 +35,11 @@ const makeReview = async (data) => {
 	return store.makeReview(data);
 }
 
+const changeCategory = async (data) => {
+
+	return store.changeCategory(data);
+}
+
 
 module.exports = {
 	getUsers,
@@ -43,5 +48,6 @@ module.exports = {
 	becomeUser,
 	getAllPC,
 	makeReview,
-	searchUser
+	searchUser,
+	changeCategory
 };
