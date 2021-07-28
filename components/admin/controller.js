@@ -5,6 +5,11 @@ const getUsers = async (data) => {
 	return store.getUsers(data);
 }
 
+const searchUser = async (data) => {
+
+	return store.searchUser(data);
+}
+
 const changePass = async (data) => {
 
 	return store.changePass(data);
@@ -37,5 +42,6 @@ module.exports = {
 	changePass,
 	becomeUser,
 	getAllPC,
-	makeReview
+	makeReview,
+	searchUser
 };

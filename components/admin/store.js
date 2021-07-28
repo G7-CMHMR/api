@@ -20,7 +20,28 @@ const store = {
             return array
         }
     },
-    becomeUser: async function (data) {
+    searchUser: async function(data){
+        let admin = await User.findOne({
+            where: {id: data.adminId}
+        })
+        if(admin.superAdmin){
+            let users = await Users.findAll()
+            users.filter((e)=> e.name.includes(data.name))
+            return users
+        }
+        else if(admin.isAdmin){
+            let users = await Users.findAll({
+                where:{superAdmin: false,
+                    isAdmin: false}
+            })
+            users.filter((e)=> e.name.includes(data.name))
+            return users
+        }else{
+            let array = []
+            return array
+        }
+    },
+    becomeUser: async function(data){
         let admin = await User.findOne({
             where: { id: data.adminId }
         })
