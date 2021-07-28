@@ -52,7 +52,7 @@ let json_categories = [
     {
     title:'PC',
     image : null,
-    types: []
+    types: ["Portatil","PC de Escritorio"]
     },
 ];
 

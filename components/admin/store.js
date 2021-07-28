@@ -161,6 +161,7 @@ const store = {
                 }
                 await user.destroy()
                 await cart.destroy()
+                return await this.getUsers(data)
             }
         }
     }
