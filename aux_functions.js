@@ -27,7 +27,7 @@ const json_products = require('./jsons_files/json_products')
                         name: add_user.name
                         ,lastName: add_user.lastName
                         ,email: add_user.mail
-                        ,password: '456'
+                        ,password: 'contraseña'
                         ,dni:add_user.dni
                         ,phone:add_user.phone
                         ,address:add_user.address
