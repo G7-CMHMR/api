@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/Users/', ( req, res ) => {
 	controller.
-		getUsers(req.params)
+		getUsers(req.query)
 	    .then(e => response.sucess(req, res, 200, e))
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
 })
