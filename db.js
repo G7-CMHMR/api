@@ -58,7 +58,7 @@ Items.belongsTo(Cart);
 Product.hasMany(Items);
 Items.belongsTo(Product);
 
-Save_product_state.hasOne(Items);
+Save_product_state.hasMany(Items);
 Items.belongsTo(Save_product_state);
 
 Save_product_state.hasMany(Image);
