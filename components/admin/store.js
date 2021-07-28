@@ -11,10 +11,16 @@ const store = {
                 include:{model: Product}
             })
             category.visible = data.status
-            category.product.map((e)=>{
-
-            })
-            category.save()
+            if(category.status !== true){
+                category.products.map(async (e)=>{
+                    let product = await Product.findOne({
+                        where: {id : e.id}
+                    })
+                    product.visible = false
+                    product.save()
+                })
+            }
+                category.save()
         }
     },
     getUsers: async function (data) {
