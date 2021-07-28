@@ -377,14 +377,15 @@ let json_products = [
       name: "Placa de video Nvidia Gigabyte GeForce RTX 20 Series RTX 2060 GV-N2060OC-6GD OC Edition 6GB",
       status: "Nuevo",
       price: "127780",
-      valuation: 5,
+      valuation: 0,
       stock: 2,
       brand: "Gygabyte",
       type: "240GB",
       description: "Nvidia es el fabricante líder de placas de video; su calidad asegura una experiencia positiva en el desarrollo del motor gráfico de tu computadora.",
       visible: true,
+      validate:false,
       category: [
-        "Placa de Video"
+        "PC"
       ],
       promotion: {
         title: null,

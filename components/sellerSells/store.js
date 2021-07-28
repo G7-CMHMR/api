@@ -87,7 +87,7 @@ const store = {
 				}
 			}
 		})
-		return response.Seller_sells;
+		return response.seller_sells;
 	},
 	getSellerItemsFilter: async function(data){
 		let response = await this.getSellerItems(data)
@@ -96,19 +96,23 @@ const store = {
 			response = response.filter((sellerSell) => sellerSell.product_status == data.status);
 		}
 
-		if(sellerSell.items.product){
-			if(data.category){
-				response = response.filter((sellerSell) => sellerSell.items.product.category.includes(data.category));
-			}else if(data.productId){
-				response = response.filter((sellerSell) => sellerSell.productId === data.productId);
-			}
-		}else if(sellerSell.items.Save_product_state){
-			if(data.category){
-				response = response.filter((sellerSell) => sellerSell.items.Save_product_state.category.includes(data.category));
-			}else if(data.productId){
-				response = response.filter((sellerSell) => sellerSell.productId === data.productId);
-			}
+		if(data.productId){
+
+			response = response.filter((sellerSell) => sellerSell.productId === data.productId);
+		}else if(data.category){
+
+			response = response.filter((sellerSell) => {
+				if(sellerSell.items.product && sellerSell.items.product.category.includes(data.category))
+				{
+					return true
+				}else if(sellerSell.items.Save_product_state && sellerSell.items.Save_product_state.category.includes(data.category)){
+					return true
+				}else{
+					return false
+				}
+			});
 		}
+
 		return response;
 	},
 	changeItemStatus: async function(data){
