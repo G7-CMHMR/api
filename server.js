@@ -18,10 +18,17 @@ const port = api.port;
 
 //socketio
 const io = require('socket.io')(server, {cors: {origin: '*'}})
-
+var clients = {}
 io.on('connection', (socket) => {
-  console.log('User Connected ' + socket.id);
+  //console.log('User Connected ' + socket.id)
+  clients[socket.id] = socket;
+  
 });
+io.on('disconnect', (socket) => {
+  console.log('User Disconnected' + socket.id)
+  delete clients[socket.id];
+  
+}) 
 
 // Config middlewares
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
@@ -47,9 +54,6 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   });
 
 routes(app);
-io.on('connection', (socket) => {
-  console.log('new connection '+ socket.id)
-})
 
 module.exports = server;
 
