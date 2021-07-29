@@ -1,10 +1,4 @@
 const {Seller, User, Seller_sells,Category, Save_product_state, Product, Items} = require('../../db');
-<<<<<<< HEAD
-=======
-const { DataTypes, UUIDV4 } = require('sequelize');
-const Sequelize = require('sequelize');
-
->>>>>>> 0d7e972ce3d027e9646e7af5a2ca4fbc5c643934
 
 const store = {
 	createSeller: async function(data){
