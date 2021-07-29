@@ -17,6 +17,14 @@ router.get('/', (req, res) => {
     .then(e => response.sucess(req, res, 200, e))
     .catch(e => response.error(req, res, 404, e,'fallo en conseguir los productos'))
 })
+
+router.post('/interest', (req, res) => {
+    controller
+    .getAllInterest(req.body)
+    .then(e => response.sucess(req, res, 200, e))
+    .catch(e => response.error(req, res, 404, e,'fallo en conseguir los productos'))
+})
+
 router.get('/all', (req, res) => {
     controller
     .getAllProducts()

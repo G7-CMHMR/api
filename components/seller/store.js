@@ -1,4 +1,4 @@
-const {Seller, User, Seller_sells,Category, Save_product_state, Product} = require('../../db');
+const {Seller, User, Seller_sells,Category, Save_product_state, Product, Items} = require('../../db');
 
 const store = {
 	createSeller: async function(data){
@@ -62,7 +62,7 @@ const store = {
 				include: [{
 					model: Seller_sells,
 					include: [{
-						model: Item,
+						model: Items,
 						include: [{
 							model: Product,
 							include: Category

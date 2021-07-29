@@ -13,6 +13,11 @@ const getAllProductsByCategory = async (category_name) => {
     return store.getAll_category(category_name)
 }
 
+const getAllInterest = async (data) => {
+    
+    return store.getInterest(data)
+}
+
 const getAllProductsOffer = async () => {
     
     return store.getAll_offer()
@@ -29,4 +34,5 @@ module.exports = {
     getAllProductsByCategory,
     getAllProductsOffer,
     getSellerProducts,
+    getAllInterest,
 }
