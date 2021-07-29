@@ -146,7 +146,8 @@ const store = {
             where: { userId: params.userId },
             include: [{
                 model: Product,
-                where: {visible: params.visible},
+                where: {visible: params.visible,
+                    visible_lvl_2: true},
                 attributes: product_attributes,
                 include: [
                     {
