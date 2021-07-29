@@ -10,10 +10,10 @@ const store = {
             include: [
                 {
                     model: Seller,
-                    attributes: ["id", "location"],
+                    attributes: ["id", "location", "reputation"],
                     include: [{
                         model: User,
-                         attributes: ["name"],
+                         attributes: ["name", "lastName"],
                     }]
                 },
                 {
