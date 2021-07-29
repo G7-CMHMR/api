@@ -1,8 +1,19 @@
 const { Seller_review, Seller, User } = require('../../db');
 
-const store = {
-	createSellerReview: async(reviewData) => {
-		console.log('LO QUE ME LLEGA A STORE SELLER REVIEW: ', reviewData);
+
+const calculateReputation = async (idSeller) => {
+	let reputation = 0;
+	const reviews = await getSellerReviews(idSeller);
+	for (var i = 0; i < reviews.length; i++ ){
+		reputation = reputation + reviews[i].type;
+	}
+	reputation = Math.round(reputation / i);
+	if (reputation > 5)	reputation = 5;
+	if (reputation < 1)	reputation = 1;
+	return reputation;
+}
+
+const createSellerReview = async(reviewData) => {
 		const { idSeller, idUser, review } = reviewData;
 
 		const seller = await Seller.findOne({ where: { id: idSeller}});
@@ -19,13 +30,16 @@ const store = {
 		});
 
 		if (!sellerReview)	throw { error: 'No se pudo crear la review'};
-
-		sellerReview.setUser(idUser);
-		sellerReview.setSeller(idSeller);
-		console.log('LA SELLER REVIEW CREADA: ',sellerReview);
+		
+		await sellerReview.setUser(idUser);
+		await sellerReview.setSeller(idSeller);
+		seller.reputation = await calculateReputation(idSeller);
+		await seller.save();
+		console.log('LA REPUTACION DEL VENDEDOR: ', seller.reputation);
 		return sellerReview;
-	},
-	getSellerReviews: async(idSeller) => {
+};
+
+const getSellerReviews = async(idSeller) => {
 		console.log('LO QUE LLEGA A STORE EN GETSELLERREVIEWS: ',idSeller);
 		const seller = await Seller.findOne({ where: { id: idSeller}});
 		if (!seller)	throw { error: 'No se encuentra el vendedor correspondiente a la id' };
@@ -39,16 +53,23 @@ const store = {
 				attributes: ["name"]
 			}
 		});
-
 		console.log('LAS REVIEWS DEL SELLER: ', reviews);
 		return reviews;
-	},
-	updateSellerReview: async(idSellerReview) => {
-
-	},
-	deleteSellerReview: async(idSellerReview) => {
-
-	}
 };
 
-module.exports = store;	
+const updateSellerReview = async(idSellerReview) => {
+
+};
+
+const deleteSellerReview = async(idSellerReview) => {
+
+};
+
+
+module.exports = {
+	calculateReputation,
+	createSellerReview,
+	getSellerReviews,
+	updateSellerReview,
+	deleteSellerReview
+};	
