@@ -1,4 +1,4 @@
-const {Seller, User, Seller_sells,Category, Save_product_state, Product} = require('../../db');
+const {Seller, User, Seller_sells,Category, Save_product_state, Product, Items} = require('../../db');
 
 const store = {
 	createSeller: async function(data){
@@ -62,7 +62,7 @@ const store = {
 				include: [{
 					model: Seller_sells,
 					include: [{
-						model: Item,
+						model: Items,
 						include: [{
 							model: Product,
 							include: Category
@@ -76,13 +76,13 @@ const store = {
 				}] 
 		});
 		let ventas = 0;
-		seller.seller_sells.forEach((venta)=>{
+		seller.seller_sells && seller.seller_sells.forEach((venta)=>{
 			ventas = ventas + venta.amount 
 		})
 		let calificación = seller.reputation;
 		let pubicaciones = products.length;
 		let ventasCat = {};
-		seller.seller_sells.items.forEach((item)=>{
+		seller.seller_sells && seller.seller_sells.items && seller.seller_sells.items.forEach((item)=>{
 			item.product && ventasCat.product.category.forEach((category)=>{
 				ventasCat[category.title] ? (ventasCat[category.title] = 1):(ventasCat[category.title]++);
 			})
