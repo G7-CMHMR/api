@@ -32,9 +32,16 @@ router.put('/response', (req, res) => {
 		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar responder 😞'));
 })
 
-router.delete('/', (req, res) => {
+router.post('/', (req, res) => {
 	controller.
 		deleteQuestion(req.body)
+		.then(e => response.sucess(req, res, 200, e))
+		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar borrar 😞'));
+})
+
+router.post('/answerMe', (req, res) => {
+	controller.
+		answerMe(req.body)
 		.then(e => response.sucess(req, res, 200, e))
 		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar borrar 😞'));
 })
