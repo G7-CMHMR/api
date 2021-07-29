@@ -4,6 +4,7 @@ const {simplificarProduct, product_attributes} = require('../../aux_functions');
 
 const store = {
     getAll_category: async function(category_name){
+        try{
         let response = await Category.findOne(
             {
                 where: {title: category_name},
@@ -38,6 +39,7 @@ const store = {
                 }]
             })
         return response.products.map((el) => simplificarProduct(el))
+    }catch{return []}
     },
     getAllVisible: async function(params){
 
