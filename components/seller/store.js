@@ -98,7 +98,6 @@ const store = {
 			ventasCat: ventasCat,
 		}
 
-		console.log(response);
 		return response;
 	}
 };
