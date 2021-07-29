@@ -203,7 +203,8 @@ const getItemsFromUser = async(data) =>{
                     attributes: {exclude: ['createdAt','updatedAt']},},
                 {model:Seller_sells,
                     attributes:['product_status']},
-                {model:Save_product_state}
+                {model:Save_product_state,
+                    include:{model: Image}}
             ]
         }]}]
     })

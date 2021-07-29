@@ -1,4 +1,10 @@
 const {Seller, User, Seller_sells,Category, Save_product_state, Product, Items} = require('../../db');
+<<<<<<< HEAD
+=======
+const { DataTypes, UUIDV4 } = require('sequelize');
+const Sequelize = require('sequelize');
+
+>>>>>>> 0d7e972ce3d027e9646e7af5a2ca4fbc5c643934
 
 const store = {
 	createSeller: async function(data){
@@ -80,21 +86,22 @@ const store = {
 			ventas = ventas + venta.amount 
 		})
 		let calificación = seller.reputation;
-		let pubicaciones = products.length;
+		let publicaciones = seller.products.length;
 		let ventasCat = {};
-		seller.seller_sells && seller.seller_sells.items && seller.seller_sells.items.forEach((item)=>{
+		console.log(seller.seller_sells)
+		seller.seller_sells.length && seller.seller_sells.items.forEach((item)=>{
 			item.product && ventasCat.product.category.forEach((category)=>{
 				ventasCat[category.title] ? (ventasCat[category.title] = 1):(ventasCat[category.title]++);
 			})
 			item.save_product_state && ventasCat.save_product_state.category.forEach((category)=>{
 				ventasCat[category.title] ? (ventasCat[category.title] = 1):(ventasCat[category.title]++);
 			})
-		})
+		})	
 
 		let response = {
 			ventas: ventas,
 			calificación: calificación,
-			pubicaciones: pubicaciones,
+			publicaciones: publicaciones,
 			ventasCat: ventasCat,
 		}
 
