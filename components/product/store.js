@@ -86,6 +86,7 @@ const store = {
                 where:{ productId : response.id}
             })
             let save = await Save_product_state.create({
+                productId: response.id,
                 seller: response.seller.user.name,
                 name: response.name,
                 status: response.status,
@@ -110,6 +111,7 @@ const store = {
                     await im.save()
                 })
             }
+            response.sold = response.state
         }
 
         propierties.forEach(e => {
