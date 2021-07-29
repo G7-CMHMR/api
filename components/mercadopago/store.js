@@ -65,7 +65,12 @@ const store = {
             expires: true,
             expiration_date_from: date,
             expiration_date_to: dateExpired,
-
+            back_urls: {
+                success: "http://localhost:3000/Compras",
+                failure: "http://localhost:3000/Carrito",
+                pending: "http://localhost:3000/Carrito"
+            },
+            auto_return: "approved",
             payment_methods: {
                 //Para SACAR ALGUNA TARJETA EN ESPECIFICO:
                 // excluded_payment_methods: [

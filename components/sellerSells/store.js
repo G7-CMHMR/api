@@ -87,7 +87,7 @@ const store = {
 				}
 			}
 		})
-		return response.Seller_sells;
+		return response.seller_sells;
 	},
 	getSellerItemsFilter: async function(data){
 		let response = await this.getSellerItems(data)

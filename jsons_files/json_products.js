@@ -318,32 +318,7 @@ let json_products = [
         "https://http2.mlstatic.com/D_NQ_NP_852767-MLA40255137010_122019-O.webp",
       ]
     },
-    // {
-    //   name: "----soy invisibleeeeeeeeeeeeeeeeeeeeeeeee, tengo visible=false----",
-    //   status: "Nuevo",
-    //   price: "4588",
-    //   valuation: 5,
-    //   stock: 19,
-    //   brand: "Gygabyte",
-    //   type: "Disco solido",
-    //   description: "Con la unidad en estado sólido Gigabyte vas a incrementar la capacidad de respuesta de tu equipo.",
-    //   visible: false,
-    //   category: [
-    //     "Almacenamiento"
-    //   ],
-    //   promotion: {
-    //     title: null,
-    //     value: 5,
-    //     image: null,
-    //     delivery: "false"
-    //   },
-    //   seller: "Nacho",
-    //   image: [
-    //     "https://http2.mlstatic.com/D_NQ_NP_839339-MLA40255016455_122019-O.webp",
-    //     "https://http2.mlstatic.com/D_NQ_NP_814612-MLA40255016458_122019-O.webp",
-    //     "https://http2.mlstatic.com/D_NQ_NP_852767-MLA40255137010_122019-O.webp",
-    //   ]
-    // },
+    
 
 
     {
@@ -372,7 +347,6 @@ let json_products = [
         "https://http2.mlstatic.com/D_NQ_NP_642285-MLA42128541572_062020-O.webp",
       ]
     },
-
     {
       name: "Placa de video Nvidia Gigabyte GeForce RTX 20 Series RTX 2060 GV-N2060OC-6GD OC Edition 6GB",
       status: "Nuevo",
@@ -385,7 +359,7 @@ let json_products = [
       visible: true,
       validate:false,
       category: [
-        "PC"
+        'Placa de Video'
       ],
       promotion: {
         title: null,
@@ -401,5 +375,146 @@ let json_products = [
     },
 
 
+    ///////////////////////////////////////////////////
+    {
+      name: "Notebook Lenovo 14 AMD Pro A4-4350B 4GB 500GB DOS",
+      status: "Nuevo",
+      price: "68400",
+      valuation: 3,
+      stock: 20,
+      brand: "Lenovo",
+      type: "Portatil",
+      description: "Notebook Lenovo",
+      visible: true,
+      validate: false,
+      category: [
+        'PC'
+      ],
+      promotion: {
+        title: null,
+        value: 5,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Kirby",
+      image: [
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_24158_Notebook_Lenovo_14__AMD_Pro_A4-4350B_4GB_500GB_DOS_28a58e50-grn.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_24159_Notebook_Lenovo_14__AMD_Pro_A4-4350B_4GB_500GB_DOS_14fd84a6-grn.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_24160_Notebook_Lenovo_14__AMD_Pro_A4-4350B_4GB_500GB_DOS_79909c90-grn.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_24161_Notebook_Lenovo_14__AMD_Pro_A4-4350B_4GB_500GB_DOS_59c8211b-grn.jpg",
+      ]
+    },
+
+    {
+      name: "Notebook HP 240 14 Core i3-1005G1 4GB 1TB FreeDos US",
+      status: "Nuevo",
+      price: "91000",
+      valuation: 5,
+      stock: 500,
+      brand: "HP",
+      type: "Portatil",
+      description: "Notebook HP",
+      visible: true,
+      validate: false,
+      category: [
+        'PC'
+      ],
+      promotion: {
+        title: null,
+        value: 15,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Lucemon",
+      image: [
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25750_Notebook_HP_240_14__Core_i3-1005G1_4GB_1TB_FreeDos_US_c10eb7eb-grn.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25751_Notebook_HP_240_14__Core_i3-1005G1_4GB_1TB_FreeDos_US_7a0880c3-grn.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25753_Notebook_HP_240_14__Core_i3-1005G1_4GB_1TB_FreeDos_US_2a0e55f6-grn.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25754_Notebook_HP_240_14__Core_i3-1005G1_4GB_1TB_FreeDos_US_2fcfdba0-grn.jpg",
+      ]
+    },
+
+    {
+      name: "Notebook ASUS Vivobook K513EA 15.6 FHD Core i5 1135G7 8GB 256GB Freedos",
+      status: "Nuevo",
+      price: "139000",
+      valuation: 4,
+      stock: 365,
+      brand: "ASUS",
+      type: "Portatil",
+      description: "Notebook ASUS Vivobook K513EA",
+      visible: true,
+      validate: false,
+      category: [
+        'PC'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "true"
+      },
+      seller: "Totodile",
+      image: [
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25112_Notebook_ASUS_Vivobook_K513EA_15.6__FHD_Core_i5_1135G7_8GB_256GB__Freedos_4e0d0ea6-grn.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25113_Notebook_ASUS_Vivobook_K513EA_15.6__FHD_Core_i5_1135G7_8GB_256GB__Freedos_8b7c99f7-grn.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25115_Notebook_ASUS_Vivobook_K513EA_15.6__FHD_Core_i5_1135G7_8GB_256GB__Freedos_1ea4a84e-med.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25116_Notebook_ASUS_Vivobook_K513EA_15.6__FHD_Core_i5_1135G7_8GB_256GB__Freedos_45658136-grn.jpg",
+      ]
+    },
+
+    {
+      name: "Notebook Lenovo IdeaPad 3 14 Core i5-1035G1 8GB SSD 512GB Platinum Grey Win 10",
+      status: "Nuevo",
+      price: "116250",
+      valuation: 5,
+      stock: 635,
+      brand: "Lenovo",
+      type: "Portatil",
+      description: "Notebook Lenovo IdeaPad",
+      visible: true,
+      validate: false,
+      category: [
+        'PC'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Totodile",
+      image: [
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_27114_Notebook_Lenovo_IdeaPad_3__14__Core_i5-1035G1_8GB_SSD_512GB_Platinum_Grey_Win_10_aba5414f-grn.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_27115_Notebook_Lenovo_IdeaPad_3__14__Core_i5-1035G1_8GB_SSD_512GB_Platinum_Grey_Win_10_60307b87-grn.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_27117_Notebook_Lenovo_IdeaPad_3__14__Core_i5-1035G1_8GB_SSD_512GB_Platinum_Grey_Win_10_a473e155-grn.jpg",
+        "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_27118_Notebook_Lenovo_IdeaPad_3__14__Core_i5-1035G1_8GB_SSD_512GB_Platinum_Grey_Win_10_caf2fbd2-grn.jpg",
+      ]
+    },
+
+    {
+      name: "Computadora Completa Amd Intel Dual Core Monitor Led 19",
+      status: "Nuevo",
+      price: "49999",
+      valuation: 0,
+      stock: 200,
+      brand: "AMD",
+      type: "PC de Escritorio",
+      description: "Una pc equipada para almacenar imágenes y videos, navegar en internet y trabajar con programas que requieren una computadora eficiente",
+      visible: true,
+      validate: false,
+      category: [
+        'PC'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "true"
+      },
+      seller: "Totodile",
+      image: ["https://http2.mlstatic.com/D_NQ_NP_638519-MLA31031803216_062019-O.webp"]
+    },
+    
   ]
 module.exports = json_products;

@@ -4,6 +4,7 @@ const {Category, Type} = require('../../db');
 const store = {
     getAll: async function(){
         let response = await Category.findAll({
+            where:{visible:true},
             include: [{
                 model: Type,
                 attributes: [

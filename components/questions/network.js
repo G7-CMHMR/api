@@ -11,14 +11,14 @@ router.post('/create', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la pregunta'))
 })
 
-router.get('/seller', ( req, res ) => {
+router.post('/seller', ( req, res ) => {
 	controller.
 		getAllSellerQuestion(req.body)
 	    .then(e => response.sucess(req, res, 200, e))
     	.catch(e => response.error(req, res, 404, e, 'Fallo al obtener las preguntas del vendedor'))
 })
 
-router.get('/product', ( req, res ) => {
+router.post('/product', ( req, res ) => {
 	controller.
 		getProductQuestions(req.body)
 	    .then(e => response.sucess(req, res, 200, e))

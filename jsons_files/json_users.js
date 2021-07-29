@@ -6,6 +6,9 @@ let json_users = [
       dni: 12345678,
       phone: "789-4466",
       address: "morioh 23",
+      isAdmin: false,
+      superAdmin: false,
+      isSeller: true,
       seller: {
         accountBank: "idk123",
         address: "bikini bottom",
@@ -24,6 +27,9 @@ let json_users = [
       dni: 87654321,
       phone: "333-456",
       address: "Pampa 4545",
+      isAdmin: false,
+      superAdmin: false,
+      isSeller: true,
       seller: {
         accountBank: "aRandomNumber",
         address: "my office 456",
@@ -42,6 +48,9 @@ let json_users = [
       dni: 158,
       phone: "426-7531",
       address: "jotho",
+      isAdmin: false,
+      superAdmin: false,
+      isSeller: true,
       seller: {
         accountBank: "pokebank page 2",
         address: "kanto",
@@ -60,6 +69,9 @@ let json_users = [
       dni: 666,
       phone: "666-6666",
       address: "digimon frontier",
+      isAdmin: false,
+      superAdmin: false,
+      isSeller: true,
       seller: {
         accountBank: "digibank",
         address: "Lucemon's house",
@@ -78,6 +90,9 @@ let json_users = [
       dni: 123456,
       phone: "123-7878",
       address: "dream land",
+      isAdmin: false,
+      superAdmin: false,
+      isSeller: true,
       seller: {
         accountBank: "kirby's mouth",
         address: "amazing mirror",
@@ -88,6 +103,69 @@ let json_users = [
         cuil: 99887766,
         products: {}
       }
-    }
+    },
+    {
+      name: "Admin1",
+      lastName: "Pellido",
+      mail: "admin1@gmail.com",
+      dni: 42856752,
+      phone: "789-4682",
+      address: "ignaHouse",
+      isAdmin: true,
+      superAdmin: false,
+      isSeller: true,
+      seller: {
+        accountBank: "ignaBank",
+        address: "ignaHouse",
+        reputation: "1",
+        comission: 1,
+        location: "San Juan",
+        phone: "789-4682",
+        cuil: 20428567525,
+        products: {}
+      }
+    },
+    {
+      name: "Admin2",
+      lastName: "Nieva",
+      mail: "admin2@gmail.com",
+      dni: 42876752,
+      phone: "789-4692",
+      address: "marinevHouse",
+      isAdmin: true,
+      superAdmin: false,
+      isSeller: true,
+      seller: {
+        accountBank: "marinevBank",
+        address: "marinevHouse",
+        reputation: "1",
+        comission: 1,
+        location: "San Juan",
+        phone: "789-4692",
+        cuil: 20428767525,
+        products: {}
+      }
+    },
+    {
+      name: "SuperAdmin",
+      lastName: "Bocado",
+      mail: "superadmin1@gmail.com",
+      dni: 42676752,
+      phone: "769-4692",
+      address: "matiHouseTron",
+      isAdmin: true,
+      superAdmin: true,
+      isSeller: true,
+      seller: {
+        accountBank: "mariBaTron",
+        address: "matiHouseTron",
+        reputation: "13",
+        comission: 1,
+        location: "San Juan",
+        phone: "769-4692",
+        cuil: 20426767525,
+        products: {}
+      }
+    },
   ]
 module.exports = json_users;

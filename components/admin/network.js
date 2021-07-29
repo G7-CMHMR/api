@@ -4,9 +4,23 @@ const response = require('../../network/response');
 
 const router = express.Router();
 
-router.get('/Users/', ( req, res ) => {
+router.post('/Search/', ( req, res ) => {
 	controller.
-		getUsers(req.query)
+		searchUser(req.body)
+	    .then(e => response.sucess(req, res, 200, e))
+    	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
+})
+
+router.post('/Users/', ( req, res ) => {
+	controller.
+		getUsers(req.body)
+	    .then(e => response.sucess(req, res, 200, e))
+    	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
+})
+
+router.post('/Category/', ( req, res ) => {
+	controller.
+		changeCategory(req.body)
 	    .then(e => response.sucess(req, res, 200, e))
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
 })
@@ -39,7 +53,7 @@ router.get('/notValidePC/', ( req, res ) => {
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
 })
 
-router.delete('/User/', ( req, res ) => {
+router.post('/User/', ( req, res ) => {
 	controller.
 		delUser(req.body)
 	    .then(e => response.sucess(req, res, 200, e))

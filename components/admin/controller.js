@@ -5,6 +5,11 @@ const getUsers = async (data) => {
 	return store.getUsers(data);
 }
 
+const searchUser = async (data) => {
+
+	return store.searchUser(data);
+}
+
 const changePass = async (data) => {
 
 	return store.changePass(data);
@@ -16,7 +21,7 @@ const becomeUser = async (data) => {
 }
 
 const delUser = async (data) => {
-
+	console.log(data)
 	return store.delUser(data);
 }
 
@@ -30,6 +35,11 @@ const makeReview = async (data) => {
 	return store.makeReview(data);
 }
 
+const changeCategory = async (data) => {
+
+	return store.changeCategory(data);
+}
+
 
 module.exports = {
 	getUsers,
@@ -37,5 +47,7 @@ module.exports = {
 	changePass,
 	becomeUser,
 	getAllPC,
-	makeReview
+	makeReview,
+	searchUser,
+	changeCategory
 };

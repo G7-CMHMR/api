@@ -27,10 +27,14 @@ const json_products = require('./jsons_files/json_products')
                         name: add_user.name
                         ,lastName: add_user.lastName
                         ,email: add_user.mail
-                        ,password: '456'
+                        ,password: '$2a$10$huhkg.p56sFRbQsHRuwpXeBbhkUztF7ZcSZ4J1D2LWizjnxbRPEa2'
+                        ,active: true
                         ,dni:add_user.dni
                         ,phone:add_user.phone
                         ,address:add_user.address
+                        ,isSeller: add_user.isSeller
+                        ,isAdmin: add_user.isAdmin
+                        ,superAdmin: add_user.superAdmin
                     };
                     let user_db = await User.create(new_user);
                     let new_seller = {
