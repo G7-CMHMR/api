@@ -87,6 +87,7 @@ const store = {
                 where: { id: data.productId }
             })
             product.valuation = data.valuation
+            product.valide = true
             await product.save()
         }
 
