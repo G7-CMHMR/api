@@ -82,12 +82,12 @@ const store = {
 		let calificación = seller.reputation;
 		let publicaciones = seller.products.length;
 		let ventasCat = {};
-		seller.seller_sells.length && seller.seller_sells.items.forEach((item)=>{
-			item.product && ventasCat.product.category.forEach((category)=>{
-				ventasCat[category.title] ? (ventasCat[category.title] = 1):(ventasCat[category.title]++);
+		seller.seller_sells.length && seller.seller_sells.forEach((seller_sell)=>{
+			seller_sell.item.product && seller_sell.item.product.categories.forEach((category)=>{
+				ventasCat[category.title] ? (ventasCat[category.title]++):(ventasCat[category.title] = 1);
 			})
-			item.save_product_state && ventasCat.save_product_state.category.forEach((category)=>{
-				ventasCat[category.title] ? (ventasCat[category.title] = 1):(ventasCat[category.title]++);
+			seller_sell.item.save_product_state && seller_sell.item.save_product_state.categories.forEach((category)=>{
+				ventasCat[category.title] ? (ventasCat[category.title]++):(ventasCat[category.title] = 1);
 			})
 		})	
 
@@ -98,6 +98,7 @@ const store = {
 			ventasCat: ventasCat,
 		}
 
+		console.log(response);
 		return response;
 	}
 };
