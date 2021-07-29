@@ -33,9 +33,15 @@ router.put('/response', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-	console.log(req.body)
 	controller.
 		deleteQuestion(req.body)
+		.then(e => response.sucess(req, res, 200, e))
+		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar borrar 😞'));
+})
+
+router.post('/answerMe', (req, res) => {
+	controller.
+		answerMe(req.body)
 		.then(e => response.sucess(req, res, 200, e))
 		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar borrar 😞'));
 })
