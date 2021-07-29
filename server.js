@@ -10,18 +10,26 @@ const cors = require('cors');
 
 require('./db')
 
-const server = express()
+const app = express()
+const server = require('http').createServer(app)
 
 const host = api.host;
 const port = api.port;
 
-// Config middlewares
-server.use(express.urlencoded({ extended: true, limit: '50mb' }));
-server.use(express.json({ limit: '50mb' }));
-server.use(cookieParser());
-server.use(morgan('dev'));
+//socketio
+const io = require('socket.io')(server, {cors: {origin: '*'}})
 
-server.use(cors());
+io.on('connection', (socket) => {
+  console.log('User Connected ' + socket.id);
+});
+
+// Config middlewares
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+app.use(express.json({ limit: '50mb' }));
+app.use(cookieParser());
+app.use(morgan('dev'));
+
+app.use(cors());
 // server.use((req, res, next) => {
 //     res.header('Access-Control-Allow-Origin', 'http://localhost:3001'); // update to match the domain you will make the request from
 //     res.header('Access-Control-Allow-Credentials', 'true');
@@ -31,15 +39,17 @@ server.use(cors());
 //   });
 
   // Error catching endware.
-server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
     const status = err.status || 500;
     const message = err.message || err;
     console.error(err);
     res.status(status).send(message);
   });
 
-routes(server);
-
+routes(app);
+io.on('connection', (socket) => {
+  console.log('new connection '+ socket.id)
+})
 
 module.exports = server;
 

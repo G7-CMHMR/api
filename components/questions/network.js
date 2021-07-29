@@ -32,7 +32,8 @@ router.put('/response', (req, res) => {
 		.catch(e => response.error(req, res, 404, e, 'Fallo al intentar responder 😞'));
 })
 
-router.delete('/', (req, res) => {
+router.post('/', (req, res) => {
+	console.log(req.body)
 	controller.
 		deleteQuestion(req.body)
 		.then(e => response.sucess(req, res, 200, e))
