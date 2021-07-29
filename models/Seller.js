@@ -4,12 +4,12 @@ const Sequelize = require('sequelize');
 module.exports = (sequelize) => {
 
   sequelize.define('seller', {
-    // id: {
-    //   primaryKey: true,
-    //   type: DataTypes.UUID,
-    //   defaultValue: UUIDV4,
-    //   allowNull: false
-    // },
+    id: {
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: UUIDV4,
+      allowNull: false
+    },
     accountBank: {
       type: DataTypes.STRING,
       allowNull: false,
