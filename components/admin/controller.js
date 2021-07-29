@@ -39,6 +39,10 @@ const changeCategory = async (data) => {
 
 	return store.changeCategory(data);
 }
+const incompletePC = async (data) => {
+
+	return store.incompletePC(data);
+}
 
 
 module.exports = {
@@ -49,5 +53,6 @@ module.exports = {
 	getAllPC,
 	makeReview,
 	searchUser,
-	changeCategory
+	changeCategory,
+	incompletePC
 };

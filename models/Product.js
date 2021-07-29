@@ -35,7 +35,11 @@ module.exports = (sequelize) => {
     },
     valide: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true,
+        defaultValue: false,
+    },
+    completepc: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     },
     visible: {
         type: DataTypes.BOOLEAN,
