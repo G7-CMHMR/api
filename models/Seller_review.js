@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
     },
     type: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     date: {
@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
         allowNull: false,
     },
     message: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.STRING,
         allowNull: false,
     }
   });

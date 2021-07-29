@@ -41,6 +41,11 @@ module.exports = (sequelize) => {
     cuil: {
       type: DataTypes.FLOAT,
       allowNull: false
+    },
+    reputation: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false
     }
   });
 };
