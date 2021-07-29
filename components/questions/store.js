@@ -92,7 +92,8 @@ const answerMe = async (data) => {
                 {
                     model : Product,
                     include:[{model: Questions,
-                        include:{model:Product}    
+                        include:{model:Product,
+                            attributes:["name","id"]}    
                     }]
             }]
     })
