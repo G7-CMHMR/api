@@ -39,7 +39,6 @@ const store = {
         return response
     },
     updateOne: async function(product_id, product_body){
-
         let response = await Product.findOne({
             where: { id: product_id},
             attributes: product_attributes,
@@ -67,6 +66,11 @@ const store = {
                     model:Promotion
                 }
             ],
+        })
+        response.categories.map((e)=>{
+            if(e.title == "PC"){
+                response.valide = false
+            }
         })
         let propierties = Object.keys(product_body);
         if(response.sold !== response.state){
