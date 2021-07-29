@@ -23,6 +23,7 @@ const store = {
                 category.save()
         }
     },
+
     getUsers: async function (data) {
         let admin = await User.findOne({
             where:{id: data.adminId}
@@ -44,6 +45,7 @@ const store = {
             return array
         }
     },
+
     searchUser: async function(data){
         data.name = data.name.toLowerCase()
         let admin = await User.findOne({
@@ -66,6 +68,7 @@ const store = {
             return array
         }
     },
+
     becomeUser: async function(data){
         let admin = await User.findOne({
             where: { id: data.adminId }
@@ -74,10 +77,14 @@ const store = {
             let user = await User.findOne({
                 where: { id: data.userId }
             })
-            user.isAdmin = true
+            user.isAdmin = data.status
+            if(data.superAdmin){
+                user.superAdmin = true
+            }
             await user.save()
         }
     },
+
     makeReview: async function (data) {
         let admin = await User.findOne({
             where: { id: data.adminId }
@@ -110,6 +117,7 @@ const store = {
 
         }
     },
+
     changePass: async function (data) {
         let admin = await User.findOne({
             where: { id: data.adminId }
@@ -131,6 +139,7 @@ const store = {
             }
         }
     },
+
     delUser: async function (data) {
         let admin = await User.findOne({
             where: { id: data.adminId }
