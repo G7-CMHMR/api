@@ -87,9 +87,7 @@ const store = {
 		})
 		let calificación = seller.reputation;
 		let publicaciones = seller.products.length;
-
 		let ventasCat = {};
-		console.log(seller.seller_sells)
 		seller.seller_sells.length && seller.seller_sells.items.forEach((item)=>{
 			item.product && ventasCat.product.category.forEach((category)=>{
 				ventasCat[category.title] ? (ventasCat[category.title] = 1):(ventasCat[category.title]++);
