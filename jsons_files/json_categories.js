@@ -17,37 +17,37 @@ let json_categories = [
     {
     title:'Almacenamiento',
     image : null,
-    types: ['Disco solido','Disco duro','M.2']
+    types: ['Disco solido','Disco rígigo interno','Disco rígigo externo']
     },
     {
     title:'Placa de Video',
     image : null,
-    types: ['240GB']
+    types: ['pcie']
     },
     {
     title:'Placa Madre',
     image : null,
-    types: []
+    types: ['Placa Madre AMD','Placa Madre Intel']
     },
     {
     title:'Coolers CPU',
     image : null,
-    types: []
+    types: ["Coolers"]
     },
     {
     title:'Gabinete',
     image : null,
-    types: []
+    types: ['Gabinete']
     },
     {
     title:'Fuente de alimentación',
     image : null,
-    types: []
+    types: ["Fuente de alimentación"]
     },
     {
     title:'Accesorios',
     image : null,
-    types: []
+    types: ['Mouse','Teclado','Auriculares']
     },
     {
     title:'PC',
