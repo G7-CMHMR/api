@@ -8,7 +8,7 @@
 // RETORNO:
 // 
 
-const { Product, Questions, Seller, User } = require('../../db');
+const { Product, Questions, Seller, User, Image } = require('../../db');
 const store = require('../carts/store')
 const { product_attributes} = require('../../aux_functions');
 
@@ -93,7 +93,8 @@ const answerMe = async (data) => {
                     model : Product,
                     include:[{model: Questions,
                         include:{model:Product,
-                            attributes:["name","id"]}    
+                            attributes:["name","id"],
+                                include:[{model: Images}]}
                     }]
             }]
     })
