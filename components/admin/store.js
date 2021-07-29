@@ -83,6 +83,7 @@ const store = {
             }
             await user.save()
         }
+        return await this.getUsers(data)
     },
 
     makeReview: async function (data) {
