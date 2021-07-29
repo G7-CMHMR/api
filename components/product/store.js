@@ -10,19 +10,19 @@ const store = {
             include: [
                 {
                     model: Seller,
-                    attributes: ["id"],
+                    attributes: {exclude: ['createdAt','updatedAt']},
                     include: [{
                         model: User,
-                         attributes: ["name"],
+                        attributes: {exclude: ['createdAt','updatedAt']}
                     }]
                 },
                 {
                     model:Image,
-                    attributes: ["image"],
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 },
                 {
                     model:Category,
-                    attributes: ["title"],
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 },
                 {
                     model:Questions,
@@ -53,25 +53,27 @@ const store = {
             include: [
                 {
                     model: Seller,
-                    attributes: ["id","location"],
+                    attributes: {exclude: ['createdAt','updatedAt']},
                     include: [{
                         model: User,
-                         attributes: ["name"],
+                        attributes: {exclude: ['createdAt','updatedAt']}
                     }]
                 },
                 {
                     model:Image,
-                    attributes: ["image"],
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 },
                 {
                     model:Category,
-                    attributes: ["title"],
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 },
                 {
                     model:Items,
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 },
                 {
-                    model:Promotion
+                    model:Promotion,
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 }
             ],
         })
