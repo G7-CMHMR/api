@@ -18,6 +18,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    reputation: {
+      type: DataTypes.FLOAT,
+      defaultValue: 0,
+    },
     phone: {
       type: DataTypes.STRING,
       allowNull: false,
