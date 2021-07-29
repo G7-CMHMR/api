@@ -91,7 +91,10 @@ const answerMe = async (data) => {
             include:[
                 {
                     model : Product,
-                    include:[{model: Questions}]
+                    include:[{model: Questions,
+                        include:{model:Product,
+                            attributes:["name","id"]}    
+                    }]
             }]
     })
     seller.products.map((em)=>{
