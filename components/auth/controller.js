@@ -24,6 +24,7 @@ const prepareUserDataResponse = async (user) => {
     userDataResponse.token = token;
     userDataResponse.isAdmin = user.isAdmin;
     userDataResponse.isSuperAdmin = user.superAdmin;
+    userDataResponse.passReset = user.passReset; 
 
     if (user.isSeller){
         const { id: idSeller } = await Seller.findOne({ where: { userId: user.id }});
