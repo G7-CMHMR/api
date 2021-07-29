@@ -95,9 +95,21 @@ const store = {
             })
             product.valuation = data.valuation
             product.valide = true
+            product.completepc = true 
             await product.save()
         }
-
+    },
+    incompletePC: async function (data){
+        let admin = await User.findOne({
+            where: { id: data.adminId}
+        })
+        if (admin.isAdmin || admin.superAdmin) {
+            let product = await Product.findOne({
+                where: { id: data.productId }
+            })
+            product.valide = true
+            await product.save()
+        }
     },
 
     getAllPC: async function (data) {
