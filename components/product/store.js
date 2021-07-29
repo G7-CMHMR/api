@@ -38,6 +38,14 @@ const store = {
         })
         return response
     },
+    hideOne: async function(data){
+        let product = await Product.findOne({
+            where: {id: data.productId}
+        })
+        product.visible_lvl_2 = false;
+        product.visible = false;
+        await product.save()
+    },
     updateOne: async function(product_id, product_body){
         let response = await Product.findOne({
             where: { id: product_id},
