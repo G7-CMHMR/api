@@ -82,6 +82,7 @@ const store = {
 								model:Category,
 								attributes: ["title"],
 							},
+							{model: Image}
 						]
 					}],
 				}
