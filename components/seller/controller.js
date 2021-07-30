@@ -10,6 +10,11 @@ const getSeller = async (userId) => {
 	return store.getSeller(userId);
 }
 
+const infoSeller = async (data) => {
+
+	return store.getInfo(data);
+}
+
 const updateSeller = async (userId, data) => {
 
 	return store.updateSeller(userId, data);
@@ -18,5 +23,6 @@ const updateSeller = async (userId, data) => {
 module.exports = {
 	createSeller,
 	getSeller,
-	updateSeller
+	updateSeller,
+	infoSeller
 }

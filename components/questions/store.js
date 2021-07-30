@@ -8,7 +8,7 @@
 // RETORNO:
 // 
 
-const { Product, Questions, Seller, User } = require('../../db');
+const { Product, Questions, Seller, User, Image } = require('../../db');
 const store = require('../carts/store')
 const { product_attributes} = require('../../aux_functions');
 
@@ -84,11 +84,33 @@ const deleteQuestion = async (param) => {
     await questions.destroy()
 }
 
+const answerMe = async (data) => {
+    let array = []
+    const seller = await Seller.findOne({
+        where: {id: data.sellerId},
+            include:[
+                {
+                    model : Product,
+                    include:[{model: Questions,
+                        include:{model:Product,
+                            attributes:["name","id"],
+                                include:[{model: Image}]}
+                    }]
+            }]
+    })
+    seller.products.map((em)=>{
+        let total = em.questions.filter((e) => e.response == null)
+        array = [...array,...total]
+    })
+    return array
+}
+
 
 module.exports = {
 	createQuestion,
     getAllUserQuestion,
     getProductQuestions,
     updateResponse,
-    deleteQuestion
+    deleteQuestion,
+    answerMe
 }

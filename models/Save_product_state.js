@@ -5,6 +5,10 @@ const Sequelize = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('save_product_state', {
+    productId: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     seller: {
       type: DataTypes.STRING,
       allowNull: false,

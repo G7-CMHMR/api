@@ -15,6 +15,7 @@ module.exports = (sequelize) => {
       },
     response: {
         type: DataTypes.STRING,
+        defaultValue: null,
       },
     date: {
         type: DataTypes.DATE,

@@ -1,4 +1,4 @@
-const {Seller, User} = require('../../db');
+const {Seller, User, Seller_sells,Category, Save_product_state, Product, Items} = require('../../db');
 
 const store = {
 	createSeller: async function(data){
@@ -55,6 +55,50 @@ const store = {
 	},
 	updateSeller: async function(userId, data){
 
+	},
+	getInfo: async function(data){
+		const seller = await Seller.findOne({
+				where: { id: data.sellerId },
+				include: [{
+					model: Seller_sells,
+					include: [{
+						model: Items,
+						include: [{
+							model: Product,
+							include: Category
+						},{
+							model: Save_product_state,
+							include: Category
+						}],
+					}]
+				},{
+					model: Product,
+				}] 
+		});
+		let ventas = 0;
+		seller.seller_sells && seller.seller_sells.forEach((venta)=>{
+			ventas = ventas + venta.amount 
+		})
+		let calificación = seller.reputation;
+		let publicaciones = seller.products.length;
+		let ventasCat = {};
+		seller.seller_sells.length && seller.seller_sells.forEach((seller_sell)=>{
+			seller_sell.item.product && seller_sell.item.product.categories.forEach((category)=>{
+				ventasCat[category.title] ? (ventasCat[category.title]++):(ventasCat[category.title] = 1);
+			})
+			seller_sell.item.save_product_state && seller_sell.item.save_product_state.categories.forEach((category)=>{
+				ventasCat[category.title] ? (ventasCat[category.title]++):(ventasCat[category.title] = 1);
+			})
+		})	
+
+		let response = {
+			ventas: ventas,
+			calificación: calificación,
+			publicaciones: publicaciones,
+			ventasCat: ventasCat,
+		}
+
+		return response;
 	}
 };
 

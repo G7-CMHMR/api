@@ -10,19 +10,20 @@ const store = {
             include: [
                 {
                     model: Seller,
-                    attributes: ["id", "location", "reputation"],
+                    attributes: {exclude: ['createdAt','updatedAt']},
                     include: [{
                         model: User,
-                         attributes: ["name", "lastName"],
+                        attributes: {exclude: ['createdAt','updatedAt', 'password']}
+
                     }]
                 },
                 {
                     model:Image,
-                    attributes: ["image"],
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 },
                 {
                     model:Category,
-                    attributes: ["title"],
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 },
                 {
                     model:Questions,
@@ -38,35 +39,49 @@ const store = {
         })
         return response
     },
+    hideOne: async function(data){
+        let product = await Product.findOne({
+            where: {id: data.productId}
+        })
+        product.visible_lvl_2 = false;
+        product.visible = false;
+        await product.save()
+    },
     updateOne: async function(product_id, product_body){
-
         let response = await Product.findOne({
             where: { id: product_id},
             attributes: product_attributes,
             include: [
                 {
                     model: Seller,
-                    attributes: ["id","location"],
+                    attributes: {exclude: ['createdAt','updatedAt']},
                     include: [{
                         model: User,
-                         attributes: ["name"],
+                        attributes: {exclude: ['createdAt','updatedAt']}
                     }]
                 },
                 {
                     model:Image,
-                    attributes: ["image"],
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 },
                 {
                     model:Category,
-                    attributes: ["title"],
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 },
                 {
                     model:Items,
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 },
                 {
-                    model:Promotion
+                    model:Promotion,
+                    attributes: {exclude: ['createdAt','updatedAt']}
                 }
             ],
+        })
+        response.categories.map((e)=>{
+            if(e.title == "PC"){
+                response.valide = false
+            }
         })
         let propierties = Object.keys(product_body);
         if(response.sold !== response.state){
@@ -74,6 +89,7 @@ const store = {
                 where:{ productId : response.id}
             })
             let save = await Save_product_state.create({
+                productId: response.id,
                 seller: response.seller.user.name,
                 name: response.name,
                 status: response.status,
@@ -98,6 +114,7 @@ const store = {
                     await im.save()
                 })
             }
+            response.sold = response.state
         }
 
         propierties.forEach(e => {

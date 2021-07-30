@@ -46,9 +46,8 @@ const store = {
             return item;
         })
     },
-    
-    addCart: async function(params){
 
+    addCart: async function(params, sol){
         const cart = await Cart.findOne({
             where: {userId: params.userId},
         })
@@ -68,9 +67,22 @@ const store = {
             await items.setCart(cart);
             await items.setProduct(product);
         }
-        
-        return await this.getCart(params.userId)
+
+            return await this.getCart(params.userId)
+
     },
+
+    addMe: async function(data){
+        let a = await Promise.all(data.array.map(async (e)=>{
+            let params = {
+                userId : data.userId,
+                productId : e
+            }
+            await this.addCart(params)
+        }))
+        return await this.getCart(data.userId)
+    },
+    
     eraseCart: async function(params){
 
         const userCart = await Cart.findOne({

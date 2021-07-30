@@ -38,6 +38,12 @@ router.put('/giveMeAReview/', ( req, res ) => {
 	    .then(e => response.sucess(req, res, 200, e))
     	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
 })
+router.put('/incompletePC/', ( req, res ) => {
+	controller.
+		incompletePC(req.body)
+	    .then(e => response.sucess(req, res, 200, e))
+    	.catch(e => response.error(req, res, 404, e, 'Fallo al crear la orden de compra'))
+})
 
 router.post('/MakeMeUser/', ( req, res ) => {
 	controller.

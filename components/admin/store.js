@@ -23,6 +23,7 @@ const store = {
                 category.save()
         }
     },
+
     getUsers: async function (data) {
         let admin = await User.findOne({
             where:{id: data.adminId}
@@ -44,6 +45,7 @@ const store = {
             return array
         }
     },
+
     searchUser: async function(data){
         data.name = data.name.toLowerCase()
         let admin = await User.findOne({
@@ -66,6 +68,7 @@ const store = {
             return array
         }
     },
+
     becomeUser: async function(data){
         let admin = await User.findOne({
             where: { id: data.adminId }
@@ -74,10 +77,15 @@ const store = {
             let user = await User.findOne({
                 where: { id: data.userId }
             })
-            user.isAdmin = true
+            user.isAdmin = data.status
+            if(data.superAdmin){
+                user.superAdmin = true
+            }
             await user.save()
         }
+        return await this.getUsers(data)
     },
+
     makeReview: async function (data) {
         let admin = await User.findOne({
             where: { id: data.adminId }
@@ -87,16 +95,26 @@ const store = {
                 where: { id: data.productId }
             })
             product.valuation = data.valuation
+            product.valide = true
+            product.completepc = true 
             await product.save()
         }
-
+    },
+    incompletePC: async function (data){
+        let admin = await User.findOne({
+            where: { id: data.adminId}
+        })
+        if (admin.isAdmin || admin.superAdmin) {
+            let product = await Product.findOne({
+                where: { id: data.productId }
+            })
+            product.valide = true
+            await product.save()
+        }
     },
 
     getAllPC: async function (data) {
-        let admin = await User.findOne({
-            where: { id: data.adminId }
-        })
-        if (admin.isAdmin || admin.superAdmin) {
+                
             let pc = await Category.findAll({
                 where: { title: 'PC' },
                 include: {
@@ -107,8 +125,8 @@ const store = {
             })
             return pc
 
-        }
     },
+
     changePass: async function (data) {
         let admin = await User.findOne({
             where: { id: data.adminId }
@@ -130,6 +148,7 @@ const store = {
             }
         }
     },
+
     delUser: async function (data) {
         let admin = await User.findOne({
             where: { id: data.adminId }

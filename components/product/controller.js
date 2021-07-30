@@ -12,10 +12,15 @@ const addProduct = async (product_body) => {
 
     return store.addOne(product_body)
 }
+const hideOne = async (product_body) => {
+
+    return store.hideOne(product_body)
+}
 
 
 module.exports = {
     getProduct,
     updateProduct,
-    addProduct
+    addProduct,
+    hideOne
 }

@@ -25,10 +25,16 @@ const deleteQuestion = async(params) => {
 	return store.deleteQuestion(params);
 }
 
+const answerMe = async(params) => {
+
+	return store.answerMe(params);
+}
+
 module.exports = {
 	createQuestion,
 	getAllUserQuestion,
 	getProductQuestions,
 	updateResponse,
-	deleteQuestion
+	deleteQuestion,
+	answerMe
 };
