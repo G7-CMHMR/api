@@ -239,7 +239,7 @@ const store = {
                 })
             }
         
-        return response && response[0] && response[0].products ? (response[0].products):(response);
+        return response && response[0] && response[0].products ? (response[0].products.map(el=>simplificarProduct(el))):(response);
     },
     getSeller: async function(params){
         try
