@@ -34,6 +34,10 @@ const adjustItemAmount = async (params) => {
     
     return store.adjustItemAmount(params)
 }
+
+const addMe = async (params) => {
+    return store.addMe(params)
+}
 module.exports = {
     addCart,
     removeCart,
@@ -41,5 +45,6 @@ module.exports = {
     decrementCart,
     eraseCart,
     incrementCart,
-    adjustItemAmount
+    adjustItemAmount,
+    addMe
 }

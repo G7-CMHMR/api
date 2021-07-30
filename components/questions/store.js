@@ -94,7 +94,7 @@ const answerMe = async (data) => {
                     include:[{model: Questions,
                         include:{model:Product,
                             attributes:["name","id"],
-                                include:[{model: Images}]}
+                                include:[{model: Image}]}
                     }]
             }]
     })
