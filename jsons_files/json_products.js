@@ -2,7 +2,7 @@ let json_products = [
     {
       name: "Monitor Philips V 193V5LHSB2 LCD 18.5' negro 100V/240V",
       status: "Nuevo",
-      price: "15599",
+      price: "17500",
       valuation: 4,
       stock: 201,
       brand: "Samsung",
@@ -19,6 +19,32 @@ let json_products = [
         delivery: "true"
       },
       seller: "Giorgio",
+      image: [
+        "https://http2.mlstatic.com/D_NQ_NP_687542-MLA44131470139_112020-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_925508-MLA44133740178_112020-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_914447-MLA44131134619_112020-O.webp",
+      ]
+    },
+    {
+      name: "Monitor Philips V 193V5LHSB2 LCD 18.5' negro 100V/240V",
+      status: "Nuevo",
+      price: "15599",
+      valuation: 4,
+      stock: 201,
+      brand: "Samsung",
+      type: "LCD",
+      description: "Un monitor a tu medida Gracias a su pantalla LCD, disfrutá de gráficas con colores vivos y atractivos..",
+      visible: true,
+      category: [
+        "Monitor"
+      ],
+      promotion: {
+        title: null,
+        value: 5,
+        image: null,
+        delivery: "true"
+      },
+      seller: "Totodile",
       image: [
         "https://http2.mlstatic.com/D_NQ_NP_687542-MLA44131470139_112020-O.webp",
         "https://http2.mlstatic.com/D_NQ_NP_925508-MLA44133740178_112020-O.webp",
@@ -48,6 +74,34 @@ let json_products = [
         delivery: "true"
       },
       seller: "Totodile",
+      image: [
+        "https://http2.mlstatic.com/D_NQ_NP_915847-MLA32192981692_092019-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_939226-MLA32150130346_092019-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_854725-MLA32150130348_092019-O.webp",
+      ]
+    },
+    {
+      name: "Monitor gamer ViewSonic VX Series VX2458-MHD LCD 24' negro 100V/240V",
+      status: "Nuevo",
+      price: "40000",
+      valuation: 4,
+      stock: 3,
+      brand: "ViewSonic",
+      type: "LCD",
+      description: "Este monitor de 24' te va a resultar cómodo para estudiar, trabajar o ver una película en tus tiempos de ocio.",
+      visible: true,
+      category: [
+        "Monitor"
+      ],
+      warranty: 30,
+      sold: 10,
+      promotion: {
+        title: null,
+        value: 10,
+        image: null,
+        delivery: "true"
+      },
+      seller: "Giorgio",
       image: [
         "https://http2.mlstatic.com/D_NQ_NP_915847-MLA32192981692_092019-O.webp",
         "https://http2.mlstatic.com/D_NQ_NP_939226-MLA32150130346_092019-O.webp",
@@ -137,6 +191,32 @@ let json_products = [
       ]
     },
     {
+      name: "Microcesador Intel Core i5-10400F BX8070110400F de 6 núcleos y 4.3GHz de frecuencia",
+      status: "Nuevo",
+      price: "25900",
+      valuation: 5,
+      stock: 4,
+      brand: "Intel",
+      type: "Atom",
+      description: "Productividad y entretenimiento, todo disponible en tu computadora de escritorio. ",
+      visible: true,
+      category: [
+        "Procesador"
+      ],
+      promotion: {
+        title: null,
+        value: 10,
+        image: null,
+        delivery: "true"
+      },
+      seller: "Lucemon",
+      image: [
+        "https://http2.mlstatic.com/D_NQ_NP_602530-MLA43003993713_082020-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_951550-MLA43003993763_082020-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_676435-MLA43003993799_082020-O.webp",
+      ]
+    },
+    {
       name: "Microcesador gamer AMD Ryzen 5 5600X 100-100000065BOX de 6 núcleos y 4.6GHz de frecuencia",
       status: "Nuevo",
       price: "41899",
@@ -181,6 +261,31 @@ let json_products = [
         delivery: "true"
       },
       seller: "Giorgio",
+      image: [
+        "https://http2.mlstatic.com/D_NQ_NP_677873-MLA44347499239_122020-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_625800-MLA44347283904_122020-O.webp",
+      ]
+    },
+    {
+      name: "Procesador Intel Celeron G5905 BX80701G5905 de 2 núcleos y 3.5GHz de frecuencia con gráfica integrada",
+      status: "Nuevo",
+      price: "7800",
+      valuation: 4,
+      stock: 23,
+      brand: "Intel",
+      type: "Dos núcleos",
+      description: "Productividad y entretenimiento, todo disponible en tu computadora de escritorio.",
+      visible: true,
+      category: [
+        "Procesador"
+      ],
+      promotion: {
+        title: null,
+        value: 20,
+        image: null,
+        delivery: "true"
+      },
+      seller: "Lucemon",
       image: [
         "https://http2.mlstatic.com/D_NQ_NP_677873-MLA44347499239_122020-O.webp",
         "https://http2.mlstatic.com/D_NQ_NP_625800-MLA44347283904_122020-O.webp",
@@ -264,6 +369,32 @@ let json_products = [
         "https://http2.mlstatic.com/D_NQ_NP_915099-MLA40927542438_022020-O.webp",
       ]
     },
+    {
+      name: "Memoria RAM Fury DDR4 RGB gamer color Negro 8GB 1 HyperX HX432C16FB3A/8",
+      status: "Nuevo",
+      price: "6050",
+      valuation: 5,
+      stock: 10,
+      brand: "HyperX",
+      type: "DDR4",
+      description: "Si notás que tu computadora tiene bajo rendimiento o que su capacidad no se adapta a tus necesidades de uso, es momento de renovar su memoria RAM.",
+      visible: true,
+      category: [
+        "Ram"
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "true"
+      },
+      seller: "Lucemon",
+      image: [
+        "https://http2.mlstatic.com/D_NQ_NP_824085-MLA40927542451_022020-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_860136-MLA40927542437_022020-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_915099-MLA40927542438_022020-O.webp",
+      ]
+    },
 
     {
       name: "Disco sólido interno Gigabyte GP-GSTFS31240GNTD 240GB",
@@ -340,6 +471,32 @@ let json_products = [
         image: null,
         delivery: "false"
       },
+      seller: "Nacho",
+      image: [
+        "https://http2.mlstatic.com/D_NQ_NP_632567-MLA42136065705_062020-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_752938-MLA42136307393_062020-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_642285-MLA42128541572_062020-O.webp",
+      ]
+    },
+    {
+      name: "Placa de video Nvidia Asus GTX 1660 SUPER TUF-GTX1660S-O6G-GAMING OC Edition 6GB",
+      status: "Nuevo",
+      price: "99000",
+      valuation: 5,
+      stock: 2,
+      brand: "ASUS",
+      type: "pcie",
+      description: "Nvidia es el fabricante líder de placas de video; su calidad asegura una experiencia positiva en el desarrollo del motor gráfico de tu computadora.",
+      visible: true,
+      category: [
+        "Placa de Video"
+      ],
+      promotion: {
+        title: null,
+        value: 8,
+        image: null,
+        delivery: "false"
+      },
       seller: "Lucemon",
       image: [
         "https://http2.mlstatic.com/D_NQ_NP_632567-MLA42136065705_062020-O.webp",
@@ -368,6 +525,32 @@ let json_products = [
         delivery: "false"
       },
       seller: "Kirby",
+      image: [
+        "https://http2.mlstatic.com/D_NQ_NP_920504-MLA32095352421_092019-O.webp",
+        "https://http2.mlstatic.com/D_NQ_NP_611256-MLA32095317938_092019-O.webp",
+      ]
+    },
+    {
+      name: "Placa de video Nvidia Gigabyte GeForce RTX 20 Series RTX 2060 GV-N2060OC-6GD OC Edition 6GB",
+      status: "Nuevo",
+      price: "130000",
+      valuation: 0,
+      stock: 2,
+      brand: "Gigabyte",
+      type: "pcie",
+      description: "Nvidia es el fabricante líder de placas de video; su calidad asegura una experiencia positiva en el desarrollo del motor gráfico de tu computadora.",
+      visible: true,
+      validate:false,
+      category: [
+        'Placa de Video'
+      ],
+      promotion: {
+        title: null,
+        value: 8,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Lucemon",
       image: [
         "https://http2.mlstatic.com/D_NQ_NP_920504-MLA32095352421_092019-O.webp",
         "https://http2.mlstatic.com/D_NQ_NP_611256-MLA32095317938_092019-O.webp",
@@ -718,6 +901,32 @@ let json_products = [
               "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_27511_Placa_de_Video_AFOX_Radeon_R5_230_2GB_DDR3_V5_8565ab7b-grn.jpg",
               "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_27512_Placa_de_Video_AFOX_Radeon_R5_230_2GB_DDR3_V5_8ee33da3-grn.jpg"]
     },
+    {
+      name: "Placa de Video AFOX Radeon R5 230 2GB DDR3 V5",
+      status: "Nuevo",
+      price: "5000",
+      valuation: 5,
+      warranty: 360,
+      stock: 350,
+      brand: "AFOX",
+      type: "pcie",
+      description: `El vendedor no incluyó una descripción del producto`,
+      visible: true,
+      validate: false,
+      category: [
+        'Placa de Video'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Nacho",
+      image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_27510_Placa_de_Video_AFOX_Radeon_R5_230_2GB_DDR3_V5_e8771073-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_27511_Placa_de_Video_AFOX_Radeon_R5_230_2GB_DDR3_V5_8565ab7b-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_27512_Placa_de_Video_AFOX_Radeon_R5_230_2GB_DDR3_V5_8ee33da3-grn.jpg"]
+    },
 
     {
       name: "Placa de Video EVGA GeForce RTX 3090 24GB GDDR6X FTW3 ULTRA ICX3 ARGB",
@@ -741,6 +950,32 @@ let json_products = [
         delivery: "false"
       },
       seller: "Totodile",
+      image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_23315_Placa_de_Video_EVGA_GeForce_RTX_3090_24GB_GDDR6X_FTW3_ULTRA_ICX3_ARGB_e917d21f-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_23316_Placa_de_Video_EVGA_GeForce_RTX_3090_24GB_GDDR6X_FTW3_ULTRA_ICX3_ARGB_11e06996-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_23329_Placa_de_Video_EVGA_GeForce_RTX_3090_24GB_GDDR6X_FTW3_ULTRA_ICX3_ARGB_2ea0b8e0-grn.jpg"]
+    },
+    {
+      name: "Placa de Video EVGA GeForce RTX 3090 24GB GDDR6X FTW3 ULTRA ICX3 ARGB",
+      status: "Nuevo",
+      price: "530000",
+      valuation: 5,
+      warranty: 360,
+      stock: 350,
+      brand: "EVGA",
+      type: "pcie",
+      description: `El vendedor no incluyó una descripción del producto`,
+      visible: true,
+      validate: false,
+      category: [
+        'Placa de Video'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Nacho",
       image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_23315_Placa_de_Video_EVGA_GeForce_RTX_3090_24GB_GDDR6X_FTW3_ULTRA_ICX3_ARGB_e917d21f-grn.jpg",
               "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_23316_Placa_de_Video_EVGA_GeForce_RTX_3090_24GB_GDDR6X_FTW3_ULTRA_ICX3_ARGB_11e06996-grn.jpg",
               "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_23329_Placa_de_Video_EVGA_GeForce_RTX_3090_24GB_GDDR6X_FTW3_ULTRA_ICX3_ARGB_2ea0b8e0-grn.jpg"]
@@ -846,6 +1081,60 @@ let json_products = [
         delivery: "false"
       },
       seller: "Totodile",
+      image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_13599_Fuente_Deepcool_700W_DA700_80_Plus_Bronze_d1a7762b-med.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_13600_Fuente_Deepcool_700W_DA700_80_Plus_Bronze_45c59964-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_13601_Fuente_Deepcool_700W_DA700_80_Plus_Bronze_95e41c62-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_13602_Fuente_Deepcool_700W_DA700_80_Plus_Bronze_a66b756b-grn.jpg"]
+    },
+    {
+      name: "Fuente Deepcool 600W DA600 80 Plus Bronze",
+      status: "Nuevo",
+      price: "7540",
+      valuation: 5,
+      warranty: 180,
+      stock: 210,
+      brand: "Deepcool",
+      type: "Fuente de alimentación",
+      description: `El vendedor no incluyó una descripción del producto`,
+      visible: true,
+      validate: false,
+      category: [
+        'Fuente de alimentación'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Nacho",
+      image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_13604_Fuente_Deepcool_600W_DA600_80_Plus_Bronze_31685e6c-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_13603_Fuente_Deepcool_600W_DA600_80_Plus_Bronze_acadbf51-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_13605_Fuente_Deepcool_600W_DA600_80_Plus_Bronze_95e41c62-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_13606_Fuente_Deepcool_600W_DA600_80_Plus_Bronze_adf4067e-grn.jpg"]
+    },
+    {
+      name: "Fuente Deepcool 700W DA700 80 Plus Bronze",
+      status: "Nuevo",
+      price: "7000",
+      valuation: 5,
+      warranty: 180,
+      stock: 210,
+      brand: "Deepcool",
+      type: "Fuente de alimentación",
+      description: `El vendedor no incluyó una descripción del producto`,
+      visible: true,
+      validate: false,
+      category: [
+        'Fuente de alimentación'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Nacho",
       image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_13599_Fuente_Deepcool_700W_DA700_80_Plus_Bronze_d1a7762b-med.jpg",
               "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_13600_Fuente_Deepcool_700W_DA700_80_Plus_Bronze_45c59964-grn.jpg",
               "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_13601_Fuente_Deepcool_700W_DA700_80_Plus_Bronze_95e41c62-grn.jpg",
@@ -1192,6 +1481,60 @@ let json_products = [
               "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_23001_Gabinete_Kolink_Citadel_Mesh_RGB_3xCoolers_ARGB_Vidrio_Templado_94061484-grn.jpg"]
     },
     {
+      name: "Gabinete ASUS TUF GT501 Vidrio Templado Black 3 x Coolers RGB Aura Sync",
+      status: "Nuevo",
+      price: "21800",
+      valuation: 5,
+      warranty: 360,
+      stock: 640,
+      brand: "ASUS",
+      type: 'Gabinete',
+      description: `El vendedor no incluyó una descripción del producto`,
+      visible: true,
+      validate: false,
+      category: [
+        'Gabinete'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Nacho",
+      image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_22711_Gabinete_ASUS_TUF_GT501_Vidrio_Templado_Black_3_x_Coolers_RGB_Aura_Sync_7a5d6e02-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_22712_Gabinete_ASUS_TUF_GT501_Vidrio_Templado_Black_3_x_Coolers_RGB_Aura_Sync_c654dbda-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_22713_Gabinete_ASUS_TUF_GT501_Vidrio_Templado_Black_3_x_Coolers_RGB_Aura_Sync_2bebea2e-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_22714_Gabinete_ASUS_TUF_GT501_Vidrio_Templado_Black_3_x_Coolers_RGB_Aura_Sync_ba280636-grn.jpg"]
+    },
+    {
+      name: "Gabinete Kolink Citadel Mesh RGB 3xCoolers ARGB Vidrio Templado",
+      status: "Nuevo",
+      price: "9300",
+      valuation: 5,
+      warranty: 360,
+      stock: 208,
+      brand: "Kolink",
+      type: 'Gabinete',
+      description: `El vendedor no incluyó una descripción del producto`,
+      visible: true,
+      validate: false,
+      category: [
+        'Gabinete'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Nacho",
+      image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_22997_Gabinete_Kolink_Citadel_Mesh_RGB_3xCoolers_ARGB_Vidrio_Templado_2031d0bd-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_22998_Gabinete_Kolink_Citadel_Mesh_RGB_3xCoolers_ARGB_Vidrio_Templado_a146e7eb-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_22999_Gabinete_Kolink_Citadel_Mesh_RGB_3xCoolers_ARGB_Vidrio_Templado_a5d3de12-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_23001_Gabinete_Kolink_Citadel_Mesh_RGB_3xCoolers_ARGB_Vidrio_Templado_94061484-grn.jpg"]
+    },
+    {
       name: "Mother Asrock X370M-HDV AM4",
       status: "Nuevo",
       price: "7130",
@@ -1240,6 +1583,60 @@ let json_products = [
         delivery: "false"
       },
       seller: "Totodile",
+      image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_20636_Mother_Asrock_A520M-HVS_AM4_c8f1be61-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_20637_Mother_Asrock_A520M-HVS_AM4_730625ea-med.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_20638_Mother_Asrock_A520M-HVS_AM4_ebd3b7c1-med.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_20639_Mother_Asrock_A520M-HVS_AM4_df70a33d-med.jpg"]
+    },
+    {
+      name: "Mother Asrock X370M-HDV AM4",
+      status: "Nuevo",
+      price: "8000",
+      valuation: 5,
+      warranty: 360,
+      stock: 300,
+      brand: "Asrock",
+      type: 'Placa Madre AMD',
+      description: `El vendedor no incluyó una descripción del producto`,
+      visible: true,
+      validate: false,
+      category: [
+        'Placa Madre'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Nacho",
+      image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25761_Mother_Asrock_X370M-HDV_AM4_711e4588-med.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25762_Mother_Asrock_X370M-HDV_AM4_ed2a5f7d-med.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25763_Mother_Asrock_X370M-HDV_AM4_6f6af677-med.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_25764_Mother_Asrock_X370M-HDV_AM4_89f3364d-med.jpg"]
+    },
+    {
+      name: "Mother Asrock A520M-HVS AM4",
+      status: "Nuevo",
+      price: "7000",
+      valuation: 5,
+      warranty: 360,
+      stock: 300,
+      brand: "Asrock",
+      type: 'Placa Madre AMD',
+      description: `El vendedor no incluyó una descripción del producto`,
+      visible: true,
+      validate: false,
+      category: [
+        'Placa Madre'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Nacho",
       image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_20636_Mother_Asrock_A520M-HVS_AM4_c8f1be61-grn.jpg",
               "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_20637_Mother_Asrock_A520M-HVS_AM4_730625ea-med.jpg",
               "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_20638_Mother_Asrock_A520M-HVS_AM4_ebd3b7c1-med.jpg",
@@ -1400,6 +1797,32 @@ let json_products = [
         delivery: "false"
       },
       seller: "Totodile",
+      image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_4465_Teclado_Mecanico_Logitech_G413_Carbon_Mec__nico_US_40e6061e-grn.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_4466_Teclado_Mecanico_Logitech_G413_Carbon_Mec__nico_US_351bce32-med.jpg",
+              "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_4467_Teclado_Mecanico_Logitech_G413_Carbon_Mec__nico_US_b2c04249-med.jpg"]
+    },
+    {
+      name: "Teclado Mecanico Logitech G413 Carbon Mecánico US",
+      status: "Nuevo",
+      price: "8000",
+      valuation: 5,
+      warranty: 180,
+      stock: 300,
+      brand: "Logitech",
+      type: 'Teclado',
+      description: `El vendedor no incluyó una descripción del producto`,
+      visible: true,
+      validate: false,
+      category: [
+        'Accesorios'
+      ],
+      promotion: {
+        title: null,
+        value: 0,
+        image: null,
+        delivery: "false"
+      },
+      seller: "Nacho",
       image: ["https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_4465_Teclado_Mecanico_Logitech_G413_Carbon_Mec__nico_US_40e6061e-grn.jpg",
               "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_4466_Teclado_Mecanico_Logitech_G413_Carbon_Mec__nico_US_351bce32-med.jpg",
               "https://compragamer.net/pga/imagenes_publicadas/compragamer_Imganen_general_4467_Teclado_Mecanico_Logitech_G413_Carbon_Mec__nico_US_b2c04249-med.jpg"]
