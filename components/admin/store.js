@@ -93,7 +93,7 @@ const store = {
             let product = await Product.findOne({
                 where: { id: data.productId }
             })
-            product.valuation = data.valuation
+            product.valuationpc = data.valuation
             product.valide = true
             product.completepc = true 
             await product.save()
