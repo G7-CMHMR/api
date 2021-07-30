@@ -165,7 +165,6 @@ const store = {
 
         
         let response = [];
-        try{
             let fav = user.products;
             if(fav.length){
                 response = await Category.findAll({
@@ -201,11 +200,10 @@ const store = {
                     }]
                 });
             }
-        }catch{
-            if(user.purchase_orders.length){
+            if(!response.length && user.purchase_orders.length){
                 let po = user.purchase_orders[0];
 
-                let category = po.items[0].product ? (po.items[0].product.category):(po.items[0].save_product_state.categories[0]);
+                let category = po.items[0].product ? (po.items[0].product.categories[0].title):(po.items[0].save_product_state.categories[0].title);
 
                 response = await Category.findAll({
                     where: {title: category},
@@ -240,7 +238,7 @@ const store = {
                     }]
                 })
             }
-        }
+        
         return response && response[0] && response[0].products ? (response[0].products):(response);
     },
     getSeller: async function(params){
