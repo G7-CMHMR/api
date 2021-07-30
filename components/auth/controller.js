@@ -60,7 +60,8 @@ const create = async (user) => {
         const cart = await Cart.create();
         cart.setUser(newUser);
         // const url = `http://${req.headers.host}/auth/confirm-account/${newUser.emailToken}`;
-        const url = `http://localhost:3000/confirm-account/${newUser.emailToken}`;
+        // const url = `http://localhost:3000/confirm-account/${newUser.emailToken}`;
+        const url = `https://pg-cmhmr-client.herokuapp.com/${newUser.emailToken}`;
 
         sendEmail.send({
             email: newUser.email,

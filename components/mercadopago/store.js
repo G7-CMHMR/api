@@ -66,9 +66,12 @@ const store = {
             expiration_date_from: date,
             expiration_date_to: dateExpired,
             back_urls: {
-                success: "http://localhost:3000/Compras",
-                failure: "http://localhost:3000/Carrito",
-                pending: "http://localhost:3000/Carrito"
+                // success: "http://localhost:3000/Compras",
+                // failure: "http://localhost:3000/Carrito",
+                // pending: "http://localhost:3000/Carrito"
+                success: "https://pg-cmhmr-client.herokuapp.com/Compras",
+                failure: "https://pg-cmhmr-client.herokuapp.com/Carrito",
+                pending: "https://pg-cmhmr-client.herokuapp.com/Carrito"
             },
             auto_return: "approved",
             payment_methods: {
