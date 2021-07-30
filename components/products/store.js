@@ -163,13 +163,13 @@ const store = {
 
         })
 
+        
         let response = [];
-
         try{
             let fav = user.products;
             if(fav.length){
                 response = await Category.findAll({
-                    where: {title: fav[fav.length - 1].category.title},
+                    where: {title: fav[fav.length - 1].categories[0].title},
                     include: [{
                         model: Product,
                         where: {visible: true,
@@ -199,13 +199,13 @@ const store = {
                             }
                         ],
                     }]
-                })
+                });
             }
         }catch{
             if(user.purchase_orders.length){
                 let po = user.purchase_orders[0];
 
-                let category = po.items[0].product ? (po.items[0].product.category):(po.items[0].save_product_state.category);
+                let category = po.items[0].product ? (po.items[0].product.category):(po.items[0].save_product_state.categories[0]);
 
                 response = await Category.findAll({
                     where: {title: category},
@@ -241,7 +241,7 @@ const store = {
                 })
             }
         }
-        return response.products ? (response.products):(response);
+        return response && response[0] && response[0].products ? (response[0].products):(response);
     },
     getSeller: async function(params){
         try
