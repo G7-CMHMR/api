@@ -8,10 +8,29 @@ const json_categories = require('./jsons_files/json_categories')
 const json_products = require('./jsons_files/json_products');
 const console = require('console');
 
-const sequelize = new Sequelize(`postgres://${db.user}:${db.pass}@${api.host}/compumundo`, {
+
+
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
 });
+
+sequelize.authenticate()
+  .then( response => console.log('Connection has been established successfully.'))
+  .catch( error => console.error('Unable to connect to the database:', error));
+
+
+
+// const sequelize = new Sequelize(`postgres://${db.user}:${db.pass}@${api.host}/compumundo`, {
+//   logging: false, // set to console.log to see the raw SQL queries
+//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
