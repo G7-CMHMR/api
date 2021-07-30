@@ -124,7 +124,7 @@ const json_products = require('./jsons_files/json_products')
         }
         return res;
     }
-    const product_attributes = [ 'name','status','id','price','valuation',"sold","warranty",'stock','brand','description','type', 'visible'];
+    const product_attributes = [ 'name','status','id','price','valuation', 'valuationpc',"sold","warranty",'stock','brand','description','type', 'visible'];
 
 
 module.exports = {
