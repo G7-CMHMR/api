@@ -196,7 +196,8 @@ const getItemsFromUser = async(data) =>{
             where:{paid_out : true},
             include:[{model:Items,
                 attributes: {exclude: ['createdAt','updatedAt']},
-                include:[{model:Product,
+                include:[
+                {model:Product,
                     attributes: {exclude: ['createdAt','updatedAt']},
                     include:[{model:Promotion},{model:Image},{model:Category}]},
                 {model:Purchase_order,
@@ -208,7 +209,7 @@ const getItemsFromUser = async(data) =>{
             ]
         }]}]
     })
-    await user.purchase_orders.map(async PurchaseO=>{
+    user.purchase_orders.map(async PurchaseO=>{
         await PurchaseO.items.map(async item=>{
             response.push(item)
         })
