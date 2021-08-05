@@ -390,6 +390,7 @@ let json_products = [
       category: [
         'PC'
       ],
+      valuationpc:6,
       promotion: {
         title: null,
         value: 5,
@@ -416,6 +417,7 @@ let json_products = [
       description: "Notebook HP",
       visible: true,
       validate: false,
+      valuationpc:4,
       category: [
         'PC'
       ],
@@ -439,6 +441,7 @@ let json_products = [
       status: "Nuevo",
       price: "139000",
       valuation: 4,
+      valuationpc:5,
       stock: 365,
       brand: "ASUS",
       type: "Portatil",
@@ -470,6 +473,7 @@ let json_products = [
       valuation: 5,
       stock: 635,
       warranty: 60,
+      valuationpc:4,
       brand: "Lenovo",
       type: "Portatil",
       description: "Notebook Lenovo IdeaPad",
@@ -499,6 +503,7 @@ let json_products = [
       price: "49999",
       valuation: 0,
       stock: 200,
+      valuationpc:7,
       brand: "AMD",
       warranty: 30,
       type: "PC de Escritorio",
@@ -534,6 +539,7 @@ let json_products = [
       price: "82849",
       valuation: 5,
       warranty: 90,
+      valuationpc:6,
       stock: 7,
       brand: "AMD",
       type: "PC de Escritorio",
@@ -566,6 +572,7 @@ let json_products = [
       price: "24999",
       valuation: 5,
       warranty: 90,
+      valuationpc:5,
       stock: 7,
       brand: "AMD",
       type: "PC de Escritorio",
